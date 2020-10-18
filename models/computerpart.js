@@ -1,0 +1,23 @@
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+
+var ComputerPartSchema = new Schema({
+  title: { type: String, required: true, maxlength: 100 },
+  description: { type: String, maxlength: 10000 },
+  inStock: { type: Number, required: true, max: 9999 },
+  price: { type: Number, required: true, max: 999999 },
+  category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
+  manufacturer: {
+    type: Schema.Types.ObjectId,
+    ref: "Manufacturer",
+    required: true,
+  },
+});
+
+//Virtual for manufacturer's URL
+ComputerPartSchema.virtual("url").get(function () {
+  return "/component/" + this._id;
+});
+
+//Export model
+module.exports = mongoose.model("ComputerPart", ComputerPartSchema);
