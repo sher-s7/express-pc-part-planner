@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ManufacturerSchema = new Schema({
-  title: { type: String, required: true, maxlength: 100 },
+  name: { type: String, required: true, maxlength: 100 },
   description: { type: String, maxlength: 500 },
 });
 

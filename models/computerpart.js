@@ -2,8 +2,8 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ComputerPartSchema = new Schema({
-  title: { type: String, required: true, maxlength: 100 },
-  description: { type: String, maxlength: 10000 },
+  name: { type: String, required: true, maxlength: 100 },
+  description: { type: String, required: true, maxlength: 10000 },
   inStock: { type: Number, required: true, max: 9999 },
   price: { type: Number, required: true, max: 999999 },
   category: { type: Schema.Types.ObjectId, ref: "Category", required: true },

@@ -13,200 +13,108 @@ if (!userArgs[0].startsWith('mongodb')) {
 }
 */
 var async = require("async");
-var Book = require("./models/book");
-var Author = require("./models/author");
-var Genre = require("./models/genre");
-var BookInstance = require("./models/bookinstance");
+var Category = require("./models/category");
+var ComputerPart = require("./models/computerpart");
+var Manufacturer = require("./models/manufacturer");
 
 var mongoose = require("mongoose");
+const manufacturer = require("./models/manufacturer");
 var mongoDB = userArgs[0];
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-var authors = [];
-var genres = [];
-var books = [];
-var bookinstances = [];
+var categories = [];
+var computerparts = [];
+var manufacturers = [];
 
-function authorCreate(first_name, family_name, d_birth, d_death, cb) {
-  authordetail = { first_name: first_name, family_name: family_name };
-  if (d_birth != false) authordetail.date_of_birth = d_birth;
-  if (d_death != false) authordetail.date_of_death = d_death;
+function categoryCreate(title, description, cb) {
+  categorydetail = { title: title };
+  if (description != false) categorydetail.description = description;
 
-  var author = new Author(authordetail);
+  var category = new Category(categorydetail);
 
-  author.save(function (err) {
+  category.save(function (err) {
     if (err) {
       cb(err, null);
       return;
     }
-    console.log("New Author: " + author);
-    authors.push(author);
-    cb(null, author);
+    console.log("New Category: " + category);
+    categories.push(category);
+    cb(null, category);
   });
 }
 
-function genreCreate(name, cb) {
-  var genre = new Genre({ name: name });
+function manufacturerCreate(name, description, cb) {
+  manufacturerdetail = { name: name };
+  if (description != false) manufacturerdetail.description = description;
 
-  genre.save(function (err) {
+  var manufacturer = new Manufacturer(manufacturerdetail);
+
+  manufacturer.save(function (err) {
     if (err) {
       cb(err, null);
       return;
     }
-    console.log("New Genre: " + genre);
-    genres.push(genre);
-    cb(null, genre);
+    console.log("New Manufacturer: " + manufacturer);
+    manufacturers.push(manufacturer);
+    cb(null, manufacturer);
   });
 }
 
-function bookCreate(title, summary, isbn, author, genre, cb) {
-  bookdetail = {
-    title: title,
-    summary: summary,
-    author: author,
-    isbn: isbn,
-  };
-  if (genre != false) bookdetail.genre = genre;
+function computerPartCreate(
+  name,
+  description,
+  inStock,
+  price,
+  category,
+  manufacturer,
+  cb
+) {
+  var computerPart = new ComputerPart({
+    name: name,
+    description: description,
+    inStock: inStock,
+    price: price,
+    category: category,
+    manufacturer: manufacturer,
+  });
 
-  var book = new Book(bookdetail);
-  book.save(function (err) {
+  computerPart.save(function (err) {
     if (err) {
       cb(err, null);
       return;
     }
-    console.log("New Book: " + book);
-    books.push(book);
-    cb(null, book);
+    console.log("New Computer part: " + computerPart);
+    computerparts.push(computerPart);
+    cb(null, computerPart);
   });
 }
 
-function bookInstanceCreate(book, imprint, due_back, status, cb) {
-  bookinstancedetail = {
-    book: book,
-    imprint: imprint,
-  };
-  if (due_back != false) bookinstancedetail.due_back = due_back;
-  if (status != false) bookinstancedetail.status = status;
+// Create categories, manufacturers and parts
 
-  var bookinstance = new BookInstance(bookinstancedetail);
-  bookinstance.save(function (err) {
-    if (err) {
-      console.log("ERROR CREATING BookInstance: " + bookinstance);
-      cb(err, null);
-      return;
-    }
-    console.log("New BookInstance: " + bookinstance);
-    bookinstances.push(bookinstance);
-    cb(null, book);
-  });
-}
-
-function createGenreAuthors(cb) {
-  async.series(
-    [
-      function (callback) {
-        authorCreate("Patrick", "Rothfuss", "1973-06-06", false, callback);
-      },
-      function (callback) {
-        authorCreate("Ben", "Bova", "1932-11-8", false, callback);
-      },
-      function (callback) {
-        authorCreate("Isaac", "Asimov", "1920-01-02", "1992-04-06", callback);
-      },
-      function (callback) {
-        authorCreate("Bob", "Billings", false, false, callback);
-      },
-      function (callback) {
-        authorCreate("Jim", "Jones", "1971-12-16", false, callback);
-      },
-      function (callback) {
-        genreCreate("Fantasy", callback);
-      },
-      function (callback) {
-        genreCreate("Science Fiction", callback);
-      },
-      function (callback) {
-        genreCreate("French Poetry", callback);
-      },
-    ],
-    // optional callback
-    cb
-  );
-}
-
-function createBooks(cb) {
+function createCategories(cb) {
   async.parallel(
     [
       function (callback) {
-        bookCreate(
-          "The Name of the Wind (The Kingkiller Chronicle, #1)",
-          "I have stolen princesses back from sleeping barrow kings. I burned down the town of Trebon. I have spent the night with Felurian and left with both my sanity and my life. I was expelled from the University at a younger age than most people are allowed in. I tread paths by moonlight that others fear to speak of during day. I have talked to Gods, loved women, and written songs that make the minstrels weep.",
-          "9781473211896",
-          authors[0],
-          [genres[0]],
+        categoryCreate(
+          "CPU",
+          "A Central Processing Unit (CPU) is the brain of the computer. This is what runs all your programs, calculations, and operations.",
           callback
         );
       },
       function (callback) {
-        bookCreate(
-          "The Wise Man's Fear (The Kingkiller Chronicle, #2)",
-          "Picking up the tale of Kvothe Kingkiller once again, we follow him into exile, into political intrigue, courtship, adventure, love and magic... and further along the path that has turned Kvothe, the mightiest magician of his age, a legend in his own time, into Kote, the unassuming pub landlord.",
-          "9788401352836",
-          authors[0],
-          [genres[0]],
+        categoryCreate(
+          "CPU Cooler",
+          "A heatsink and fan (HSF), also known as a CPU Cooler, sits atop the CPU to draw heat away from the CPU and disperse it, because CPUs produce heat while operating. Most CPUs will come with a free “stock” HSF, but if you buy a CPU that comes without a cooler and/or if you plan to overclock your CPU, you will need to buy an “aftermarket” HSF.",
           callback
         );
       },
       function (callback) {
-        bookCreate(
-          "The Slow Regard of Silent Things (Kingkiller Chronicle)",
-          "Deep below the University, there is a dark place. Few people know of it: a broken web of ancient passageways and abandoned rooms. A young woman lives there, tucked among the sprawling tunnels of the Underthing, snug in the heart of this forgotten place.",
-          "9780756411336",
-          authors[0],
-          [genres[0]],
-          callback
-        );
-      },
-      function (callback) {
-        bookCreate(
-          "Apes and Angels",
-          "Humankind headed out to the stars not for conquest, nor exploration, nor even for curiosity. Humans went to the stars in a desperate crusade to save intelligent life wherever they found it. A wave of death is spreading through the Milky Way galaxy, an expanding sphere of lethal gamma ...",
-          "9780765379528",
-          authors[1],
-          [genres[1]],
-          callback
-        );
-      },
-      function (callback) {
-        bookCreate(
-          "Death Wave",
-          "In Ben Bova's previous novel New Earth, Jordan Kell led the first human mission beyond the solar system. They discovered the ruins of an ancient alien civilization. But one alien AI survived, and it revealed to Jordan Kell that an explosion in the black hole at the heart of the Milky Way galaxy has created a wave of deadly radiation, expanding out from the core toward Earth. Unless the human race acts to save itself, all life on Earth will be wiped out...",
-          "9780765379504",
-          authors[1],
-          [genres[1]],
-          callback
-        );
-      },
-      function (callback) {
-        bookCreate(
-          "Test Book 1",
-          "Summary of test book 1",
-          "ISBN111111",
-          authors[4],
-          [genres[0], genres[1]],
-          callback
-        );
-      },
-      function (callback) {
-        bookCreate(
-          "Test Book 2",
-          "Summary of test book 2",
-          "ISBN222222",
-          authors[4],
-          false,
+        categoryCreate(
+          "Motherboard",
+          "The motherboard electronically connects all of your PC’s parts. It also takes power from the PSU and provides it to many of your other components.",
           callback
         );
       },
@@ -216,110 +124,57 @@ function createBooks(cb) {
   );
 }
 
-function createBookInstances(cb) {
+function createManufacturers(cb) {
   async.parallel(
     [
       function (callback) {
-        bookInstanceCreate(
-          books[0],
-          "London Gollancz, 2014.",
-          false,
-          "Available",
+        manufacturerCreate(
+          "NVIDIA",
+          "NVIDIA, inventor of the GPU, which creates interactive graphics on laptops, workstations, mobile devices, notebooks, PCs, and more. NVIDIA created the world’s largest gaming platform and the world’s fastest supercomputer. They are the brains of self-driving cars, intelligent machines, and IoT.",
           callback
         );
       },
       function (callback) {
-        bookInstanceCreate(
-          books[1],
-          " Gollancz, 2011.",
-          false,
-          "Loaned",
+        manufacturerCreate(
+          "Intel",
+          "Intel's innovation in cloud computing, data center, Internet of Things, and PC solutions is powering the smart and connected digital world we live in.",
           callback
         );
-      },
-      function (callback) {
-        bookInstanceCreate(
-          books[2],
-          " Gollancz, 2015.",
-          false,
-          false,
-          callback
-        );
-      },
-      function (callback) {
-        bookInstanceCreate(
-          books[3],
-          "New York Tom Doherty Associates, 2016.",
-          false,
-          "Available",
-          callback
-        );
-      },
-      function (callback) {
-        bookInstanceCreate(
-          books[3],
-          "New York Tom Doherty Associates, 2016.",
-          false,
-          "Available",
-          callback
-        );
-      },
-      function (callback) {
-        bookInstanceCreate(
-          books[3],
-          "New York Tom Doherty Associates, 2016.",
-          false,
-          "Available",
-          callback
-        );
-      },
-      function (callback) {
-        bookInstanceCreate(
-          books[4],
-          "New York, NY Tom Doherty Associates, LLC, 2015.",
-          false,
-          "Available",
-          callback
-        );
-      },
-      function (callback) {
-        bookInstanceCreate(
-          books[4],
-          "New York, NY Tom Doherty Associates, LLC, 2015.",
-          false,
-          "Maintenance",
-          callback
-        );
-      },
-      function (callback) {
-        bookInstanceCreate(
-          books[4],
-          "New York, NY Tom Doherty Associates, LLC, 2015.",
-          false,
-          "Loaned",
-          callback
-        );
-      },
-      function (callback) {
-        bookInstanceCreate(books[0], "Imprint XXX2", false, false, callback);
-      },
-      function (callback) {
-        bookInstanceCreate(books[1], "Imprint XXX3", false, false, callback);
       },
     ],
-    // Optional callback
+    // optional callback
+    cb
+  );
+}
+
+function createComponents(cb) {
+  async.parallel(
+    [
+      function (callback) {
+        computerPartCreate(
+          "Intel® Core™ i7-9700K Processor",
+          "The Core i7-9700k 3.6 GHz 8 Core Processor from Intel is designed for gaming, creating, and productivity.",
+          9,
+          429.99,
+          categories[0],
+          manufacturers[1],
+          callback
+        );
+      },
+    ],
+    // optional callback
     cb
   );
 }
 
 async.series(
-  [createGenreAuthors, createBooks, createBookInstances],
+  [createCategories, createManufacturers, createComponents],
   // Optional callback
   function (err, results) {
     if (err) {
       console.log("FINAL ERR: " + err);
     } else {
-      console.log("BOOKInstances: " + bookinstances);
+      console.log("Components: " + computerparts);
     }
     // All done, disconnect from database
     mongoose.connection.close();
