@@ -25,7 +25,7 @@ router.get("/list", function (req, res, next) {
     localStorage.setItem("userList", JSON.stringify({ cpu: "none" }));
   }
   res.render("list", {
-    userList: localStorage.getItem("userList"),
+    userList: JSON.parse(localStorage.getItem("userList")),
   });
 });
 
