@@ -1,3 +1,9 @@
-<h1>user list</h1>
-
-<p><%= userList.cpu %> </p>
+<% layout('layout') -%>
+<h1>hello</h1>
+<ul>
+    <% categories.forEach(category => { %>
+    <li>
+        <a href="<%= category.url %>"><%= category.title %></a>
+    </li>
+    <% }) %>
+</ul>

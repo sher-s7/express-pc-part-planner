@@ -1,6 +1,7 @@
 require('dotenv').config();
 var createError = require("http-errors");
 var express = require("express");
+var engine = require('ejs-locals');
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
@@ -17,7 +18,10 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+app.set('view options', { layout:'layout.ejs' });
+
 // view engine setup
+app.engine('ejs', engine);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 

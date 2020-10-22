@@ -13,6 +13,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
+    "ejs-locals": "^1.0.2",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "mongoose": "^5.10.9",
