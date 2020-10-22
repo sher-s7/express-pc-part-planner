@@ -18,12 +18,6 @@ router.get("/", function (req, res) {
 });
 
 router.get("/list", function (req, res, next) {
-  if (typeof localStorage === "undefined" || localStorage === null) {
-    console.log("hello");
-    var LocalStorage = require("node-localstorage").LocalStorage;
-    localStorage = new LocalStorage("./scratch");
-    localStorage.setItem("userList", JSON.stringify({}));
-  }
   async.parallel(
     {
       categories: function (callback) {
@@ -34,7 +28,7 @@ router.get("/list", function (req, res, next) {
       if (err) return next(err);
       res.render("list", {
         title: "My List - PC Part Planner",
-        userList: JSON.parse(localStorage.getItem("userList")),
+        userList: {},
         categories: results.categories,
       });
     }
