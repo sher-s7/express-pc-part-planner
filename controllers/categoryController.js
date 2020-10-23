@@ -1,5 +1,6 @@
 var Category = require("../models/category");
 var ComputerPart = require("../models/computerpart");
+var async = require("async");
 
 const { body, validationResult } = require("express-validator/check");
 const { sanitizeBody, sanitize } = require("express-validator/filter");
@@ -18,18 +19,29 @@ exports.category_list = function (req, res, next) {
 
 // Display detail page for a specific Category.
 exports.category_detail = function (req, res, next) {
-  Category.findById(req.params.id, function (err, category) {
-    if (err) return next(err);
-    if (category == null) {
-      var err = new Error("Category not found");
-      err.status = 404;
-      return next(err);
+  async.parallel(
+    {
+      category: function (callback) {
+        Category.findById(req.params.id).exec(callback);
+      },
+      category_parts: function (callback) {
+        ComputerPart.find({ category: req.params.id }).exec(callback);
+      },
+    },
+    function (err, results) {
+      if (err) return next(err);
+      if (results.category == null) {
+        var err = new Error("Category not found");
+        err.status = 404;
+        return next(err);
+      }
+      res.render("category_detail", {
+        title: results.category.title + " - PC Part Planner",
+        category: results.category,
+        category_parts: results.category_parts,
+      });
     }
-    res.render("category_detail", {
-      title: category.title + " - PC Part Planner",
-      category: category,
-    });
-  });
+  );
 };
 
 // Display Category create form on GET.

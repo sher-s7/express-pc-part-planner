@@ -1,1 +1,10 @@
 <% layout('layout') -%>
+
+<h1><%= category.title %> </h2>
+<p><%= category.description %></p>
+
+<ul>
+    <% category_parts.forEach(part => { %>
+        <li><a href="<%= part.url %>"><%= part.name %> </a></li>
+    <% }) %>
+</ul>
