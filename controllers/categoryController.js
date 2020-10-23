@@ -118,25 +118,76 @@ exports.category_delete_post = function (req, res, next) {
 
       if (results.category_parts.length > 0) {
         res.render("category_delete", {
-            title: "Delete Category: " + results.category.title,
-            category: results.category,
-            category_parts: results.category_parts,
-          });
-          return;
+          title: "Delete Category: " + results.category.title,
+          category: results.category,
+          category_parts: results.category_parts,
+        });
+        return;
       } else {
-        results.category_parts.delete //TODO
-      }
+        Category.findByIdAndRemove(req.body.categoryid, function deleteCategory(
+          err
+        ) {
+          if (err) return next(err);
 
+          res.redirect("/categories");
+        });
+      }
     }
   );
 };
 
 // Display Category update form on GET.
-exports.category_update_get = function (req, res) {
-  res.send("NOT IMPLEMENTED: Category update GET");
+exports.category_update_get = function (req, res, next) {
+  Category.findById(req.params.id, function (err, category) {
+    if (err) return next(err);
+
+    if (category == null) {
+      var err = new Error("Category not found");
+      err.status = 404;
+      return next(err);
+    }
+    //Success
+    res.render("category_form", {
+      title: "Update Category",
+      category: category,
+    });
+  });
 };
 
 // Handle Category update on POST.
-exports.category_update_post = function (req, res) {
-  res.send("NOT IMPLEMENTED: Category update POST");
-};
+exports.category_update_post = [
+  body("title")
+    .isLength({ min: 1 })
+    .trim()
+    .withMessage("Category name must be specified")
+    .isAlphanumeric()
+    .withMessage("Title has non-alphanumeric characters."),
+  body("description").optional({ checkFalsy: true }),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    var category = new Category({
+      title: req.body.title,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("category_form", {
+        title: "Update Category",
+        category: category,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      Category.findByIdAndUpdate(req.params.id, category, {}, function (
+        err,
+        thecategory
+      ) {
+        if (err) return next(err);
+
+        res.redirect(thecategory.url);
+      });
+    }
+  },
+];
