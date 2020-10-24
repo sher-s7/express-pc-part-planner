@@ -1,10 +1,35 @@
 <% layout('layout') -%>
 
-<h1><%= category.title %> </h2>
-<p><%= category.description %></p>
-
-<ul>
-    <% category_parts.forEach(part => { %>
-        <li><a href="<%= part.url %>"><%= part.name %> </a></li>
-    <% }) %>
-</ul>
+<section>
+    <h1><%= category.title %></h2>
+        <p><%= category.description %></p>
+</section>
+<section>
+    <div><%= category_parts.length %> product(s)</div>
+    <div>
+        <label for="filter">Search </label>
+        <input type="text" name="filter" id="filter" placeholder="<%= category.title %>s">
+    </div>
+</section>
+<table id='category-table'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Manufacturer</th>
+            <th>Stock</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% category_parts.forEach(part => { %>
+        <tr class="part-row">
+            <td class="part-name"><a href="<%= part.url %>"><%= part.name %></a></td>
+            <td class="part-manufacturer"><a href="<%= part.manufacturer.url %>"><%= part.manufacturer.name %></a>
+            </td>
+            <td class="part-stock"><span><%= part.inStock %></span></td>
+            <td class="part-price"><span><%= part.price %></span></td>
+            <td><button>Add</button></td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>

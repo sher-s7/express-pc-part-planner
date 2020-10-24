@@ -25,7 +25,7 @@ exports.category_detail = function (req, res, next) {
         Category.findById(req.params.id).exec(callback);
       },
       category_parts: function (callback) {
-        ComputerPart.find({ category: req.params.id }).exec(callback);
+        ComputerPart.find({ category: req.params.id }).populate('manufacturer').exec(callback);
       },
     },
     function (err, results) {
@@ -36,7 +36,7 @@ exports.category_detail = function (req, res, next) {
         return next(err);
       }
       res.render("category_detail", {
-        title: results.category.title + " - PC Part Planner",
+        title: "All " + results.category.title + "s",
         category: results.category,
         category_parts: results.category_parts,
       });
