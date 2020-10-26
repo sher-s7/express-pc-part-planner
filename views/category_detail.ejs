@@ -6,10 +6,10 @@
 </section>
 <section>
     <div><%= category_parts.length %> product(s)</div>
-    <div>
+    <form id="categoryPartFilterForm">
         <label for="filter">Search </label>
         <input type="text" name="filter" id="filter" placeholder="<%= category.title %>s">
-    </div>
+    </form>
 </section>
 <table id='category-table'>
     <thead>
@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <% category_parts.forEach(part => { %>
-        <tr class="part-row">
+        <tr class="part-row" data-part="<%= part.name %>">
             <td class="part-name"><a href="<%= part.url %>"><%= part.name %></a></td>
             <td class="part-manufacturer"><a href="<%= part.manufacturer.url %>"><%= part.manufacturer.name %></a>
             </td>
