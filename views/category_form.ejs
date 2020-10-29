@@ -1,0 +1,20 @@
+<% layout('layout') -%>
+<h1><%= title %> </h1>
+
+<form action="" method="POST">
+    <label for="title">
+        <input required type="text" name="title" id="title">
+    </label>
+    <label for="description">
+        <textarea required name="description" id="description" cols="30" rows="10"></textarea>
+    </label>
+    <button type="submit">Submit</button>
+</form>
+
+<% if (typeof errors != 'undefined') { %>
+<ul>
+    <% errors.forEach(err => { %>
+    <li><%= err.msg %> </li>
+    <% }) %>
+</ul>
+<% } %>

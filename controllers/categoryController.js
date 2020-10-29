@@ -54,9 +54,7 @@ exports.category_create_post = [
   body("title")
     .isLength({ min: 1 })
     .trim()
-    .withMessage("Category name must be specified")
-    .isAlphanumeric()
-    .withMessage("Title has non-alphanumeric characters."),
+    .withMessage("Category name must be specified"),
   body("description").optional({ checkFalsy: true }),
 
   sanitize("title").escape(),

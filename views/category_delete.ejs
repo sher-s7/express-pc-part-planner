@@ -1,0 +1,19 @@
+<% layout('layout') -%>
+
+<h1><%= title %> </h1>
+
+<% if (category_parts.length > 0) { %>
+<h2>Must delete the following parts before removing this category</h2>
+<ul>
+    <% category_parts.forEach(part => { %>
+    <li><a href="<%= part.url %>"><%= part.name %></a></li>
+    <% }) %>
+</ul>
+<% } else { %>
+    <p>Are you sure you want to delete the <span><%= category.title %></span> category?</p>
+
+    <form action="" method="POST">
+        <input type="hidden" name="categoryid" id="categoryid" value="<%= category._id %>" required>
+        <button type="submit">Delete</button>
+    </form>
+<% } %>

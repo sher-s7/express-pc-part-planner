@@ -3,6 +3,7 @@
 <section>
     <h1><%= category.title %></h2>
         <p><%= category.description %></p>
+        <a href="<%= category.url%>/delete">Delete</a>
 </section>
 <section>
     <div><%= category_parts.length %> product(s)</div>
@@ -27,9 +28,15 @@
             <td class="part-manufacturer"><a href="<%= part.manufacturer.url %>"><%= part.manufacturer.name %></a>
             </td>
             <td class="part-stock"><span><%= part.inStock %></span></td>
-            <td class="part-price"><span><%= part.price %></span></td>
+            <td class="part-price" data-price=<%= part.price %>><span>$<%= part.price %></span></td>
             <td><button>Add</button></td>
         </tr>
         <% }) %>
     </tbody>
+    <tfoot>
+        <tr>
+
+        </tr>
+    </tfoot>
 </table>
+<% block('scripts', "<script type='text/javascript' src='/javascripts/categoryDetailFunctions.js'></script>") -%>
