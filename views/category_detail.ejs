@@ -1,8 +1,9 @@
 <% layout('layout') -%>
 
 <section>
+    <p><a href="/categories">Categories</a> > <%= category.title %></p>
     <h1><%= category.title %></h2>
-        <p><%= category.description %></p>
+        <p class="description"><%= category.description %></p>
         <a href="<%= category.url%>/update">Update</a>
         <a href="<%= category.url%>/delete">Delete</a>
 </section>
@@ -10,7 +11,7 @@
     <div><%= category_parts.length %> product(s)</div>
     <form id="categoryPartFilterForm">
         <label for="filter">Search </label>
-        <input type="text" name="filter" id="filter" placeholder="<%= category.title %>s">
+        <input type="text" name="filter" id="filter" placeholder="<%= category.title %>">
     </form>
 </section>
 <table id='category-table'>

@@ -25,7 +25,9 @@ exports.category_detail = function (req, res, next) {
         Category.findById(req.params.id).exec(callback);
       },
       category_parts: function (callback) {
-        ComputerPart.find({ category: req.params.id }).populate('manufacturer').exec(callback);
+        ComputerPart.find({ category: req.params.id })
+          .populate("manufacturer")
+          .exec(callback);
       },
     },
     function (err, results) {
@@ -36,7 +38,7 @@ exports.category_detail = function (req, res, next) {
         return next(err);
       }
       res.render("category_detail", {
-        title: "All " + results.category.title + "s",
+        title: "Choose " + results.category.title + " - PCPartPlanner",
         category: results.category,
         category_parts: results.category_parts,
       });
@@ -46,7 +48,7 @@ exports.category_detail = function (req, res, next) {
 
 // Display Category create form on GET.
 exports.category_create_get = function (req, res, next) {
-  res.render("category_form", { title: "Create category" });
+  res.render("category_form", { title: "Create a category" });
 };
 
 // Handle Category create on POST.
@@ -169,9 +171,7 @@ exports.category_update_post = [
   body("title")
     .isLength({ min: 1 })
     .trim()
-    .withMessage("Category name must be specified")
-    .isAlphanumeric()
-    .withMessage("Title has non-alphanumeric characters."),
+    .withMessage("Category name must be specified"),
   body("description").optional({ checkFalsy: true }),
 
   (req, res, next) => {
@@ -179,6 +179,7 @@ exports.category_update_post = [
 
     var category = new Category({
       title: req.body.title,
+      description: req.body.description,
       _id: req.params.id,
     });
 

@@ -1,0 +1,10 @@
+<% layout('layout') -%>
+
+<section>
+  <p><a href="/categories">Categories</a> > <a href="<%= category.url %>"><%= category.title %></a> > <%= title %></p>
+  <h1><%= title %></h1>
+
+  <% if (typeof component.description != 'undefined') { %>
+  <p><%= component.description %></p>
+  <% } %>
+</section>

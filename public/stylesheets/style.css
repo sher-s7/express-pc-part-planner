@@ -10,7 +10,7 @@ body {
   font-family: "Archivo", sans-serif;
 }
 
-p {
+.description {
   white-space: pre-line;
 }
 

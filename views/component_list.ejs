@@ -1,0 +1,14 @@
+<% layout('layout') -%>
+
+<section>
+    <h1><%= title %> </h1>
+</section>
+<section><a href="/component/create">Add a new part</a></section>
+
+<ul>
+    <% component_list.forEach(component => { %>
+    <li>
+        <h2><a href="<%= component.url %>"><%= component.name %></a></h2>
+    </li>
+    <% }) %>
+</ul>

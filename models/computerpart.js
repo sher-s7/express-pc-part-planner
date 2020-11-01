@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 var ComputerPartSchema = new Schema({
   name: { type: String, required: true, maxlength: 100 },
-  description: { type: String, required: true, maxlength: 10000 },
-  inStock: { type: Number, required: true, max: 9999 },
-  price: { type: Number, required: true, max: 999999 },
+  description: { type: Array, required: true },
+  inStock: { type: Number, required: true, max: 9999, min: 0 },
+  price: { type: Number, required: true, max: 999999, min: 0 },
   category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
   manufacturer: {
     type: Schema.Types.ObjectId,

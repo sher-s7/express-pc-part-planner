@@ -18,7 +18,8 @@
     "express-validator": "^6.6.1",
     "http-errors": "~1.6.3",
     "mongoose": "^5.10.9",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pluralize": "^8.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.5"
