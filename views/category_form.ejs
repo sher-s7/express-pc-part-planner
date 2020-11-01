@@ -3,10 +3,10 @@
 
 <form action="" method="POST">
     <label for="title">
-        <input required type="text" name="title" id="title">
+        <input required type="text" name="title" id="title" value="<%= typeof category == 'undefined' ? '' : category.title %>">
     </label>
     <label for="description">
-        <textarea required name="description" id="description" cols="30" rows="10"></textarea>
+        <textarea required name="description" id="description" cols="30" rows="10"><%= typeof category == 'undefined' ? '' : category.description %></textarea>
     </label>
     <button type="submit">Submit</button>
 </form>
