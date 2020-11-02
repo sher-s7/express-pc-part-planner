@@ -1,5 +1,6 @@
 var ComputerPart = require("../models/computerpart");
 var Category = require("../models/category");
+var Manufacturer = require("../models/manufacturer");
 var async = require("async");
 
 const { body, validationResult } = require("express-validator/check");
@@ -35,10 +36,26 @@ exports.computerpart_detail = function (req, res, next) {
 };
 
 // Display ComputerPart create form on GET.
-exports.computerpart_create_get = function (req, res) {
-  res.render("component_form", {
-    title: "Create a computer part",
-  });
+exports.computerpart_create_get = function (req, res, next) {
+  async.parallel(
+    {
+      categories: function (callback) {
+        Category.find().exec(callback);
+      },
+      manufacturers: function (callback) {
+        Manufacturer.find().exec(callback);
+      },
+    },
+    function (err, results) {
+      if (err) next(err);
+
+      res.render("component_form", {
+        title: "Create a computer part",
+        categories: results.categories,
+        manufacturers: results.manufacturers,
+      });
+    }
+  );
 };
 
 // Handle ComputerPart create on POST.
@@ -48,10 +65,53 @@ exports.computerpart_create_post = [
     .isLength({ min: 3 })
     .escape(),
   body("description").trim().escape(),
-  body("inStock", "Must be a value of 0 or more").isNumeric(),
-  body("price", "Must be between $0 and $999999").isFloat(),
+  body("inStock", "Stock cannot be lower than 0").isInt({min: 0, max: 9999}),
+  body("price", "Price must be between $0 and $999999").isFloat({min: 0, max: 999999}),
   body("category", "Category must not be empty").trim().escape(),
   body("manufacturer", "Manufacturer must not be empty").trim().escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    var component = new ComputerPart({
+      name: req.body.name,
+      description: req.body.description,
+      inStock: req.body.inStock,
+      price: req.body.price,
+      category: req.body.category,
+      manufacturer: req.body.manufacturer,
+    });
+
+    if (!errors.isEmpty()) {
+      async.parallel(
+        {
+          categories: function (callback) {
+            Category.find().exec(callback);
+          },
+          manufacturers: function (callback) {
+            Manufacturer.find().exec(callback);
+          },
+        },
+        function (err, results) {
+          if (err) next(err);
+
+          res.render("component_form", {
+            title: "Create a computer part",
+            categories: results.categories,
+            manufacturers: results.manufacturers,
+            component: component,
+            errors: errors.array(),
+          });
+        }
+      );
+      return;
+    } else {
+      component.save(function (err) {
+        if (err) return next(err);
+        res.redirect(component.url);
+      });
+    }
+  },
 ];
 
 // Display ComputerPart delete form on GET.

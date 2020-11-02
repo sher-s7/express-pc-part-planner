@@ -1,20 +1,30 @@
 <% layout('layout') -%>
-<h1><%= title %> </h1>
+<h1><%= title %></h1>
 
 <form action="" method="POST">
-    <label for="title">
-        <input required type="text" name="title" id="title" value="<%= typeof category == 'undefined' ? '' : category.title %>">
-    </label>
-    <label for="description">
-        <textarea name="description" id="description" cols="30" rows="10"><%= typeof category == 'undefined' ? '' : category.description %></textarea>
-    </label>
-    <button type="submit">Submit</button>
+  <label for="title">
+    <p>Title:</p>
+    <input
+      required
+      type="text"
+      name="title"
+      id="title"
+      value="<%= typeof category == 'undefined' ? '' : category.title %>"
+    />
+  </label>
+  <label for="description">
+    <p>Description:</p>
+    <textarea name="description" id="description" cols="30" rows="10">
+<%= typeof category == 'undefined' ? '' : category.description %></textarea
+    >
+  </label>
+  <button type="submit">Submit</button>
 </form>
 
 <% if (typeof errors != 'undefined') { %>
 <ul>
-    <% errors.forEach(err => { %>
-    <li><%= err.msg %> </li>
-    <% }) %>
+  <% errors.forEach(err => { %>
+  <li><%= err.msg %></li>
+  <% }) %>
 </ul>
 <% } %>
