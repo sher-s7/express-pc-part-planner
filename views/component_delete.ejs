@@ -1,0 +1,10 @@
+<% layout('layout') -%>
+
+<h1><%= title %> </h1>
+
+<p>Are you sure you want to delete the following component? <span><%= component.name %></span></p>
+
+    <form action="" method="POST">
+        <input type="hidden" name="id" id="id" value="<%= component._id %>" required>
+        <button type="submit">Delete</button>
+    </form>
