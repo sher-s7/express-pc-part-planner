@@ -19,7 +19,8 @@
     "http-errors": "~1.6.3",
     "mongoose": "^5.10.9",
     "morgan": "~1.9.1",
-    "pluralize": "^8.0.0"
+    "pluralize": "^8.0.0",
+    "tablesort": "^5.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.5"

@@ -8,7 +8,7 @@ const { sanitizeBody, sanitize } = require("express-validator/filter");
 
 // Display list of all ComputerParts.
 exports.computerpart_list = function (req, res, next) {
-  ComputerPart.find().exec(function (err, list_computerparts) {
+  ComputerPart.find().populate('manufacturer').populate('category').exec(function (err, list_computerparts) {
     if (err) next(err);
 
     res.render("component_list", {

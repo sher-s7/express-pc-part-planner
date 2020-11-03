@@ -1,11 +1,10 @@
 <% layout('layout') -%>
 
 <section>
-    <p><a href="/categories">Categories</a> > <%= category.title %></p>
     <h1><%= category.title %></h2>
-        <p class="description"><%= category.description %></p>
         <a href="<%= category.url%>/update">Update</a>
         <a href="<%= category.url%>/delete">Delete</a>
+        <p class="description"><%= category.description %></p>
 </section>
 <section>
     <div><%= category_parts.length %> product(s)</div>
@@ -30,7 +29,7 @@
             <td class="part-manufacturer"><a href="<%= part.manufacturer.url %>"><%= part.manufacturer.name %></a>
             </td>
             <td class="part-stock"><span><%= part.inStock %></span></td>
-            <td class="part-price" data-price=<%= part.price %>><span>$<%= part.price %></span></td>
+            <td class="part-price"><span>$<%= part.price %></span></td>
             <td><button>Add</button></td>
         </tr>
         <% }) %>
@@ -42,3 +41,4 @@
     </tfoot>
 </table>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/categoryDetailFunctions.js'></script>") -%>
+<% block('scripts', "<script type='text/javascript' src='/javascripts/tablesort.min.js'></script> <script type='text/javascript' src='/javascripts/tablesort.number.min.js'></script> <script>new Tablesort(document.getElementById('category-table'));</script> ") -%>
