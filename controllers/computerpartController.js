@@ -2,6 +2,7 @@ var ComputerPart = require("../models/computerpart");
 var Category = require("../models/category");
 var Manufacturer = require("../models/manufacturer");
 var async = require("async");
+var mongoose = require("mongoose");
 
 const { body, validationResult } = require("express-validator/check");
 const { sanitizeBody, sanitize } = require("express-validator/filter");
@@ -23,11 +24,22 @@ exports.computerpart_list = function (req, res, next) {
 
 // Display detail page for a specific ComputerPart.
 exports.computerpart_detail = function (req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
   ComputerPart.findById(req.params.id)
     .populate("category")
     .populate("manufacturer")
     .exec(function (err, component) {
       if (err) next(err);
+
+      if (component == null) {
+        let err = new Error("Component not found");
+        err.status - 404;
+        return next(err);
+      }
 
       res.render("component_detail", {
         title: component.name,
@@ -122,6 +134,11 @@ exports.computerpart_create_post = [
 
 // Display ComputerPart delete form on GET.
 exports.computerpart_delete_get = function (req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
   ComputerPart.findById(req.params.id)
     .populate("category")
     .populate("manufacturer")
@@ -129,7 +146,9 @@ exports.computerpart_delete_get = function (req, res, next) {
       if (err) next(err);
 
       if (component == null) {
-        res.redirect("/components");
+        let err = new Error("Component not found");
+        err.status - 404;
+        return next(err);
       }
 
       res.render("component_delete", {
@@ -152,7 +171,9 @@ exports.computerpart_delete_post = function (req, res, next) {
 
 // Display ComputerPart update form on GET.
 exports.computerpart_update_get = function (req, res) {
-  res.send("NOT IMPLEMENTED: ComputerPart update GET");
+  ComputerPart.findById(req.params.id, function (err, component) {
+    if (err) return next(err);
+  });
 };
 
 // Handle ComputerPart update on POST.

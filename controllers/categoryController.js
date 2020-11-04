@@ -5,6 +5,8 @@ var async = require("async");
 const { body, validationResult } = require("express-validator/check");
 const { sanitizeBody, sanitize } = require("express-validator/filter");
 
+var mongoose = require("mongoose");
+
 // Display list of all Categorys.
 exports.category_list = function (req, res, next) {
   Category.find().exec(function (err, list_categories) {
@@ -19,6 +21,11 @@ exports.category_list = function (req, res, next) {
 
 // Display detail page for a specific Category.
 exports.category_detail = function (req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
   async.parallel(
     {
       category: function (callback) {
@@ -89,6 +96,11 @@ exports.category_create_post = [
 
 // Display Category delete form on GET.
 exports.category_delete_get = function (req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
   async.parallel(
     {
       category: function (callback) {
@@ -102,7 +114,9 @@ exports.category_delete_get = function (req, res, next) {
       if (err) return next(err);
 
       if (results.category == null) {
-        res.redirect("/categories");
+        let err = new Error("Category not found");
+        err.status = 404;
+        return next(err);
       }
 
       res.render("category_delete", {
