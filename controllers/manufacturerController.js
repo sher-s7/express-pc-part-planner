@@ -160,11 +160,60 @@ exports.manufacturer_delete_post = function (req, res, next) {
 };
 
 // Display Manufacturer update form on GET.
-exports.manufacturer_update_get = function (req, res) {
-  res.send("NOT IMPLEMENTED: Manufacturer update GET");
+exports.manufacturer_update_get = function (req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
+  Manufacturer.findById(req.params.id, function (err, manufacturer) {
+    if (err) return next(err);
+
+    if (manufacturer == null) {
+      const err = new Error("Manufacturer not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    res.render("manufacturer_form", {
+      title: "Update Manufacturer",
+      manufacturer: manufacturer,
+    });
+  });
 };
 
 // Handle Manufacturer update on POST.
-exports.manufacturer_update_post = function (req, res) {
-  res.send("NOT IMPLEMENTED: Manufacturer update POST");
-};
+exports.manufacturer_update_post = [
+  body("name")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Manufacturer name must be specified."),
+  body("description").optional({ checkFalsy: true }),
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    var manufacturer = new Manufacturer({
+      name: req.body.name,
+      description: req.body.description,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("manufacturer_form", {
+        title: "Update Manufacturer",
+        manufacturer: manufacturer,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      Manufacturer.findByIdAndUpdate(req.params.id, manufacturer, {}, function (
+        err,
+        themanufacturer
+      ) {
+        if (err) return next(err);
+
+        res.redirect(themanufacturer.url);
+      });
+    }
+  },
+];
