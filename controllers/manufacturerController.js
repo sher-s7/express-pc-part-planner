@@ -92,13 +92,71 @@ exports.manufacturer_create_post = [
 ];
 
 // Display Manufacturer delete form on GET.
-exports.manufacturer_delete_get = function (req, res) {
-  res.send("NOT IMPLEMENTED: Manufacturer delete GET");
+exports.manufacturer_delete_get = function (req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
+  async.parallel(
+    {
+      manufacturer: function (callback) {
+        Manufacturer.findById(req.params.id).exec(callback);
+      },
+      manufacturer_parts: function (callback) {
+        ComputerPart.find({ manufacturer: req.params.id }).exec(callback);
+      },
+    },
+    function (err, results) {
+      if (err) return next(err);
+
+      if (results.manufacturer == null) {
+        const err = new Error("Manufacturer not found");
+        err.status = 404;
+        return next(err);
+      }
+
+      res.render("manufacturer_delete", {
+        title: "Delete Manufacturer: " + results.manufacturer.name,
+        manufacturer: results.manufacturer,
+        manufacturer_parts: results.manufacturer_parts,
+      });
+    }
+  );
 };
 
 // Handle Manufacturer delete on POST.
-exports.manufacturer_delete_post = function (req, res) {
-  res.send("NOT IMPLEMENTED: Manufacturer delete POST");
+exports.manufacturer_delete_post = function (req, res, next) {
+  async.parallel(
+    {
+      manufacturer: function (callback) {
+        Manufacturer.findById(req.params.id).exec(callback);
+      },
+      manufacturer_parts: function (callback) {
+        ComputerPart.find({ manufacturer: req.params.id }).exec(callback);
+      },
+    },
+    function (err, results) {
+      if (err) return next(err);
+
+      if (results.manufacturer_parts.length > 0) {
+        res.render("manufacturer_delete", {
+          title: "Delete Manufacturer: " + results.manufacturer.name,
+          manufacturer: results.manufacturer,
+          manufacturer_parts: results.manufacturer_parts,
+        });
+        return;
+      } else {
+        Manufacturer.findByIdAndRemove(req.body.id, function deleteManufacturer(
+          err
+        ) {
+          if (err) return next(err);
+
+          res.redirect("/manufacturers");
+        });
+      }
+    }
+  );
 };
 
 // Display Manufacturer update form on GET.
