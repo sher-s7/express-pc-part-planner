@@ -59,8 +59,8 @@ exports.manufacturer_create_get = function (req, res) {
 };
 
 // Handle Manufacturer create on POST.
-exports.manufacturer_create_post[
-  (body("name")
+exports.manufacturer_create_post = [
+  body("name")
     .trim()
     .isLength({ min: 1 })
     .escape()
@@ -88,7 +88,7 @@ exports.manufacturer_create_post[
         res.redirect(manufacturer.url);
       });
     }
-  })
+  },
 ];
 
 // Display Manufacturer delete form on GET.
