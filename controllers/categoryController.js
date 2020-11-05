@@ -61,8 +61,8 @@ exports.category_create_get = function (req, res, next) {
 // Handle Category create on POST.
 exports.category_create_post = [
   body("title")
-    .isLength({ min: 1 })
     .trim()
+    .isLength({ min: 1 })
     .withMessage("Category name must be specified"),
   body("description").optional({ checkFalsy: true }),
 
@@ -74,7 +74,7 @@ exports.category_create_post = [
 
     if (!errors.isEmpty()) {
       res.render("category_form", {
-        title: "Create category",
+        title: "Create a category",
         category: req.body,
         errors: errors.array(),
       });
@@ -183,8 +183,8 @@ exports.category_update_get = function (req, res, next) {
 // Handle Category update on POST.
 exports.category_update_post = [
   body("title")
-    .isLength({ min: 1 })
     .trim()
+    .isLength({ min: 1 })
     .withMessage("Category name must be specified"),
   body("description").optional({ checkFalsy: true }),
 
