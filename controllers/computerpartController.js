@@ -170,13 +170,112 @@ exports.computerpart_delete_post = function (req, res, next) {
 };
 
 // Display ComputerPart update form on GET.
-exports.computerpart_update_get = function (req, res) {
-  ComputerPart.findById(req.params.id, function (err, component) {
-    if (err) return next(err);
-  });
+exports.computerpart_update_get = function (req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
+  async.parallel(
+    {
+      component: function (callback) {
+        ComputerPart.findById(req.params.id)
+          .populate("category")
+          .populate("manufacturer")
+          .exec(callback);
+      },
+      categories: function (callback) {
+        Category.find().exec(callback);
+      },
+      manufacturers: function (callback) {
+        Manufacturer.find().exec(callback);
+      },
+    },
+    function (err, results) {
+      if (err) return next(err);
+
+      if (results.component == null) {
+        let err = new Error("Component not found");
+        err.status - 404;
+        return next(err);
+      }
+
+      res.render("component_form", {
+        title: "Update Component",
+        component: results.component,
+        categories: results.categories,
+        manufacturers: results.manufacturers,
+      });
+    }
+  );
 };
 
 // Handle ComputerPart update on POST.
-exports.computerpart_update_post = function (req, res) {
-  res.send("NOT IMPLEMENTED: ComputerPart update POST");
-};
+exports.computerpart_update_post = [
+  body("name", "Name must be at least 3 characters in length")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+  body("description").trim().escape(),
+  body("inStock", "Stock cannot be lower than 0").isInt({ min: 0, max: 9999 }),
+  body("price", "Price must be between $0 and $999999").isFloat({
+    min: 0,
+    max: 999999,
+  }),
+  body("category", "Category must not be empty").trim().escape(),
+  body("manufacturer", "Manufacturer must not be empty").trim().escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    const component = new ComputerPart({
+      name: req.body.name,
+      description: req.body.description,
+      inStock: req.body.inStock,
+      price: req.body.price,
+      category: req.body.category,
+      manufacturer: req.body.manufacturer,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      async.parallel(
+        {
+          categories: function (callback) {
+            Category.find().exec(callback);
+          },
+          manufacturers: function (callback) {
+            Manufacturer.find().exec(callback);
+          },
+        },
+        function (err, results) {
+          if (err) return next(err);
+
+          if (results.component == null) {
+            let err = new Error("Component not found");
+            err.status - 404;
+            return next(err);
+          }
+
+          res.render("component_form", {
+            title: "Update Component",
+            component: component,
+            categories: results.categories,
+            manufacturers: results.manufacturers,
+            errors: errors.array(),
+          });
+        }
+      );
+      return;
+    } else {
+      ComputerPart.findByIdAndUpdate(req.params.id, component, {}, function (
+        err,
+        thecomponent
+      ) {
+        if (err) return next(err);
+
+        res.redirect(thecomponent.url);
+      });
+    }
+  },
+];
