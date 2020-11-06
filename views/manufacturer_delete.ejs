@@ -1,1 +1,19 @@
 <% layout('layout') -%>
+
+<h1><%= title %> </h1>
+
+<% if (manufacturer_parts.length > 0) { %>
+<h2>Must delete the following parts before removing this manufacturer</h2>
+<ul>
+    <% manufacturer_parts.forEach(part => { %>
+    <li><a href="<%= part.url %>"><%= part.name %></a></li>
+    <% }) %>
+</ul>
+<% } else { %>
+    <p>Are you sure you want to delete the <span><%= manufacturer.name %></span> manufacturer?</p>
+
+    <form action="" method="POST">
+        <input type="hidden" name="id" id="id" value="<%= manufacturer._id %>" required>
+        <button type="submit">Delete</button>
+    </form>
+<% } %>

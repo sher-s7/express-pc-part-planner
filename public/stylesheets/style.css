@@ -17,6 +17,11 @@ body {
 	font-family: 'Arvo', serif;
 }
 
+#logo a {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
 .accent1 {
 	color: var(--accent1);
 }

@@ -1,1 +1,32 @@
 <% layout('layout') -%>
+<h1><%= title %></h1>
+
+<form action="" method="POST">
+  <label for="name">
+    <p>Name:</p>
+    <input
+      required
+      type="text"
+      name="name"
+      id="name"
+      value="<%= typeof manufacturer == 'undefined' ? '' : manufacturer.name %>"
+    />
+  </label>
+  <label for="description">
+    <p>Description:</p>
+    <textarea name="description" id="description" cols="30" rows="10">
+<%= typeof manufacturer == 'undefined' ? '' : manufacturer.description %></textarea
+    >
+  </label>
+  <button type="submit">Submit</button>
+</form>
+
+<% if (typeof errors != 'undefined') { %>
+<ul>
+  <% errors.forEach(err => { %>
+  <li><%= err.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<a href="<%= typeof manufacturer == 'undefined' ? '/manufacturers' : manufacturer.url %>">Cancel</a>
