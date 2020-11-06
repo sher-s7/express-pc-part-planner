@@ -1,9 +1,30 @@
 <% layout('layout') -%>
 <h1>My Planner</h1>
-<ul>
+<table id="pc-planner-list">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Selection</th>
+      <th>Price</th>
+      <th id="buy"></th>
+      <th id="remove"></th>
+    </tr>
+  </thead>
+  <tbody>
     <% categories.forEach(category => { %>
-    <li>
-        <a href="<%= category.url %>"><%= category.title %></a>
-    </li>
+    <tr>
+      <td class="part_category"><a href="<%= category.url %>"><%= category.title %></a></td>
+      <td class="part_selected"></td>
+      <td class="part_price"></td>
+      <td class="part_buy"><a target="_blank" rel="noopener noreferrer" href="https://www.amazon.com/s?k=">Buy</a></td>
+      <td class="part_remove"><button>🗙</button></td>
+    </tr>
     <% }) %>
-</ul>
+  </tbody>
+  <tfoot>
+      <td colspan="2" id="parts_total">Total: </td>
+      <td>$1234</td>
+      <td></td>
+      <td></td>
+  </tfoot>
+</table>

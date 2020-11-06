@@ -20,8 +20,10 @@
     >
   </label>
   <label for="price">
-    <p>Price:</p>
-    <input
+    <p>Price [USD]:</p>
+    <div id="price-input">
+      <span id="dollar-sign">$</span>
+      <input
       type="number"
       step="0.01"
       name="price"
@@ -29,6 +31,8 @@
       value="<%= typeof component != 'undefined' ? parseFloat(component.price) : 0%>"
       required
     />
+    </div>
+    
   </label>
   <label for="inStock">
     <p>Stock:</p>

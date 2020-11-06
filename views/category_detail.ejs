@@ -28,8 +28,8 @@
             <td class="part-name"><a href="<%= part.url %>"><%= part.name %></a></td>
             <td class="part-manufacturer"><a href="<%= part.manufacturer.url %>"><%= part.manufacturer.name %></a>
             </td>
-            <td class="part-stock"><span><%= part.inStock %></span></td>
-            <td class="part-price"><span>$<%= part.price %></span></td>
+            <td class="part-stock"><%= part.inStock %></td>
+            <td class="part-price">$<%= part.price %></td>
             <td><button>Add</button></td>
         </tr>
         <% }) %>
