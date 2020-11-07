@@ -12,39 +12,41 @@
       value="<%= typeof component == 'undefined' ? '' : component.name %>"
     />
   </fieldset>
-  <fieldset for="description">
+  <fieldset>
     <legend>FEATURES</legend>
     <textarea required name="description" id="description">
 <%= typeof component == 'undefined' ? '' : component.description %></textarea
     >
     <sub>Separate features with a comma</sub>
   </fieldset>
-  <fieldset for="price">
-    <legend>PRICE [USD]</legend>
-    <div id="price-input">
-      <span id="dollar-sign">$</span>
+  <div id="price-stock-container">
+    <fieldset>
+      <legend>PRICE [USD]</legend>
+      <div id="price-input">
+        <span id="dollar-sign">$</span>
+        <input
+        type="number"
+        step="0.01"
+        name="price"
+        id="price"
+        value="<%= typeof component != 'undefined' ? parseFloat(component.price) : 0%>"
+        required
+      />
+      </div>
+      
+    </fieldset>
+    <fieldset>
+      <legend>STOCK</legend>
       <input
-      type="number"
-      step="0.01"
-      name="price"
-      id="price"
-      value="<%= typeof component != 'undefined' ? parseFloat(component.price) : 0%>"
-      required
-    />
-    </div>
-    
-  </fieldset>
-  <fieldset for="inStock">
-    <legend>STOCK</legend>
-    <input
-      type="number"
-      name="inStock"
-      id="inStock"
-      value="<%= typeof component != 'undefined' ? parseInt(component.inStock) : 0%>"
-      required
-    />
-  </fieldset>
-  <fieldset for="category">
+        type="number"
+        name="inStock"
+        id="inStock"
+        value="<%= typeof component != 'undefined' ? parseInt(component.inStock) : 0%>"
+        required
+      />
+    </fieldset>
+  </div>
+  <fieldset>
     <legend>SELECT CATEGORY</legend>
     <select name="category" id="category" required>
         <% categories.forEach(category => { %>
@@ -57,7 +59,7 @@
         <% }) %>
     </select>
   </fieldset>
-  <fieldset for="manufacturer">
+  <fieldset>
     <legend>SELECT MANUFACTURER</legend>
     <select name="manufacturer" id="manufacturer" required>
         <% manufacturers.forEach(manufacturer => { %>

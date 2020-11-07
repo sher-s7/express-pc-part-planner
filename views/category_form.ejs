@@ -2,8 +2,8 @@
 <h1><%= title %></h1>
 
 <form action="" method="POST">
-  <label for="title">
-    <p>Title:</p>
+  <fieldset>
+    <legend>TITLE</legend>
     <input
       required
       type="text"
@@ -11,13 +11,13 @@
       id="title"
       value="<%= typeof category == 'undefined' ? '' : category.title %>"
     />
-  </label>
-  <label for="description">
-    <p>Description:</p>
+  </fieldset>
+  <fieldset>
+    <legend>DESCRIPTION</legend>
     <textarea name="description" id="description" cols="30" rows="10">
 <%= typeof category == 'undefined' ? '' : category.description %></textarea
     >
-  </label>
+  </fieldset>
   <button type="submit">Submit</button>
 </form>
 

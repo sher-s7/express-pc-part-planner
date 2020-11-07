@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cabin+Condensed:wght@400;500;600;700&display=swap");
 
 body {
-  --accent1: #eccb46;
+  --accent1: #f8d23c;
   --accent2: #e3d081;
   --fg: #1e1e1e;
   --bg: #333333;
@@ -21,6 +22,15 @@ body {
 
 a {
   color: var(--accent1);
+}
+
+button {
+  padding: 5px 10px;
+  background-color: var(--accent1);
+  color: var(--black);
+  border: none;
+  border-radius: 2px;
+  font-family: "Cabin Condensed", sans-serif;
 }
 
 /* -       -       -       -       -       -       -       -  Header -       -       -       -       -       -       -       - */
@@ -55,6 +65,33 @@ header section {
 }
 
 /* -       -       -       -       -       -       -       -  List -       -       -       -       -       -       -       - */
+table {
+  width: 100%;
+}
+
+thead {
+  display: none;
+}
+
+tr {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid var(--accent2);
+}
+
+.th-small {
+  font-size: 13px;
+  color: var(--accent2);
+  opacity: 0.5;
+}
+td {
+  padding: 10px;
+}
+
 
 /* -       -       -       -       -       -       -       -  Detail -       -       -       -       -       -       -       - */
 .description {
@@ -72,7 +109,7 @@ legend {
   margin-left: 10px;
   font-size: 12px;
   font-weight: bold;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   transition: 0.2s;
   text-shadow: 0 0 7px #000000c9;
   position: relative;
@@ -94,7 +131,9 @@ fieldset {
   position: relative;
   top: 0;
 }
-input, textarea, select {
+input,
+textarea,
+select {
   width: 100%;
   height: 100%;
   padding: 5px 15px 10px 15px;
@@ -103,6 +142,15 @@ input, textarea, select {
   color: var(--accent1);
   outline: none;
   box-shadow: none;
+}
+
+option {
+  background-color: #4d4836;
+  color: var(--accent1);
+}
+
+textarea {
+  resize: vertical;
 }
 
 fieldset:focus-within {
@@ -116,15 +164,25 @@ fieldset:focus-within legend {
 }
 
 @keyframes bounce {
-  0% {top: 0px}
-  25% {top: -4px}
-  50% {top: 0px}
-  75% {top: 2px}
-  100% {top: 0px}
+  0% {
+    top: 0px;
+  }
+  25% {
+    top: -3px;
+  }
+  50% {
+    top: 0px;
+  }
+  75% {
+    top: 2px;
+  }
+  100% {
+    top: 0px;
+  }
 }
 
-#price-input {
-  /* position: relative; */
+#price-stock-container {
+  display: flex;
 }
 
 #dollar-sign {
@@ -134,7 +192,7 @@ fieldset:focus-within legend {
   left: 10px;
   color: var(--accent1);
 }
-input[type="number"] {
+#price {
   padding-left: 25px;
   padding-right: 5px;
 }

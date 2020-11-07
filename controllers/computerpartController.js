@@ -65,7 +65,7 @@ exports.computerpart_create_get = function (req, res, next) {
       if (err) next(err);
 
       res.render("component_form", {
-        title: "Create a computer part",
+        title: "Add a new computer part",
         categories: results.categories,
         manufacturers: results.manufacturers,
       });
