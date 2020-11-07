@@ -2,8 +2,8 @@
 <h1><%= title %></h1>
 
 <form action="" method="POST">
-  <label for="name">
-    <p>Name:</p>
+  <fieldset>
+    <legend>NAME</legend>
     <input
       required
       type="text"
@@ -11,16 +11,16 @@
       id="name"
       value="<%= typeof component == 'undefined' ? '' : component.name %>"
     />
-  </label>
-  <label for="description">
-    <p>Features:</p>
-    <p>Separate features with a comma</p>
+  </fieldset>
+  <fieldset for="description">
+    <legend>FEATURES</legend>
     <textarea required name="description" id="description">
 <%= typeof component == 'undefined' ? '' : component.description %></textarea
     >
-  </label>
-  <label for="price">
-    <p>Price [USD]:</p>
+    <sub>Separate features with a comma</sub>
+  </fieldset>
+  <fieldset for="price">
+    <legend>PRICE [USD]</legend>
     <div id="price-input">
       <span id="dollar-sign">$</span>
       <input
@@ -33,9 +33,9 @@
     />
     </div>
     
-  </label>
-  <label for="inStock">
-    <p>Stock:</p>
+  </fieldset>
+  <fieldset for="inStock">
+    <legend>STOCK</legend>
     <input
       type="number"
       name="inStock"
@@ -43,9 +43,9 @@
       value="<%= typeof component != 'undefined' ? parseInt(component.inStock) : 0%>"
       required
     />
-  </label>
-  <label for="category">
-    <p>Select category:</p>
+  </fieldset>
+  <fieldset for="category">
+    <legend>SELECT CATEGORY</legend>
     <select name="category" id="category" required>
         <% categories.forEach(category => { %>
             <% if (typeof component != 'undefined') { %>
@@ -56,9 +56,9 @@
                 <% } %>
         <% }) %>
     </select>
-  </label>
-  <label for="manufacturer">
-    <p>Select manufacturer:</p>
+  </fieldset>
+  <fieldset for="manufacturer">
+    <legend>SELECT MANUFACTURER</legend>
     <select name="manufacturer" id="manufacturer" required>
         <% manufacturers.forEach(manufacturer => { %>
             <% if (typeof component != 'undefined') { %>
@@ -69,7 +69,7 @@
                 <% } %>
         <% }) %>
     </select>
-  </label>
+  </fieldset>
 
   <button type="submit">Submit</button>
 </form>

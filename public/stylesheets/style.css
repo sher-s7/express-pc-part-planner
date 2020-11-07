@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&display=swap');
 
 body {
   --accent1: #eccb46;
@@ -11,6 +12,7 @@ body {
   background-color: var(--bg);
   font-family: "Archivo", sans-serif;
   color: var(--font-color);
+  padding: 20px;
 }
 
 .accent1 {
@@ -61,33 +63,78 @@ header section {
 
 /* -       -       -       -       -       -       -       -  Form -       -       -       -       -       -       -       - */
 
-input, textarea {
-  padding: 10px 15px;
-  border-radius: 2px;
-  color: var(--accent1);
-  background: radial-gradient(hsla(48, 81%, 60%, 0.11), hsla(48, 81%, 60%, 0.15));
-  border: 2px solid transparent;
-  transition: border 0.2s;
+form {
+  display: flex;
+  flex-direction: column;
+}
+legend {
+  padding: 0 2px;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+  transition: 0.2s;
+  text-shadow: 0 0 7px #000000c9;
+  position: relative;
+  top: 0;
 }
 
-input:focus, textarea:focus {
+fieldset {
+  padding: 0;
+  border-radius: 2px;
+  color: var(--accent1);
+  background: radial-gradient(
+    hsla(48, 81%, 60%, 0.11),
+    hsla(48, 81%, 60%, 0.15)
+  );
+  border: 2px solid transparent;
+  transition: border 0.2s;
+  box-shadow: 0 0 10px #0000002e;
+  margin-bottom: 30px;
+  position: relative;
+  top: 0;
+}
+input, textarea, select {
+  width: 100%;
+  height: 100%;
+  padding: 5px 15px 10px 15px;
+  border: none;
+  background: transparent;
+  color: var(--accent1);
+  outline: none;
+  box-shadow: none;
+}
+
+fieldset:focus-within {
   transition: border 0.2s;
   border-color: var(--accent1);
   outline: none;
 }
+
+fieldset:focus-within legend {
+  animation: bounce 0.2s linear none 1;
+}
+
+@keyframes bounce {
+  0% {top: 0px}
+  25% {top: -4px}
+  50% {top: 0px}
+  75% {top: 2px}
+  100% {top: 0px}
+}
+
 #price-input {
-  position: relative;
+  /* position: relative; */
 }
 
 #dollar-sign {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 3px;
   font-size: 20px;
   left: 10px;
   color: var(--accent1);
 }
-input[type='number'] {
+input[type="number"] {
   padding-left: 25px;
   padding-right: 5px;
 }
