@@ -12,13 +12,13 @@
       value="<%= typeof component == 'undefined' ? '' : component.name %>"
     />
   </fieldset>
-  <fieldset>
+  <fieldset id="features">
     <legend>FEATURES</legend>
     <textarea required name="description" id="description">
 <%= typeof component == 'undefined' ? '' : component.description %></textarea
     >
-    <sub>Separate features with a comma</sub>
   </fieldset>
+  <sub id="feature-sub">Separate features with a comma</sub>
   <div id="price-stock-container">
     <fieldset>
       <legend>PRICE [USD]</legend>
