@@ -58,18 +58,8 @@ header section {
   padding: 15px;
 }
 
-.logo {
+.logo a {
   font-family: "Arvo", serif;
-}
-
-.symbol {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 18px;
-}
-
-.symbol a {
   color: var(--font-color);
 }
 
@@ -249,3 +239,15 @@ button[type='submit'] {
 }
 
 /* -       -       -       -       -       -       -       -  Delete -       -       -       -       -       -       -       - */
+
+
+
+/* -       -       -       -       -       -       -       -  Footer -       -       -       -       -       -       -       - */
+
+.symbol {
+  font-size: 18px;
+}
+
+.symbol a {
+  color: var(--font-color);
+}
