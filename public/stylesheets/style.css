@@ -192,7 +192,6 @@ body.expand #burger div:nth-child(2) {
 }
 table {
   width: 100%;
-  min-height: 220px;
   background-color: var(--fg);
 }
 
