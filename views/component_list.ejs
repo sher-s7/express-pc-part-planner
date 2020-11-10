@@ -1,9 +1,19 @@
 <% layout('layout') -%>
 
-<section>
-  <h1><%= title %></h1>
-</section>
+<h1 class="title"><%= title %></h1>
+
+  <p><%= component_list.length %> product(s)</p>
+
 <section><a href="/component/create">Add a new part</a></section>
+
+<section class="filter-section">
+  <form id="componentFilterForm">
+      <fieldset>
+          <legend>SEARCH</legend>
+          <input type="text" name="filter" id="filter" placeholder="Components">
+      </fieldset>
+  </form>
+</section>
 
 <table id="component-table">
   <thead>
@@ -17,7 +27,7 @@
   </thead>
   <tbody>
     <% component_list.forEach(component => { %>
-    <tr>
+    <tr class="part-row" data-part="<%= component.name %>">
       <td><a href="<%= component.url %>"><%= component.name %></a></td>
       <td><a href="<%= component.manufacturer.url %>"><%= component.manufacturer.name %></a></td>
       <td><a href="<%= component.category.url %>"><%= component.category.title %></a></td>
@@ -31,4 +41,5 @@
   </tfoot>
 </table>
 
+<% block('scripts', "<script type='text/javascript' src='/javascripts/searchFilter.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/tablesort.min.js'></script> <script type='text/javascript' src='/javascripts/tablesort.number.min.js'></script> <script>new Tablesort(document.getElementById('component-table'));</script> ") -%>

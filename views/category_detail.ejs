@@ -1,12 +1,12 @@
 <% layout('layout') -%>
 
+<h1 class="title"><%= category.title %></h1>
 <section>
-    <h1><%= category.title %></h1>
         <a href="<%= category.url%>/update">Update</a>
         <a href="<%= category.url%>/delete">Delete</a>
         <p class="description"><%= category.description %></p>
 </section>
-<section>
+<section class="filter-section">
     <div><%= category_parts.length %> product(s)</div>
     <form id="categoryPartFilterForm">
         <fieldset>

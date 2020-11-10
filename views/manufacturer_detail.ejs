@@ -1,12 +1,12 @@
 <% layout('layout') -%>
 
+<h1 class="title"><%= title %></h2>
 <section>
-    <h1><%= title %></h2>
         <a href="<%= manufacturer.url%>/update">Update</a>
         <a href="<%= manufacturer.url%>/delete">Delete</a>
         <p class="description"><%= manufacturer.description %></p>
 </section>
-<section>
+<section class="filter-section">
     <div><%= manufacturer_parts.length %> product(s)</div>
     <form id="manufacturerPartFilterForm">
         <label for="filter">Search </label>

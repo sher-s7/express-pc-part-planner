@@ -1,9 +1,9 @@
 <% layout('layout') -%>
-<h1><%= title %></h1>
+<h1 class="form-header title"><%= title %></h1>
 
 <form action="" method="POST">
-  <label for="name">
-    <p>Name:</p>
+  <fieldset for="name">
+    <legend>NAME</legend>
     <input
       required
       type="text"
@@ -11,13 +11,13 @@
       id="name"
       value="<%= typeof manufacturer == 'undefined' ? '' : manufacturer.name %>"
     />
-  </label>
-  <label for="description">
-    <p>Description:</p>
+  </fieldset>
+  <fieldset for="description">
+    <legend>DESCRIPTION</legend>
     <textarea name="description" id="description" cols="30" rows="10">
 <%= typeof manufacturer == 'undefined' ? '' : manufacturer.description %></textarea
     >
-  </label>
+  </fieldset>
   <button type="submit">Submit</button>
 </form>
 
