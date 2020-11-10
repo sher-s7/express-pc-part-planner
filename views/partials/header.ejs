@@ -1,8 +1,13 @@
 <header>
     <section>
         <h1 class="logo"><a href="/list"><span class="accent1">P</span>C<span class="accent1">P</span>ART<span class="accent1">P</span>LANNER</a></h1>
+        <button id="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </button>
     </section>
-    <section id="nav-bar" class="hidden">
+    <section id="nav-bar">
         <ul>
             <li><a href="/list">MY LIST</a></li>
             <li><a href="/categories">CATEGORIES</a></li>
@@ -11,3 +16,5 @@
         </ul>
     </section>
 </header>
+
+<% block('scripts', "<script type='text/javascript' src='/javascripts/burgerMenu.js'></script>") -%>

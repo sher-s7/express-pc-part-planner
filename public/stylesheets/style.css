@@ -14,11 +14,12 @@ body {
   --body-padding: 20px;
   --footer-height: 200px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg);
   font-family: "Archivo", sans-serif;
   color: var(--font-color);
   position: relative;
-  padding-bottom: var(--footer-height);
 }
 
 .hidden {
@@ -70,6 +71,63 @@ header {
   position: relative;
   background-color: var(--black);
 }
+
+header section:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+#burger {
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  width: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+#burger div {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background-color: var(--font-color);
+  transition: 0.2s;
+  top: 0;
+  bottom: 0;
+}
+body.expand {
+  overflow: hidden;
+}
+body.expand #nav-bar {
+  display: flex;
+}
+body.expand #burger div:first-of-type{
+  top: 8px;
+  opacity: 0;
+}
+body.expand #burger div:last-of-type{
+  top: -8px;
+  opacity: 0;
+}
+
+body.expand #burger div:nth-child(2) {
+  animation: bounce 0.2s linear none 1;
+}
+#burger:focus {
+  transform: scale(1);
+  box-shadow: none;
+  outline: none;
+}
+#burger:focus div{
+  background-color: var(--accent1);
+  transition: 0.2s;
+}
+
+
 .title {
   text-align: center;
   padding: 20px;
@@ -95,10 +153,10 @@ header {
   background: var(--fg);
   z-index: 1;
   width: 100%;
-  height: calc(100vh - 58px);
-  bottom: 0px;
+  height: 100vh;
+  top: 0px;
   left: 0;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -134,6 +192,7 @@ header {
 }
 table {
   width: 100%;
+  min-height: 220px;
   background-color: var(--fg);
 }
 
@@ -314,11 +373,10 @@ a.cancel {
 /* -       -       -       -       -       -       -       -  Footer -       -       -       -       -       -       -       - */
 footer {
   background-color: var(--black);
-  height: var(--footer-height);
+  min-height: var(--footer-height);
   padding: 20px;
-  position: absolute;
-  bottom: 0;
   width: 100%;
+  flex-grow: 1;
 }
 .symbol {
   font-size: 30px;
