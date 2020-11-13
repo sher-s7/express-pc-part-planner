@@ -33,6 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/'));
+app.use('/lineawesome', express.static(__dirname + '/node_modules/line-awesome/dist/line-awesome'));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
