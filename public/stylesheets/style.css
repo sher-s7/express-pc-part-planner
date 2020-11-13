@@ -40,6 +40,11 @@ a:hover {
 }
 
 button {
+  cursor: pointer;
+}
+
+.part-add button,
+button[type="submit"] {
   width: 100%;
   padding: 15px 0;
   background-color: var(--accent1);
@@ -47,21 +52,23 @@ button {
   border: 5px solid #ccb146;
   border-top: none;
   border-radius: 2px;
-  cursor: pointer;
-  transition: 0.2s;
+  transition: 0.2s ease-out;
   font-size: 18px;
   text-transform: uppercase;
   box-shadow: 0 5px 10px #0009;
 }
-button:focus {
+.part-add button:focus,
+button[type="submit"]:focus {
   transform: scale(1.02);
   box-shadow: 0 3px 25px #0009;
 }
-button:active {
+.part-add button:active,
+button[type="submit"]:active {
   transform: scale(0.98);
 }
 
-section, table {
+section,
+table {
   padding: var(--body-padding);
 }
 
@@ -83,8 +90,6 @@ header section:first-of-type {
   background: none;
   border: none;
   padding: 0;
-  border-radius: 0;
-  box-shadow: none;
   width: 28px;
   display: flex;
   flex-direction: column;
@@ -105,11 +110,11 @@ body.expand {
 body.expand #nav-bar {
   display: flex;
 }
-body.expand #burger div:first-of-type{
+body.expand #burger div:first-of-type {
   top: 8px;
   opacity: 0;
 }
-body.expand #burger div:last-of-type{
+body.expand #burger div:last-of-type {
   top: -8px;
   opacity: 0;
 }
@@ -118,23 +123,13 @@ body.expand #burger div:nth-child(2) {
   animation: bounce 0.2s linear none 1;
 }
 #burger:focus {
-  transform: scale(1);
-  box-shadow: none;
   outline: none;
 }
-#burger:focus div{
+#burger:focus div {
   background-color: var(--accent1);
   transition: 0.2s;
 }
 
-
-.title {
-  text-align: center;
-  padding: 20px;
-  width: 90%;
-  margin: 0 auto;
-  border-bottom: 1px solid var(--font-color);
-}
 .logo {
   font-size: 24px;
   text-align: center;
@@ -231,8 +226,57 @@ td {
 }
 
 /* -       -       -       -       -       -       -       -  Detail -       -       -       -       -       -       -       - */
+.title {
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  background-color: var(--fg);
+  margin: 0 auto;
+  position: relative;
+}
+.title button {
+  position: absolute;
+  right: 25px;
+  background: none;
+  border: none;
+  color: var(--accent1);
+  padding: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  font-size: 25px;
+}
+.title button:focus {
+  outline-color: var(--accent1);
+}
+.title button.flip {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.edit-links {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  right: 5px;
+  background-color: var(--fg);
+  transition: 0.2s ease-in-out;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  top: 60px;
+}
+
+.edit-links.collapsed {
+  visibility: hidden;
+  opacity: 0;
+}
+
 .description {
   white-space: pre-line;
+}
+
+.edit-links a {
+  padding: 20px;
 }
 
 /* -       -       -       -       -       -       -       -  Form -       -       -       -       -       -       -       - */

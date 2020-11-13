@@ -1,10 +1,15 @@
 <% layout('layout') -%>
 
-<h1 class="title"><%= category.title %></h1>
+<section class="title">
+    <h1><%= category.title %></h1>
+    <button id="dropdown"><i class="fas fa-caret-down"></i></button>
+    <div class="edit-links collapsed">
+        <a href="<%= category.url%>/update"><i class="fas fa-wrench"></i></a>
+        <a href="<%= category.url%>/delete"><i class="fas fa-trash"></i></a>
+    </div>
+</section>
 <section>
-        <a href="<%= category.url%>/update">Update</a>
-        <a href="<%= category.url%>/delete">Delete</a>
-        <p class="description"><%= category.description %></p>
+    <p class="description"><%= category.description %></p>
 </section>
 <section class="filter-section">
     <div><%= category_parts.length %> product(s)</div>
@@ -54,4 +59,5 @@
     </tfoot>
 </table>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/searchFilter.js'></script>") -%>
+<% block('scripts', "<script type='text/javascript' src='/javascripts/dropdown.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/tablesort.min.js'></script> <script type='text/javascript' src='/javascripts/tablesort.number.min.js'></script> <script>new Tablesort(document.getElementById('category-table'));</script> ") -%>
