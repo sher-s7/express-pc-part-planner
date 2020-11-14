@@ -1,14 +1,13 @@
 <% layout('layout') -%>
 
-<h1 class="title"><%= title %></h1>
+<h1 class="title"><%= title %><a href="/category/create" class="create-link"><i class="fas fa-plus"></i></a></h1>
 
-<section><a href="/category/create">New Category</a></section>
+<section class='create-section'><a href="/category/create" class="create-link"><i class="las la-plus"></i> New category</a></section>
 
-<ul>
+<ul class="list">
   <% category_list.forEach(category => { %>
   <li>
-    <h2><%= category.title %></h2>
-    <p><a href="<%= category.url %>">View all</a></p>
+    <h2><a href="<%= category.url %>"><%= category.title %></a></h2>
   </li>
   <% }) %>
 </ul>

@@ -209,6 +209,42 @@ body.expand #burger div:nth-child(2) {
 }
 
 /* -       -       -       -       -       -       -       -  List -       -       -       -       -       -       -       - */
+.list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list li {
+  text-align: center;
+  background-color: var(--fg);
+}
+
+.list li:hover, .list li:active {
+  background-color: var(--black);
+}
+
+.list li h2 {
+  margin: 0;
+}
+.list li h2 a {
+  width: 100%;
+  display: inline-block;
+  padding: var(--body-padding);
+  text-decoration: none;
+}
+.create-section {
+  text-align: right;
+  display: none;
+}
+.create-link {
+  color: var(--font-color);
+  text-decoration: none;
+}
+.create-link:hover {
+  color: var(--accent1);
+  text-decoration: none;
+}
+
 .filter-section {
   padding: 0 var(--body-padding);
   position: relative;
@@ -266,6 +302,10 @@ td {
   background-color: var(--fg);
   margin: 0 auto;
   position: relative;
+}
+.title a {
+  position: absolute;
+  right: 80px;
 }
 .title button {
   position: absolute;
