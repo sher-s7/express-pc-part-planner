@@ -1,14 +1,19 @@
 <% layout('layout') -%>
 
-<h1 class="title"><%= title %></h1>
-<section> 
-  <a href="<%= component.url%>/update">Update</a>
-  <a href="<%= component.url%>/delete">Delete</a>
-  <ul>
-    <% component.description.split(',').forEach(spec => { %>
-      <% if (spec.trim().length > 0) { %>
-        <li><%= spec %></li>
-      <% } %>
-    <% }) %>
-  </ul>
+<section class="title"> 
+  <h1><%= title %></h1>
+  <button id="dropdown"><i class="fas fa-caret-down"></i></button>
+    <div class="edit-links collapsed">
+        <a href="<%= component.url%>/update"><i class="fas fa-wrench"></i></a>
+        <a href="<%= component.url%>/delete"><i class="fas fa-trash"></i></a>
+    </div>
 </section>
+<ul>
+  <% component.description.split(',').forEach(spec => { %>
+    <% if (spec.trim().length > 0) { %>
+      <li><%= spec %></li>
+    <% } %>
+  <% }) %>
+</ul>
+
+<% block('scripts', "<script type='text/javascript' src='/javascripts/dropdown.js'></script>") -%>

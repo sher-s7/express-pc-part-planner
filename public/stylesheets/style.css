@@ -30,6 +30,12 @@ body {
 .accent1 {
   color: var(--accent1);
 }
+h1 {
+  max-width: 85%;
+}
+h1, h2, h3, h4, li, section, p, a, td {
+  word-wrap: break-word;
+}
 
 a {
   text-decoration: none;
@@ -44,10 +50,7 @@ button {
   cursor: pointer;
 }
 
-.part-add button,
-button[type="submit"] {
-  width: 100%;
-  padding: 15px 0;
+.yellow-btn {
   background-color: var(--accent1);
   color: var(--bg);
   border: 5px solid #ccb146;
@@ -58,13 +61,11 @@ button[type="submit"] {
   text-transform: uppercase;
   box-shadow: 0 5px 10px #0009;
 }
-.part-add button:focus,
-button[type="submit"]:focus {
+.yellow-btn:focus {
   transform: scale(1.02);
   box-shadow: 0 3px 25px #0009;
 }
-.part-add button:active,
-button[type="submit"]:active {
+.yellow-btn:active {
   transform: scale(0.98);
 }
 
@@ -168,7 +169,6 @@ body.expand #burger div:nth-child(2) {
 
 #nav-bar li {
   font-size: 20px;
-  padding: 15px 0;
   width: 100%;
   text-transform: capitalize;
 }
@@ -180,17 +180,20 @@ body.expand #burger div:nth-child(2) {
   display: block;
   position: absolute;
   left: 0;
-  margin-top: 15px;
   opacity: 0.2;
 }
 
 #nav-bar li a {
   color: var(--font-color);
-  display: inline-block;
   width: 100%;
   text-decoration: none;
   display: flex;
   align-items: center;
+  padding: 15px 0;
+}
+
+#nav-bar li:first-of-type {
+  padding-bottom: 15px;
 }
 
 #nav-bar li a i {
@@ -215,7 +218,6 @@ body.expand #burger div:nth-child(2) {
   padding: 0;
 }
 .list li {
-  text-align: center;
   background-color: var(--fg);
 }
 
@@ -223,22 +225,21 @@ body.expand #burger div:nth-child(2) {
   background-color: var(--black);
 }
 
-.list li h2 {
-  margin: 0;
-}
-.list li h2 a {
+.list li a {
   width: 100%;
   display: inline-block;
   padding: var(--body-padding);
   text-decoration: none;
+  font-size: 25px;
 }
 .create-section {
   text-align: right;
   display: none;
 }
 .create-link {
-  color: var(--font-color);
+  color: var(--accent1);
   text-decoration: none;
+  font-size: 24px;
 }
 .create-link:hover {
   color: var(--accent1);
@@ -249,6 +250,24 @@ body.expand #burger div:nth-child(2) {
   padding: 0 var(--body-padding);
   position: relative;
   top: 22px;
+}
+
+.component-list {
+  background-color: var(--fg);
+}
+
+p.component-list {
+  width: 100%;
+  /* text-align: center; */
+  margin: 0;
+  padding-left: var(--body-padding);
+  padding-bottom: 20px;
+  color: #dddddd8f;
+
+}
+
+.filter-section.component-list {
+  top: 0;
 }
 
 .filter-section fieldset {
@@ -302,27 +321,23 @@ td {
   background-color: var(--fg);
   margin: 0 auto;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.title a {
-  position: absolute;
-  right: 80px;
-}
+
 .title button {
-  position: absolute;
-  right: 25px;
   background: none;
   border: none;
   color: var(--accent1);
   padding: 0;
-  top: 50%;
-  transform: translateY(-50%) rotate(0deg);
   font-size: 25px;
 }
 .title button:focus {
   outline-color: var(--accent1);
 }
 .title button.flip {
-  transform: translateY(-50%) rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .edit-links {
@@ -472,6 +487,8 @@ button[type="submit"] {
   margin: 0 auto;
   margin-bottom: 20px;
   font-size: 20px;
+  width: 100%;
+  padding: 15px 0;
 }
 
 a.cancel {
@@ -496,6 +513,7 @@ footer {
 }
 .symbol {
   font-size: 30px;
+  display: inline;
 }
 
 .symbol a {

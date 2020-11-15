@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var CategorySchema = new Schema({
-  title: { type: String, required: true, maxlength: 100 },
+  title: { type: String, required: true, maxlength: 30 },
   description: { type: String, maxlength: 500 },
 });
 

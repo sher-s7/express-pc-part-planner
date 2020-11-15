@@ -7,7 +7,7 @@
         <p class="description"><%= manufacturer.description %></p>
 </section>
 <section class="filter-section">
-    <div><%= manufacturer_parts.length %> product(s)</div>
+    <div><span id="numProducts"><%= manufacturer_parts.length %></span> product(s)</div>
     <form id="manufacturerPartFilterForm">
         <label for="filter">Search </label>
         <input type="text" name="filter" id="filter" placeholder="<%= manufacturer.name %>">

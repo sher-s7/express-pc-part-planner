@@ -12,7 +12,7 @@
     <p class="description"><%= category.description %></p>
 </section>
 <section class="filter-section">
-    <div><%= category_parts.length %> product(s)</div>
+    <div><span id="numProducts"><%= category_parts.length %></span> product(s)</div>
     <form id="categoryPartFilterForm">
         <fieldset>
             <legend>SEARCH</legend>
@@ -48,7 +48,7 @@
                 <div class="th-small">Price</div>
                 $<%= part.price %>
             </td>
-            <td class="part-add"><button>Add</button></td>
+            <td class="part-add"><button class="yellow-btn">Add</button></td>
         </tr>
         <% }) %>
     </tbody>

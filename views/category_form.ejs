@@ -10,16 +10,17 @@
       type="text"
       name="title"
       id="title"
+      maxlength="30"
       value="<%= typeof category == 'undefined' ? '' : category.title %>"
     />
   </fieldset>
   <fieldset>
     <legend>DESCRIPTION</legend>
-    <textarea name="description" id="description" cols="30" rows="10">
+    <textarea name="description" id="description" cols="30" rows="10" maxlength="500">
 <%= typeof category == 'undefined' ? '' : category.description %></textarea
     >
   </fieldset>
-  <button type="submit">Submit</button>
+  <button type="submit" class="yellow-btn">Submit</button>
 </form>
 
 <% if (typeof errors != 'undefined') { %>

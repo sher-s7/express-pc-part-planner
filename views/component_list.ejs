@@ -1,12 +1,17 @@
 <% layout('layout') -%>
 
-<h1 class="title"><%= title %></h1>
+<section class="title">
+  <h1><%= title %></h1>
+  <a class="create-link" href="/component/create">
+    <i class="fas fa-plus"></i>
+  </a>
+</section>
 
-  <p><%= component_list.length %> product(s)</p>
+  <p class="component-list"><span id="numProducts"><%= component_list.length %></span> product(s)</p>
 
-<section><a href="/component/create">Add a new part</a></section>
+<section class="create-section component-list"><a href="/component/create">Add a new part</a></section>
 
-<section class="filter-section">
+<section class="filter-section component-list">
   <form id="componentFilterForm">
       <fieldset>
           <legend>SEARCH</legend>
