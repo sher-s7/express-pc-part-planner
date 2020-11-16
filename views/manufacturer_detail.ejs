@@ -9,8 +9,10 @@
 <section class="filter-section">
     <div><span id="numProducts"><%= manufacturer_parts.length %></span> product(s)</div>
     <form id="manufacturerPartFilterForm">
-        <label for="filter">Search </label>
-        <input type="text" name="filter" id="filter" placeholder="<%= manufacturer.name %>">
+        <fieldset>
+            <legend for="filter">SEARCH</legend>
+            <input type="text" name="filter" id="filter" placeholder="<%= manufacturer.name %>">
+        </fieldset>
     </form>
 </section>
 <table id='manufacturer-table'>
