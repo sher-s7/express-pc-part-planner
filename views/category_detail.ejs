@@ -13,7 +13,7 @@
 </section>
 <section class="filter-section">
     <div id="numProductsContainer"><span id="numProducts"><%= category_parts.length %></span> product(s)</div>
-    <form id="categoryPartFilterForm">
+    <form id="filterForm">
         <fieldset>
             <legend>SEARCH</legend>
             <input type="text" name="filter" id="filter" placeholder="<%= category.title %>">
@@ -30,6 +30,9 @@
         </tr>
     </thead>
     <tbody>
+        <tr id="notFound" class="<%= category_parts.length == 0 ? '' : 'hidden' %>">
+            <td><i class="fas fa-sad-tear"></i></td>
+        </tr>
         <% category_parts.forEach(part => { %>
         <tr class="part-row" data-part="<%= part.name %>">
             <td class="part-name">
