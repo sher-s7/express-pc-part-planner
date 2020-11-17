@@ -1,7 +1,7 @@
 <% layout('layout') -%>
-<section class="title"><h1><%= title %></h1></section>
+<section class="title delete"><h1><%= title %></h1></section>
 
-
+<section>
 <% if (category_parts.length > 0) { %>
 <h2>Must delete the following parts before removing this category</h2>
 <ul>
@@ -16,4 +16,6 @@
         <input type="hidden" name="categoryid" id="categoryid" value="<%= category._id %>" required>
         <button type="submit" class="yellow-btn">Delete</button>
     </form>
+    <a class="cancel" href="<%= typeof category == 'undefined' ? '/categories' : category.url %>">Cancel</a>
 <% } %>
+</section>

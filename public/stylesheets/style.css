@@ -33,7 +33,15 @@ body {
 h1 {
   max-width: 85%;
 }
-h1, h2, h3, h4, li, section, p, a, td {
+h1,
+h2,
+h3,
+h4,
+li,
+section,
+p,
+a,
+td {
   word-wrap: break-word;
 }
 
@@ -212,7 +220,7 @@ body.expand #burger div:nth-child(2) {
 }
 
 /* -       -       -       -       -       -       -       -  List -       -       -       -       -       -       -       - */
-.list{
+.list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -221,7 +229,8 @@ body.expand #burger div:nth-child(2) {
   background-color: var(--fg);
 }
 
-.list li:hover, .list li:active {
+.list li:hover,
+.list li:active {
   background-color: var(--black);
 }
 
@@ -263,7 +272,6 @@ p.component-list {
   padding-left: var(--body-padding);
   padding-bottom: 20px;
   color: #dddddd8f;
-
 }
 
 .filter-section.component-list {
@@ -365,6 +373,14 @@ td {
 
 .edit-links a {
   padding: 20px;
+}
+
+#numProductsContainer {
+  font-size: 14px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  color: var(--accent2);
+  opacity: 0.7;
 }
 
 /* -       -       -       -       -       -       -       -  Form -       -       -       -       -       -       -       - */
@@ -502,7 +518,9 @@ a.cancel {
 }
 
 /* -       -       -       -       -       -       -       -  Delete -       -       -       -       -       -       -       - */
-
+.delete h1 {
+  margin: 0 auto;
+}
 /* -       -       -       -       -       -       -       -  Footer -       -       -       -       -       -       -       - */
 footer {
   background-color: var(--black);
