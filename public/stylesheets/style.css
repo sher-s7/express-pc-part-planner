@@ -389,7 +389,9 @@ td {
   color: var(--accent1);
   opacity: 0.5;
 }
-
+.form-header {
+  margin: 0 auto;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -518,8 +520,8 @@ a.cancel {
 }
 
 /* -       -       -       -       -       -       -       -  Delete -       -       -       -       -       -       -       - */
-.delete h1 {
-  margin: 0 auto;
+.delete {
+  flex-direction: column;
 }
 /* -       -       -       -       -       -       -       -  Footer -       -       -       -       -       -       -       - */
 footer {
