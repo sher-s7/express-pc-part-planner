@@ -23,6 +23,11 @@ body {
   position: relative;
 }
 
+::-moz-selection, ::selection {
+  background-color: var(--accent1);
+  color: var(--black);
+}
+
 .hidden {
   display: none !important;
 }

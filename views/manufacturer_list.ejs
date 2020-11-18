@@ -1,14 +1,18 @@
 <% layout('layout') -%>
 
-<h1 class="title"><%= title %></h1>
+<section class="title">
+  <h1><%= title %></h1>
+  <a href="/manufacturer/create" class="create-link">
+    <i class="fas fa-plus"></i>
+  </a>
+</section>
 
-<section><a href="/manufacturer/create">New Manufacturer</a></section>
+<section class="create-section"><a href="/manufacturer/create">New Manufacturer</a></section>
 
-<ul>
+<ul class="list">
   <% manufacturers.forEach(manufacturer => { %>
   <li>
-    <h2><%= manufacturer.name %></h2>
-    <p><a href="<%= manufacturer.url %>">View manufacturer</a></p>
+    <a href="<%= manufacturer.url %>"><%= manufacturer.name %> </a>
   </li>
   <% }) %>
 </ul>
