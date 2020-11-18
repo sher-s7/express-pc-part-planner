@@ -176,7 +176,7 @@ exports.manufacturer_update_get = function (req, res, next) {
     }
 
     res.render("manufacturer_form", {
-      title: "Update Manufacturer",
+      title: "Update " + manufacturer.name,
       manufacturer: manufacturer,
     });
   });
@@ -196,6 +196,7 @@ exports.manufacturer_update_post = [
     var manufacturer = new Manufacturer({
       name: req.body.name,
       description: req.body.description,
+      _id: req.params.id
     });
 
     if (!errors.isEmpty()) {

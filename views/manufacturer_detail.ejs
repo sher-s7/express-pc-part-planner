@@ -1,13 +1,18 @@
 <% layout('layout') -%>
 
-<h1 class="title"><%= title %></h2>
+<section class="title">
+    <h1><%= title %></h1>
+    <button id="dropdown"><i class="fas fa-caret-down"></i></button>
+    <div class="edit-links collapsed">
+        <a href="<%= manufacturer.url%>/update"><i class="fas fa-wrench"></i></a>
+        <a href="<%= manufacturer.url%>/delete"><i class="fas fa-trash"></i></a>
+    </div>
+</section>
 <section>
-        <a href="<%= manufacturer.url%>/update">Update</a>
-        <a href="<%= manufacturer.url%>/delete">Delete</a>
         <p class="description"><%= manufacturer.description %></p>
 </section>
 <section class="filter-section">
-    <div><span id="numProducts"><%= manufacturer_parts.length %></span> product(s)</div>
+    <div id="numProductsContainer"><span id="numProducts"><%= manufacturer_parts.length %></span> product(s)</div>
     <form id="filterForm">
         <fieldset>
             <legend for="filter">SEARCH</legend>
@@ -25,14 +30,28 @@
         </tr>
     </thead>
     <tbody>
+        <tr id="notFound" class="<%= manufacturer_parts.length == 0 ? '' : 'hidden' %>">
+            <td><i class="fas fa-sad-tear"></i></td>
+        </tr>
         <% manufacturer_parts.forEach(part => { %>
         <tr class="part-row" data-part="<%= part.name %>">
-            <td class="part-name"><a href="<%= part.url %>"><%= part.name %></a></td>
-            <td class="part-category"><a href="<%= part.category.url %>"><%= part.category.title %></a>
+            <td class="part-name">
+                <div class="th-small">Name</div>
+                <a href="<%= part.url %>"><%= part.name %></a>
             </td>
-            <td class="part-stock"><span><%= part.inStock %></span></td>
-            <td class="part-price">$<%= part.price %></td>
-            <td><button>Add</button></td>
+            <td class="part-category">
+                <div class="th-small">Category</div>
+                <a href="<%= part.category.url %>"><%= part.category.title %></a>
+            </td>
+            <td class="part-stock">
+                <div class="th-small">Stock</div>
+                <span><%= part.inStock %></span>
+            </td>
+            <td class="part-price">
+                <div class="th-small">Name</div>
+                <span>$<%= part.price %></span>
+            </td>
+            <td class="part-add"><button class="yellow-btn">Add</button></td>
         </tr>
         <% }) %>
     </tbody>
@@ -44,4 +63,5 @@
 </table>
 
 <% block('scripts', "<script type='text/javascript' src='/javascripts/searchFilter.js'></script>") -%>
+<% block('scripts', "<script type='text/javascript' src='/javascripts/dropdown.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/tablesort.min.js'></script> <script type='text/javascript' src='/javascripts/tablesort.number.min.js'></script> <script>new Tablesort(document.getElementById('manufacturer-table'));</script> ") -%>

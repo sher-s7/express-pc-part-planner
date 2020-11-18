@@ -1,19 +1,25 @@
 <% layout('layout') -%>
 
-<h1 class="title"><%= title %> </h1>
+<section class="title delete">
+    <h1>Delete Manufacturer:</h1>
+    <h2><%= manufacturer.name %></h2>
+</section>
 
-<% if (manufacturer_parts.length > 0) { %>
-<h2>Must delete the following parts before removing this manufacturer</h2>
-<ul>
-    <% manufacturer_parts.forEach(part => { %>
-    <li><a href="<%= part.url %>"><%= part.name %></a></li>
-    <% }) %>
-</ul>
-<% } else { %>
-    <p>Are you sure you want to delete the <span><%= manufacturer.name %></span> manufacturer?</p>
+<section>
+    <% if (manufacturer_parts.length > 0) { %>
+    <h2 id="deleteMsg">Must delete the following parts before removing this manufacturer:</h2>
+    <ul id="deleteList">
+        <% manufacturer_parts.forEach(part => { %>
+        <li><a href="<%= part.url %>"><%= part.name %></a></li>
+        <% }) %>
+    </ul>
+    <% } else { %>
+        <p>Are you sure you want to delete this manufacturer?</p>
 
-    <form action="" method="POST">
-        <input type="hidden" name="id" id="id" value="<%= manufacturer._id %>" required>
-        <button type="submit" class="yellow-btn">Delete</button>
-    </form>
-<% } %>
+        <form action="" method="POST">
+            <input type="hidden" name="id" id="id" value="<%= manufacturer._id %>" required>
+            <button type="submit" class="yellow-btn">Delete</button>
+        </form>
+    <% } %>
+    <a class="cancel" href="<%= typeof manufacturer == 'undefined' ? '/manufacturers' : manufacturer.url %>">Cancel</a>
+</section>

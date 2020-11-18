@@ -1,6 +1,7 @@
 <% layout('layout') -%>
-<h1 class="form-header title"><%= title %></h1>
+<section class="title"><h1 class="form-header"><%= title %></h1></section>
 
+<section>
 <form action="" method="POST">
   <fieldset for="name">
     <legend>NAME</legend>
@@ -20,6 +21,8 @@
   </fieldset>
   <button type="submit" class="yellow-btn">Submit</button>
 </form>
+<a class="cancel" href="<%= typeof manufacturer == 'undefined' ? '/manufacturers' : manufacturer.url %>">Cancel</a>
+</section>
 
 <% if (typeof errors != 'undefined') { %>
 <ul>
@@ -29,4 +32,3 @@
 </ul>
 <% } %>
 
-<a class="cancel" href="<%= typeof manufacturer == 'undefined' ? '/manufacturers' : manufacturer.url %>">Cancel</a>

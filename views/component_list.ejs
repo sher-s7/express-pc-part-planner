@@ -7,10 +7,11 @@
   </a>
 </section>
 
-  <p class="component-list"><span id="numProducts"><%= component_list.length %></span> product(s)</p>
-
 <section class="create-section component-list"><a href="/component/create">Add a new part</a></section>
 
+<section class="component-list numProductsSection">
+  <p id="numProductsContainer"><span id="numProducts"><%= component_list.length %></span> product(s)</p>
+</section>
 <section class="filter-section component-list">
   <form id="filterForm">
       <fieldset>
@@ -31,13 +32,31 @@
     </tr>
   </thead>
   <tbody>
+    <tr id="notFound" class="<%= component_list.length == 0 ? '' : 'hidden' %>">
+      <td><i class="fas fa-sad-tear"></i></td>
+    </tr>
     <% component_list.forEach(component => { %>
     <tr class="part-row" data-part="<%= component.name %>">
-      <td><a href="<%= component.url %>"><%= component.name %></a></td>
-      <td><a href="<%= component.manufacturer.url %>"><%= component.manufacturer.name %></a></td>
-      <td><a href="<%= component.category.url %>"><%= component.category.title %></a></td>
-      <td><%= component.inStock %></td>
-      <td>$<%= component.price %></td>
+      <td class="part-name">
+        <div class="th-small">Name</div>
+        <a href="<%= component.url %>"><%= component.name %></a>
+      </td>
+      <td class="part-manufacturer">
+        <div class="th-small">Manufacturer</div>
+        <a href="<%= component.manufacturer.url %>"><%= component.manufacturer.name %></a>
+      </td>
+      <td class="part-category">
+        <div class="th-small">Category</div>
+        <a href="<%= component.category.url %>"><%= component.category.title %></a>
+      </td>
+      <td class="part-stock">
+        <div class="th-small">Stock</div>
+        <span><%= component.inStock %></span>
+      </td>
+      <td class="part-price">
+        <div class="th-small">Price</div>
+        <span>$<%= component.price %></span>
+      </td>
     </tr>
     <% }) %>
   </tbody>

@@ -270,6 +270,10 @@ body.expand #burger div:nth-child(2) {
   background-color: var(--fg);
 }
 
+.numProductsSection {
+  padding: 0px var(--body-padding);
+}
+
 p.component-list {
   width: 100%;
   /* text-align: center; */
@@ -537,6 +541,12 @@ a.cancel {
 /* -       -       -       -       -       -       -       -  Delete -       -       -       -       -       -       -       - */
 .delete {
   flex-direction: column;
+}
+h2#deleteMsg {
+  font-size: 16px;
+}
+#deleteList {
+  list-style: disclosure-closed;
 }
 /* -       -       -       -       -       -       -       -  Footer -       -       -       -       -       -       -       - */
 footer {
