@@ -23,7 +23,8 @@ body {
   position: relative;
 }
 
-::-moz-selection, ::selection {
+::-moz-selection,
+::selection {
   background-color: var(--accent1);
   color: var(--black);
 }
@@ -47,7 +48,8 @@ section,
 p,
 a,
 td {
-  word-wrap: break-word;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 a {
@@ -167,7 +169,7 @@ body.expand #burger div:nth-child(2) {
   list-style: none;
   position: fixed;
   background: var(--fg);
-  z-index: 1;
+  z-index: 3;
   width: 100%;
   height: calc(100vh - var(--header-height));
   left: 0;
@@ -349,6 +351,9 @@ td {
   color: var(--accent1);
   padding: 0;
   font-size: 25px;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
 }
 .title button:focus {
   outline-color: var(--accent1);
@@ -363,12 +368,13 @@ td {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  right: 5px;
+  right: 7px;
   background-color: var(--fg);
   transition: 0.2s ease-in-out;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   top: 60px;
+  z-index: 1;
 }
 
 .edit-links.collapsed {
@@ -542,11 +548,16 @@ a.cancel {
 .delete {
   flex-direction: column;
 }
-h2#deleteMsg {
-  font-size: 16px;
+#deleteMsg {
+  font-size: 14px;
+  margin-top: 0;
 }
 #deleteList {
-  list-style: disclosure-closed;
+  list-style: square;
+}
+#confirmationMsg {
+  font-size: 14px;
+  margin-bottom: 30px;
 }
 /* -       -       -       -       -       -       -       -  Footer -       -       -       -       -       -       -       - */
 footer {
@@ -566,3 +577,39 @@ footer {
 }
 
 /* -       -       -       -       -       -       -       -  Error -       -       -       -       -       -       -       - */
+#errorMsgs {
+  position: relative;
+  list-style: none;
+  padding-left: 30px;
+}
+
+#errorMsgs li {
+  position: relative;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--accent1);
+}
+
+#errorMsgs li i {
+  position: absolute;
+  left: -22px;
+  top: 3px;
+  font-size: 12px;
+  color: var(--accent1);
+}
+
+#errorPage {
+  padding: 50px;
+}
+
+#errorTitle, #errorDetails {
+  padding: 0;
+}
+
+#errorTitle h1 {
+  font-size: 18px;
+}
+
+#errorDetails p{
+  font-size: 16px;
+}
