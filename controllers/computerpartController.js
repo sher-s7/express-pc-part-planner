@@ -37,7 +37,7 @@ exports.computerpart_detail = function (req, res, next) {
 
       if (component == null) {
         let err = new Error("Component not found");
-        err.status - 404;
+        err.status = 404;
         return next(err);
       }
 
@@ -79,7 +79,7 @@ exports.computerpart_create_post = [
     .trim()
     .isLength({ min: 3 })
     .escape(),
-  body("description").trim().escape(),
+  body("description", "Must add at least one feature in the description").trim().isLength({min: 1}).escape(),
   body("inStock", "Stock cannot be lower than 0").isInt({ min: 0, max: 9999 }),
   body("price", "Price must be between $0 and $999999").isFloat({
     min: 0,
@@ -118,6 +118,7 @@ exports.computerpart_create_post = [
             categories: results.categories,
             manufacturers: results.manufacturers,
             component: component,
+            isNew: true,
             errors: errors.array(),
           });
         }
@@ -147,7 +148,7 @@ exports.computerpart_delete_get = function (req, res, next) {
 
       if (component == null) {
         let err = new Error("Component not found");
-        err.status - 404;
+        err.status = 404;
         return next(err);
       }
 
@@ -196,7 +197,7 @@ exports.computerpart_update_get = function (req, res, next) {
 
       if (results.component == null) {
         let err = new Error("Component not found");
-        err.status - 404;
+        err.status = 404;
         return next(err);
       }
 
@@ -250,12 +251,6 @@ exports.computerpart_update_post = [
         },
         function (err, results) {
           if (err) return next(err);
-
-          if (results.component == null) {
-            let err = new Error("Component not found");
-            err.status - 404;
-            return next(err);
-          }
 
           res.render("component_form", {
             title: "Update Component",

@@ -41,7 +41,7 @@ exports.manufacturer_detail = function (req, res, next) {
 
       if (results.manufacturer == null) {
         let err = new Error("Manufacturer not found");
-        err.status - 404;
+        err.status = 404;
         return next(err);
       }
       res.render("manufacturer_detail", {
