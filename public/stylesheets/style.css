@@ -412,6 +412,59 @@ td {
   border: none;
 }
 
+.component-details {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--fg);
+
+}
+
+.component-details--img {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.component-details--img img {
+  width: 100%;
+  filter: drop-shadow(0 0 10px black);
+}
+
+.component-details--details > div {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.component-details--details > div:not(:last-of-type) {
+  border-bottom: 1px solid var(--bg);
+}
+
+.features-list-container .th-small {
+  margin-bottom: 5px;
+}
+
+.features-list-container ul{
+  margin: 0;
+  padding-left: 10px;
+  list-style: none;
+}
+.features-list-container li {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.features-list-container li:not(:last-of-type) {
+  border-bottom: 1px solid var(--bg);
+}
+
+.component-details--details button {
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 40px;
+
+}
+
 /* -       -       -       -       -       -       -       -  Form -       -       -       -       -       -       -       - */
 
 ::placeholder {
@@ -570,6 +623,14 @@ footer {
   padding: 20px;
   width: 100%;
   flex-grow: 1;
+}
+.footer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-header img {
+  height: 36px;
 }
 .symbol {
   font-size: 30px;

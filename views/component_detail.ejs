@@ -8,12 +8,32 @@
         <a href="<%= component.url%>/delete"><i class="fas fa-trash"></i></a>
     </div>
 </section>
-<ul>
-  <% component.description.split(',').forEach(spec => { %>
-    <% if (spec.trim().length > 0) { %>
-      <li><%= spec %></li>
-    <% } %>
-  <% }) %>
-</ul>
+<section class="component-details">
+  <div class="component-details--img">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/RTX_2080Ti.png" alt="<%= component.name %> image">
+  </div>
+  <div class="component-details--details">
+    <div>
+      <div class="th-small">Category</div>
+      <a href="<%= category.url %>"><%= category.title %></a>
+    </div>
+    <div>
+      <div class="th-small">Manufacturer</div>
+      <a href="<%= manufacturer.url %>"><%= manufacturer.name %></a>
+    </div>
+    <div class="features-list-container">
+      <div class="th-small">Features</div>
+      <ul>
+        <% component.description.split(',').forEach(spec => { %>
+          <% if (spec.trim().length > 0) { %>
+            <li><%= spec %></li>
+          <% } %>
+        <% }) %>
+      </ul>
+    </div>
+    <button class="yellow-btn">Add</button>
+  </div>
+</section>
+
 
 <% block('scripts', "<script type='text/javascript' src='/javascripts/dropdown.js'></script>") -%>
