@@ -1,7 +1,10 @@
-<% layout('layout') -%> 
-<section>
-<h1 class="title"><%= title %></h1>
-<h2><%= message %> </h2>
-<h3><%= error.status %></h3>
-
-</section>
+<% layout('layout') -%>
+<div id="errorPage">
+  <section id="errorTitle">
+    <h1><%= title %></h1>
+  </section>
+  <section id="errorDetails">
+    <p><code><%= message %></code></p>
+    <p><code><%= error.status %></code></p>
+  </section>
+</div>
