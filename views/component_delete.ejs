@@ -1,20 +1,23 @@
 <% layout('layout') -%>
 
-<h1 class="title"><%= title %></h1>
+<section class="title delete">
+  <h1>Delete Component:</h1>
+  <h2><%= component.name %> </h2>
+</section>
 
-<p>
-  Are you sure you want to delete the following component?
-  <span><%= component.name %></span>
-</p>
+<section>
+  <p id="confirmationMsg">Are you sure you want to delete this component?</p>
 
-<form action="" method="POST">
-  <input
-    type="hidden"
-    name="id"
-    id="id"
-    value="<%= component._id %>"
-    required
-  />
-  <button type="submit" class="yellow-btn">Delete</button>
-</form>
-<a class="cancel" href="<%= component.url %>">Cancel</a>
+  <form action="" method="POST">
+    <input
+      type="hidden"
+      name="id"
+      id="id"
+      value="<%= component._id %>"
+      required
+    />
+    <button type="submit" class="yellow-btn">Delete</button>
+  </form>
+  <a class="cancel" href="<%= component.url %>">Cancel</a>
+</section>
+

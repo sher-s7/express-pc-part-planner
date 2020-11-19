@@ -7,14 +7,14 @@
 
 <section>
     <% if (manufacturer_parts.length > 0) { %>
-    <h2 id="deleteMsg">Must delete the following parts before removing this manufacturer:</h2>
+    <p id="deleteMsg">Must delete the following parts before removing this manufacturer:</p>
     <ul id="deleteList">
         <% manufacturer_parts.forEach(part => { %>
         <li><a href="<%= part.url %>"><%= part.name %></a></li>
         <% }) %>
     </ul>
     <% } else { %>
-        <p>Are you sure you want to delete this manufacturer?</p>
+        <p id="confirmationMsg">Are you sure you want to delete this manufacturer?</p>
 
         <form action="" method="POST">
             <input type="hidden" name="id" id="id" value="<%= manufacturer._id %>" required>
