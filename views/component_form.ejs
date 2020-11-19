@@ -1,87 +1,88 @@
 <% layout('layout') -%>
-<h1 class="form-header title"><%= title %></h1>
+<section class="title"><h1 class="form-header"><%= title %></h1></section>
 
-<form action="" method="POST">
-  <fieldset>
-    <legend>NAME</legend>
-    <input
-      required
-      type="text"
-      name="name"
-      id="name"
-      value="<%= typeof component == 'undefined' ? '' : component.name %>"
-    />
-  </fieldset>
-  <fieldset id="features">
-    <legend>FEATURES</legend>
-    <textarea required name="description" id="description">
-<%= typeof component == 'undefined' ? '' : component.description %></textarea
-    >
-  </fieldset>
-  <sub id="feature-sub">Separate features with a comma</sub>
-  <div id="price-stock-container">
+<section>
+  <% if (typeof errors != 'undefined') { %>
+    <ul id="errorMsgs">
+      <% errors.forEach(err => { %>
+      <li><i class="fas fa-exclamation-triangle"></i><%= err.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  <form action="" method="POST">
     <fieldset>
-      <legend>PRICE [USD]</legend>
-      <div id="price-input">
-        <span id="dollar-sign">$</span>
-        <input
-        type="number"
-        step="0.01"
-        name="price"
-        id="price"
-        value="<%= typeof component != 'undefined' ? parseFloat(component.price) : 0%>"
-        required
-      />
-      </div>
-      
-    </fieldset>
-    <fieldset>
-      <legend>STOCK</legend>
+      <legend>NAME</legend>
       <input
-        type="number"
-        name="inStock"
-        id="inStock"
-        value="<%= typeof component != 'undefined' ? parseInt(component.inStock) : 0%>"
         required
+        type="text"
+        name="name"
+        id="name"
+        value="<%= typeof component == 'undefined' ? '' : component.name %>"
       />
     </fieldset>
-  </div>
-  <fieldset>
-    <legend>SELECT CATEGORY</legend>
-    <select name="category" id="category" required>
-        <% categories.forEach(category => { %>
-            <% if (typeof component != 'undefined') { %>
-                <% var selected = category._id.toString() === component.category._id.toString() ? 'selected' : '' %>
-                <option value="<%= category._id %>" <%= selected %> ><%= category.title %> </option>
-            <% } else { %>
-                <option value="<%= category._id %> "><%= category.title %> </option>
-                <% } %>
-        <% }) %>
-    </select>
-  </fieldset>
-  <fieldset>
-    <legend>SELECT MANUFACTURER</legend>
-    <select name="manufacturer" id="manufacturer" required>
-        <% manufacturers.forEach(manufacturer => { %>
-            <% if (typeof component != 'undefined') { %>
-                <% var selected = manufacturer._id.toString() === component.manufacturer._id.toString() ? 'selected' : '' %> 
-                <option value="<%= manufacturer._id %>" <%= selected %>> <%= manufacturer.name %> </option>
-            <% } else { %>
-                <option value="<%= manufacturer._id %> "><%= manufacturer.name %> </option>
-                <% } %>
-        <% }) %>
-    </select>
-  </fieldset>
+    <fieldset id="features">
+      <legend>FEATURES</legend>
+      <textarea required name="description" id="description">
+  <%= typeof component == 'undefined' ? '' : component.description %></textarea
+      >
+    </fieldset>
+    <sub id="feature-sub">Separate features with a comma</sub>
+    <div id="price-stock-container">
+      <fieldset>
+        <legend>PRICE [USD]</legend>
+        <div id="price-input">
+          <span id="dollar-sign">$</span>
+          <input
+          type="number"
+          step="0.01"
+          name="price"
+          id="price"
+          value="<%= typeof component != 'undefined' ? parseFloat(component.price) : 0%>"
+          required
+        />
+        </div>
+        
+      </fieldset>
+      <fieldset>
+        <legend>STOCK</legend>
+        <input
+          type="number"
+          name="inStock"
+          id="inStock"
+          value="<%= typeof component != 'undefined' ? parseInt(component.inStock) : 0%>"
+          required
+        />
+      </fieldset>
+    </div>
+    <fieldset>
+      <legend>SELECT CATEGORY</legend>
+      <select name="category" id="category" required>
+          <% categories.forEach(category => { %>
+              <% if (typeof component != 'undefined') { %>
+                  <% var selected = category._id.toString() === component.category._id.toString() ? 'selected' : '' %>
+                  <option value="<%= category._id %>" <%= selected %> ><%= category.title %> </option>
+              <% } else { %>
+                  <option value="<%= category._id %> "><%= category.title %> </option>
+                  <% } %>
+          <% }) %>
+      </select>
+    </fieldset>
+    <fieldset>
+      <legend>SELECT MANUFACTURER</legend>
+      <select name="manufacturer" id="manufacturer" required>
+          <% manufacturers.forEach(manufacturer => { %>
+              <% if (typeof component != 'undefined') { %>
+                  <% var selected = manufacturer._id.toString() === component.manufacturer._id.toString() ? 'selected' : '' %> 
+                  <option value="<%= manufacturer._id %>" <%= selected %>> <%= manufacturer.name %> </option>
+              <% } else { %>
+                  <option value="<%= manufacturer._id %> "><%= manufacturer.name %> </option>
+                  <% } %>
+          <% }) %>
+      </select>
+    </fieldset>
 
-  <button type="submit" class="yellow-btn">Submit</button>
-</form>
+    <button type="submit" class="yellow-btn">Submit</button>
+  </form>
+  <a class="cancel" href="<%= typeof component == 'undefined' || component.isNew ? '/components' : component.url %>">Cancel</a>
+</section>
 
-<% if (typeof errors != 'undefined') { %>
-<ul>
-  <% errors.forEach(err => { %>
-  <li><%= err.msg %></li>
-  <% }) %>
-</ul>
-<% } %>
-
-<a class="cancel" href="<%= typeof component == 'undefined' ? '/components' : component.url %>">Cancel</a>
