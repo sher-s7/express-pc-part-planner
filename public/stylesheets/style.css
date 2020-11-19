@@ -106,6 +106,10 @@ header section:first-of-type {
   background-color: var(--black);
 }
 
+h1.header-small {
+  display: none;
+}
+
 #burger {
   background: none;
   border: none;
@@ -612,4 +616,13 @@ footer {
 
 #errorDetails p{
   font-size: 16px;
+}
+
+@media (max-width: 319px) {
+  h1.header-large {
+    display: none;
+  }
+  h1.header-small {
+    display: block;
+  }
 }
