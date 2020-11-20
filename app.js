@@ -8,7 +8,6 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 
 var app = express();
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
@@ -36,7 +35,6 @@ app.use('/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/f
 app.use('/lineawesome', express.static(__dirname + '/node_modules/line-awesome/dist/line-awesome'));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

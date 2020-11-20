@@ -11,13 +11,22 @@
       <th id="remove"></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody> 
     <% categories.forEach(category => { %>
+      <% let key = category.title.toLowerCase().split(" ").join("_") %>
+      <% let info = null %>
+      <% if (userList[key]) { %>
+        <% info = JSON.parse(userList[key]) %>  
+      <% } %> 
     <tr>
       <td class="part_category"><a href="<%= category.url %>"><%= category.title %></a></td>
-      <td class="part_selected"></td>
-      <td class="part_price"></td>
-      <td class="part_buy"><a target="_blank" rel="noopener noreferrer" href="https://www.amazon.com/s?k=">Buy</a></td>
+      <td class="part_selected"><%= info ? info['component'] : '-' %></td>
+      <td class="part_price"><%= info ? info['price'] : '-' %></td>
+      <td class="part_buy">
+        <% if (info) { %>
+          <a href="https://www.amazon.com/s?k=<%= info['component'] %>" rel="noopener noreferrer" target="_blank">Buy</a>
+        <% } %>
+      </td>
       <td class="part_remove"><button>🗙</button></td>
     </tr>
     <% }) %>

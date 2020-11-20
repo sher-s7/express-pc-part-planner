@@ -26,9 +26,10 @@ router.get("/list", function (req, res, next) {
     },
     function (err, results) {
       if (err) return next(err);
+
       res.render("list", {
         title: "My List - PC Part Planner",
-        userList: {},
+        userList: req.cookies,
         categories: results.categories,
       });
     }
@@ -38,79 +39,115 @@ router.get("/list", function (req, res, next) {
 /// CATEGORY ROUTES ///
 
 // GET request for creating Category. NOTE This must come before route for id (i.e. display category).
-router.get('/category/create', category_controller.category_create_get);
+router.get("/category/create", category_controller.category_create_get);
 
 // POST request for creating Category.
-router.post('/category/create', category_controller.category_create_post);
+router.post("/category/create", category_controller.category_create_post);
 
 // GET request to delete Category.
-router.get('/category/:id/delete', category_controller.category_delete_get);
+router.get("/category/:id/delete", category_controller.category_delete_get);
 
 // POST request to delete Category.
-router.post('/category/:id/delete', category_controller.category_delete_post);
+router.post("/category/:id/delete", category_controller.category_delete_post);
 
 // GET request to update Category.
-router.get('/category/:id/update', category_controller.category_update_get);
+router.get("/category/:id/update", category_controller.category_update_get);
 
 // POST request to update Category.
-router.post('/category/:id/update', category_controller.category_update_post);
+router.post("/category/:id/update", category_controller.category_update_post);
 
 // GET request for one Category.
-router.get('/category/:id', category_controller.category_detail);
+router.get("/category/:id", category_controller.category_detail);
 
 // GET request for list of all Categories.
-router.get('/categories', category_controller.category_list);
+router.get("/categories", category_controller.category_list);
 
 /// COMPUTERPART ROUTES ///
 
 // GET request for creating ComputerPart. NOTE This must come before route for id (i.e. display computerpart).
-router.get('/component/create', computerpart_controller.computerpart_create_get);
+router.get(
+  "/component/create",
+  computerpart_controller.computerpart_create_get
+);
 
 // POST request for creating ComputerPart.
-router.post('/component/create', computerpart_controller.computerpart_create_post);
+router.post(
+  "/component/create",
+  computerpart_controller.computerpart_create_post
+);
 
 // GET request to delete ComputerPart.
-router.get('/component/:id/delete', computerpart_controller.computerpart_delete_get);
+router.get(
+  "/component/:id/delete",
+  computerpart_controller.computerpart_delete_get
+);
 
 // POST request to delete ComputerPart.
-router.post('/component/:id/delete', computerpart_controller.computerpart_delete_post);
+router.post(
+  "/component/:id/delete",
+  computerpart_controller.computerpart_delete_post
+);
 
 // GET request to update ComputerPart.
-router.get('/component/:id/update', computerpart_controller.computerpart_update_get);
+router.get(
+  "/component/:id/update",
+  computerpart_controller.computerpart_update_get
+);
 
 // POST request to update ComputerPart.
-router.post('/component/:id/update', computerpart_controller.computerpart_update_post);
+router.post(
+  "/component/:id/update",
+  computerpart_controller.computerpart_update_post
+);
 
 // GET request for one ComputerPart.
-router.get('/component/:id', computerpart_controller.computerpart_detail);
+router.get("/component/:id", computerpart_controller.computerpart_detail);
 
 // GET request for list of all ComputerParts.
-router.get('/components', computerpart_controller.computerpart_list);
+router.get("/components", computerpart_controller.computerpart_list);
 
 /// MANUFACTURER ROUTES ///
 
 // GET request for creating Manufacturer. NOTE This must come before route for id (i.e. display manufacturer).
-router.get('/manufacturer/create', manufacturer_controller.manufacturer_create_get);
+router.get(
+  "/manufacturer/create",
+  manufacturer_controller.manufacturer_create_get
+);
 
 // POST request for creating Manufacturer.
-router.post('/manufacturer/create', manufacturer_controller.manufacturer_create_post);
+router.post(
+  "/manufacturer/create",
+  manufacturer_controller.manufacturer_create_post
+);
 
 // GET request to delete Manufacturer.
-router.get('/manufacturer/:id/delete', manufacturer_controller.manufacturer_delete_get);
+router.get(
+  "/manufacturer/:id/delete",
+  manufacturer_controller.manufacturer_delete_get
+);
 
 // POST request to delete Manufacturer.
-router.post('/manufacturer/:id/delete', manufacturer_controller.manufacturer_delete_post);
+router.post(
+  "/manufacturer/:id/delete",
+  manufacturer_controller.manufacturer_delete_post
+);
 
 // GET request to update Manufacturer.
-router.get('/manufacturer/:id/update', manufacturer_controller.manufacturer_update_get);
+router.get(
+  "/manufacturer/:id/update",
+  manufacturer_controller.manufacturer_update_get
+);
 
 // POST request to update Manufacturer.
-router.post('/manufacturer/:id/update', manufacturer_controller.manufacturer_update_post);
+router.post(
+  "/manufacturer/:id/update",
+  manufacturer_controller.manufacturer_update_post
+);
 
 // GET request for one Manufacturer.
-router.get('/manufacturer/:id', manufacturer_controller.manufacturer_detail);
+router.get("/manufacturer/:id", manufacturer_controller.manufacturer_detail);
 
 // GET request for list of all Manufactuers.
-router.get('/manufacturers', manufacturer_controller.manufacturer_list);
+router.get("/manufacturers", manufacturer_controller.manufacturer_list);
 
 module.exports = router;

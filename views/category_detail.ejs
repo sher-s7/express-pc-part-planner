@@ -51,7 +51,7 @@
                 <div class="th-small">Price</div>
                 <span>$<%= part.price %></span>
             </td>
-            <td class="part-add"><button class="yellow-btn">Add</button></td>
+            <td class="part-add"><button class="yellow-btn add" data-info='<%= JSON.stringify(part) %>'>Add</button></td>
         </tr>
         <% }) %>
     </tbody>
