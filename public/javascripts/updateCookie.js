@@ -10,16 +10,9 @@ for (const button of addButtons) {
       component_url: url,
       price: info.price,
     };
-    console.log(formatted_obj, JSON.stringify(formatted_obj));
     document.cookie = `${key}=${JSON.stringify(
       formatted_obj
     )}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; SameSite=None;`;
+    window.location.replace("/");
   });
-}
-
-function getCookie(name) {
-  document.cookie
-    .split("; ")
-    .find((row) => row.startsWith(name))
-    .split("=")[1];
 }
