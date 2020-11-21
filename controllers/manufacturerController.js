@@ -32,6 +32,7 @@ exports.manufacturer_detail = function (req, res, next) {
       },
       manufacturer_parts: function (callback) {
         ComputerPart.find({ manufacturer: req.params.id })
+          .populate('manufacturer')
           .populate("category")
           .exec(callback);
       },
