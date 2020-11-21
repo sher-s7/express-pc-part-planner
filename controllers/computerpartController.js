@@ -36,7 +36,7 @@ exports.computerpart_detail = function (req, res, next) {
       if (err) next(err);
 
       if (component == null) {
-        let err = new Error("Component not found");
+        let err = new Error("Component not found. It may have been deleted, or does not exist.");
         err.status = 404;
         return next(err);
       }
