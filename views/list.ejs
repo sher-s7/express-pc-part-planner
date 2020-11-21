@@ -20,14 +20,18 @@
       <% } %> 
     <tr>
       <td class="part_category"><a href="<%= category.url %>"><%= category.title %></a></td>
-      <td class="part_selected"><%= info ? info['component'] : '-' %></td>
-      <td class="part_price"><%= info ? info['price'] : '-' %></td>
-      <td class="part_buy">
-        <% if (info) { %>
-          <a href="https://www.amazon.com/s?k=<%= info['component'] %>" rel="noopener noreferrer" target="_blank">Buy</a>
-        <% } %>
+      <% if (info) { %>
+      <td class="part_selected">
+        <a href="<%= info['component_url'] %>" rel="noopener noreferrer" target="_blank" ><%= info['component'] %></a>
       </td>
-      <td class="part_remove"><button>🗙</button></td>
+      <td class="part_price"><%= info['price'] %></td>
+      <td class="part_buy">
+          <a href="https://www.amazon.com/s?k=<%= info['component'] %>" rel="noopener noreferrer" target="_blank">Buy<i class="fab fa-amazon"></i></a>
+      </td>
+      <td class="part_remove"><button class="remove" data-removekey="<%= key %>">🗙</button></td>
+        <% } else { %>
+         <td colspan="4"><a href="<%= category.url %>">Choose <%= category.title %></a></td>
+      <% } %>
     </tr>
     <% }) %>
   </tbody>
@@ -38,3 +42,5 @@
       <td></td>
   </tfoot>
 </table>
+
+<% block('scripts', "<script type='text/javascript' src='/javascripts/removeCookie.js'></script>") -%>
