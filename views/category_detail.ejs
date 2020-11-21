@@ -51,7 +51,7 @@
                 <div class="th-small">Price</div>
                 <span>$<%= part.price %></span>
             </td>
-            <td class="part-add"><button class="yellow-btn add" data-info='<%= JSON.stringify(part) %>'>Add</button></td>
+            <td class="part-add"><button class="yellow-btn add" data-info='<%= JSON.stringify(part) %>' data-url="<%= part.url %>">Add</button></td>
         </tr>
         <% }) %>
     </tbody>
@@ -63,4 +63,5 @@
 </table>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/searchFilter.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/dropdown.js'></script>") -%>
+<% block('scripts', "<script type='text/javascript' src='/javascripts/updateCookie.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/tablesort.min.js'></script> <script type='text/javascript' src='/javascripts/tablesort.number.min.js'></script> <script>new Tablesort(document.getElementById('category-table'));</script> ") -%>
