@@ -33,6 +33,7 @@ exports.category_detail = function (req, res, next) {
       },
       category_parts: function (callback) {
         ComputerPart.find({ category: req.params.id })
+          .populate('category')
           .populate("manufacturer")
           .exec(callback);
       },
