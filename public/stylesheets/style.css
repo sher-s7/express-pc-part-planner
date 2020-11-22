@@ -317,14 +317,16 @@ body.expand #burger div:nth-child(2) {
   text-decoration: none;
   text-transform: none;
   white-space: nowrap;
-  /* max-width: 85vw; */
+}
+.chooseCategory a:focus {
+  background-color: var(--font-color);
 }
 .chooseCategory i {
   margin-right: 7px;
 }
 tfoot tr {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 #parts_total {
   color: var(--font-color);
