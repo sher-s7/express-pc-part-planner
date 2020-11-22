@@ -226,6 +226,78 @@ body.expand #burger div:nth-child(2) {
 }
 
 /* -       -       -       -       -       -       -       -  Part List -       -       -       -       -       -       -       - */
+#pc-planner-list td {
+  padding: 0;
+}
+#pc-planner-list tr {
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+#pc-planner-list .part_category {
+  grid-column: 1 / 3;
+  position: relative;
+  padding: 0;
+}
+#pc-planner-list .part_category::after {
+  content: "";
+  height: 2px;
+  display: block;
+  width: 100%;
+  background-color: var(--bg);
+  position: absolute;
+  top: 50%;
+}
+#pc-planner-list .part_category a {
+  color: var(--font-color);
+  background-color: var(--fg);
+  position: relative;
+  z-index: 1;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+#pc-planner-list tr {
+  border: none;
+}
+
+#pc-planner-list .part_buy{
+  text-align: center;
+}
+#pc-planner-list .part_remove {
+  text-align: center;
+  border: 2px solid var(--bg);
+  border-radius: 3px;
+}
+
+#pc-planner-list .part_buy a,
+#pc-planner-list .part_remove .remove {
+  background: none;
+  border: none;
+  padding: 7px;
+  width: 100%;
+  display: inline-block;
+  height: 100%;
+}
+#pc-planner-list .part_buy {
+  background-color: var(--accent1);
+  border-radius: 3px;
+  font-weight: bold;
+}
+.part_buy a {
+  color: var(--fg);
+}
+.part_buy i {
+  margin-left: 5px;
+}
+#text-remove {
+  font-weight: bold;
+}
+.part_remove .remove {
+  color: var(--font-color);
+  opacity: 0.3;
+}
+
 #parts_total {
   text-align: right;
 }
@@ -416,7 +488,6 @@ td {
   display: flex;
   flex-direction: column;
   background-color: var(--fg);
-
 }
 
 .component-details--img {
@@ -442,7 +513,7 @@ td {
   margin-bottom: 5px;
 }
 
-.features-list-container ul{
+.features-list-container ul {
   margin: 0;
   padding-left: 10px;
   list-style: none;
@@ -462,7 +533,6 @@ td {
   width: 100%;
   padding: 10px 0;
   margin-bottom: 40px;
-
 }
 
 /* -       -       -       -       -       -       -       -  Form -       -       -       -       -       -       -       - */
@@ -667,7 +737,8 @@ footer {
   padding: 50px;
 }
 
-#errorTitle, #errorDetails {
+#errorTitle,
+#errorDetails {
   padding: 0;
 }
 
@@ -675,7 +746,7 @@ footer {
   font-size: 18px;
 }
 
-#errorDetails p{
+#errorDetails p {
   font-size: 16px;
 }
 

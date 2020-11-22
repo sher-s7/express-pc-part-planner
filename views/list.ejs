@@ -19,16 +19,24 @@
         <% info = JSON.parse(userList[key]) %>  
       <% } %> 
     <tr>
-      <td class="part_category"><a href="<%= category.url %>"><%= category.title %></a></td>
+      <td class="part_category">
+        <a href="<%= category.url %>"><%= category.title %></a>
+      </td>
       <% if (info) { %>
       <td class="part_selected">
+        <div class="th-small">Selection</div>
         <a href="<%= info['component_url'] %>" rel="noopener noreferrer" target="_blank" ><%= info['component'] %></a>
       </td>
-      <td class="part_price"><%= info['price'] %></td>
-      <td class="part_buy">
-          <a href="https://www.amazon.com/s?k=<%= info['component'] %>" rel="noopener noreferrer" target="_blank">Buy<i class="fab fa-amazon"></i></a>
+      <td class="part_price">
+        <div class="th-small">Price</div>
+        <span><%= info['price'] %></span>
       </td>
-      <td class="part_remove"><button class="remove" data-removekey="<%= key %>">🗙</button></td>
+      <td class="part_buy">
+        <a href="https://www.amazon.com/s?k=<%= info['component'] %>" rel="noopener noreferrer" target="_blank">
+          <span>Buy<i class="fab fa-amazon"></i></span>
+        </a>
+      </td>
+      <td class="part_remove"><button class="remove" data-removekey="<%= key %>">🗙 <span id="text-remove">Remove</span></button></td>
         <% } else { %>
          <td colspan="4"><a href="<%= category.url %>">Choose <%= category.title %></a></td>
       <% } %>
