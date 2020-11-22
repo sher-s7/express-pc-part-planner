@@ -36,6 +36,9 @@ body {
 .accent1 {
   color: var(--accent1);
 }
+.accent2 {
+  color: var(--accent2);
+}
 h1 {
   max-width: 85%;
 }
@@ -238,6 +241,7 @@ body.expand #burger div:nth-child(2) {
   grid-column: 1 / 3;
   position: relative;
   padding: 0;
+  white-space: nowrap;
 }
 #pc-planner-list .part_category::after {
   content: "";
@@ -259,9 +263,10 @@ body.expand #burger div:nth-child(2) {
 
 #pc-planner-list tr {
   border: none;
+  overflow-x: auto;
 }
 
-#pc-planner-list .part_buy{
+#pc-planner-list .part_buy {
   text-align: center;
 }
 #pc-planner-list .part_remove {
@@ -289,6 +294,8 @@ body.expand #burger div:nth-child(2) {
 }
 .part_buy i {
   margin-left: 5px;
+  position: relative;
+  top: 2px;
 }
 #text-remove {
   font-weight: bold;
@@ -297,9 +304,30 @@ body.expand #burger div:nth-child(2) {
   color: var(--font-color);
   opacity: 0.3;
 }
-
+.chooseCategory {
+  grid-column: 1 / 3;
+  margin-top: 10px;
+}
+.chooseCategory a {
+  background: var(--accent1);
+  padding: 10px 15px;
+  border-radius: 2px;
+  color: var(--fg);
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: none;
+  white-space: nowrap;
+  /* max-width: 85vw; */
+}
+.chooseCategory i {
+  margin-right: 7px;
+}
+tfoot tr {
+  display: flex;
+  justify-content: end;
+}
 #parts_total {
-  text-align: right;
+  color: var(--font-color);
 }
 
 /* -       -       -       -       -       -       -       -  List -       -       -       -       -       -       -       - */
@@ -410,7 +438,8 @@ td {
 
 .priceAmount {
   font-weight: lighter;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 /* -       -       -       -       -       -       -       -  Detail -       -       -       -       -       -       -       - */
