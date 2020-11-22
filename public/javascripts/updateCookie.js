@@ -4,7 +4,7 @@ for (const button of addButtons) {
   button.addEventListener("click", () => {
     const info = JSON.parse(button.dataset.info);
     const url = button.dataset.url;
-    const key = info.category.title.toLowerCase().split(" ").join("_");
+    const key = info.category._id;
     const formatted_obj = {
       component: info.name,
       component_url: url,
