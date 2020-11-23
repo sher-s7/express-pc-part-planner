@@ -12,6 +12,20 @@ var category_controller = require("../controllers/categoryController");
 var computerpart_controller = require("../controllers/computerpartController");
 var manufacturer_controller = require("../controllers/manufacturerController");
 
+function getStoredParts(req) {
+  let promises = [];
+  for (const categoryID in req.cookies) {
+    promises.push(
+      new Promise(function (resolve, reject) {
+        ComputerPart.findById(req.cookies[categoryID]).exec(function (err,part) {
+          if (err) return next(err);
+          resolve([categoryID, part])
+        });
+      })
+    );
+  }
+  return promises;
+}
 /* GET home page. */
 router.get("/", function (req, res) {
   res.redirect("list");
@@ -24,12 +38,19 @@ router.get("/list", function (req, res, next) {
         Category.find(callback);
       },
     },
-    function (err, results) {
+    async function (err, results) {
       if (err) return next(err);
-
+      const userList = {};
+      await Promise.all(getStoredParts(req)).then(function(parts) {
+        parts.forEach(part => {
+          console.log(part[0], part[1])
+          userList[part[0]]=part[1]
+        })
+      });
+      console.log(userList);
       res.render("list", {
         title: "My List - PC Part Planner",
-        userList: req.cookies,
+        userList: userList,
         categories: results.categories,
       });
     }
