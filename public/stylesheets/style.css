@@ -291,6 +291,7 @@ body.expand #burger div:nth-child(2) {
 }
 .part_buy a {
   color: var(--fg);
+  text-decoration: none;
 }
 .part_buy i {
   margin-left: 5px;
