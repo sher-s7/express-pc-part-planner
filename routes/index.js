@@ -43,11 +43,9 @@ router.get("/list", function (req, res, next) {
       const userList = {};
       await Promise.all(getStoredParts(req)).then(function(parts) {
         parts.forEach(part => {
-          console.log(part[0], part[1])
           userList[part[0]]=part[1]
         })
       });
-      console.log(userList);
       res.render("list", {
         title: "My List - PC Part Planner",
         userList: userList,
