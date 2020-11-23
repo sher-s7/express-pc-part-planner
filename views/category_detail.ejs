@@ -51,7 +51,7 @@
                 <div class="th-small">Price</div>
                 <span class="priceAmount">$<%= part.price %></span>
             </td>
-            <td class="part-add"><button class="yellow-btn add" data-info='<%= JSON.stringify(part) %>' data-url="<%= part.url %>">Add</button></td>
+            <td class="part-add"><button class="yellow-btn add" data-categoryid="<%= category._id %> " data-partid='<%= part._id %>'>Add</button></td>
         </tr>
         <% }) %>
     </tbody>

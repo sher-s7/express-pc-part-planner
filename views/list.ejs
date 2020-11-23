@@ -12,32 +12,33 @@
     </tr>
   </thead>
   <tbody> 
+    <% console.log('list in ejs', userList) %> 
     <% categories.forEach(category => { %>
       <% let key = category._id %>
-      <% let info = null %>
+      <% let part = null %>
       <% if (userList[key]) { %>
-        <% info = JSON.parse(userList[key]) %>  
+        <% part = userList[key] %>  
       <% } %> 
     <tr>
       <td class="part_category">
         <a href="<%= category.url %>"><%= category.title %></a>
       </td>
-      <% if (info) { %>
-        <% totalPrice += info['price'] %> 
+      <% if (part) { %>
+        <% totalPrice += part.price %> 
       <td class="part_selected">
         <div class="th-small">Selection</div>
-        <a href="<%= info['component_url'] %>" rel="noopener noreferrer" target="_blank" ><%= info['component'] %></a>
+        <a href="<%= part.url %>" rel="noopener noreferrer" target="_blank" ><%= part.name %></a>
       </td>
       <td class="part_price">
         <div class="th-small">Price</div>
-        <span class="priceAmount">$<%= info['price'] %></span>
+        <span class="priceAmount">$<%= part.price %></span>
       </td>
       <td class="part_buy">
-        <a href="https://www.amazon.com/s?k=<%= info['component'] %>" rel="noopener noreferrer" target="_blank">
+        <a href="https://www.amazon.com/s?k=<%= part.name %>" rel="noopener noreferrer" target="_blank">
           <span>Buy<i class="fab fa-amazon"></i></span>
         </a>
       </td>
-      <td class="part_remove"><button class="remove" data-removekey="<%= key %>">🗙 <span id="text-remove">Remove</span></button></td>
+      <td class="part_remove"><button class="remove" data-removekey="<%= key %>"><i class="fas fa-times"></i> <span id="text-remove">Remove</span></button></td>
         <% } else { %>
          <td colspan="5" class="chooseCategory"><a href="<%= category.url %>"><i class="fas fa-plus"></i> Choose <%= category.title %></a></td>
       <% } %>
@@ -46,7 +47,7 @@
   </tbody>
   <tfoot>
       <td colspan="2" id="parts_total">Total: </td>
-      <td class="accent1">$<%= totalPrice %></td>
+      <td class="accent1">$<%= totalPrice.toFixed(2) %></td>
       <td></td>
       <td></td>
   </tfoot>

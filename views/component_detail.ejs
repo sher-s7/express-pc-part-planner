@@ -25,6 +25,10 @@
       <div class="th-small">Price</div>
       <span class="priceAmount accent2">$<%= component.price %></span>
     </div>
+    <div>
+      <div class="th-small">Stock</div>
+      <span class="inStock accent2"><%= component.inStock %></span>
+    </div>
     <div class="features-list-container">
       <div class="th-small">Features</div>
       <ul>
@@ -35,7 +39,7 @@
         <% }) %>
       </ul>
     </div>
-    <button class="yellow-btn add" data-info='<%= JSON.stringify(component) %>' data-url="<%= component.url %>">Add</button>
+    <button class="yellow-btn add" data-categoryid="<%= category._id %> " data-partid='<%= component._id %>'>Add</button>
   </div>
 </section>
 

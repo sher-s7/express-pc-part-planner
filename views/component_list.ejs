@@ -49,13 +49,12 @@
         <div class="th-small">Category</div>
         <a href="<%= component.category.url %>"><%= component.category.title %></a>
       </td>
-      <td class="part-stock">
-        <div class="th-small">Stock</div>
-        <span><%= component.inStock %></span>
-      </td>
       <td class="part-price">
         <div class="th-small">Price</div>
         <span class="priceAmount">$<%= component.price %></span>
+      </td>
+      <td class="part-add">
+        <button class="yellow-btn add" data-categoryid="<%= component.category._id %> " data-partid='<%= component._id %>'>Add</button>
       </td>
     </tr>
     <% }) %>
