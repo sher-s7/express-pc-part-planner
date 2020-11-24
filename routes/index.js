@@ -7,22 +7,27 @@ var Category = require("../models/category");
 var ComputerPart = require("../models/computerpart");
 var Manufacturer = require("../models/manufacturer");
 
+var mongoose = require("mongoose");
+
+
 // Require controller modules.
 var category_controller = require("../controllers/categoryController");
 var computerpart_controller = require("../controllers/computerpartController");
 var manufacturer_controller = require("../controllers/manufacturerController");
 
-function getStoredParts(req) {
+function getStoredParts(req, next) {
   let promises = [];
   for (const categoryID in req.cookies) {
-    promises.push(
-      new Promise(function (resolve, reject) {
-        ComputerPart.findById(req.cookies[categoryID]).exec(function (err,part) {
-          if (err) return next(err);
-          resolve([categoryID, part])
-        });
-      })
-    );
+    if (mongoose.Types.ObjectId.isValid(categoryID) && mongoose.Types.ObjectId.isValid(req.cookies[categoryID])) {
+      promises.push(
+        new Promise(function (resolve, reject) {
+          ComputerPart.findById(req.cookies[categoryID]).exec(function (err,part) {
+            if (err) return next(err);
+            resolve([categoryID, part])
+          });
+        })
+      );
+    }
   }
   return promises;
 }
@@ -41,7 +46,7 @@ router.get("/list", function (req, res, next) {
     async function (err, results) {
       if (err) return next(err);
       const userList = {};
-      await Promise.all(getStoredParts(req)).then(function(parts) {
+      await Promise.all(getStoredParts(req, next)).then(function(parts) {
         parts.forEach(part => {
           userList[part[0]]=part[1]
         })
