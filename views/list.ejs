@@ -1,14 +1,17 @@
 <% layout('layout') -%>
 <% var totalPrice = 0 %> 
-<section class="title"><h1 style="margin: 0 auto">My List</h1></section>
+<section class="title">
+  <h1 style="margin: 0 auto">My List</h1>
+  <a id="downloadCSV">Export list to CSV</a>
+</section>
 <table id="pc-planner-list">
   <thead>
     <tr>
-      <th>Component</th>
-      <th>Selection</th>
-      <th>Price</th>
-      <th id="buy"></th>
-      <th id="remove"></th>
+      <th id="thComponent">Component</th>
+      <th id="thSelection">Selection</th>
+      <th id="thPrice">Price</th>
+      <th id="thBuy"></th>
+      <th id="thRemove"></th>
     </tr>
   </thead>
   <tbody> 
@@ -20,17 +23,17 @@
       <% } %> 
     <tr>
       <td class="part_category">
-        <a href="<%= category.url %>"><%= category.title %></a>
+        <a href="<%= category.url %>" class='csv-content'><%= category.title %></a>
       </td>
       <% if (part) { %>
         <% totalPrice += part.price %> 
       <td class="part_selected">
         <div class="th-small">Selection</div>
-        <a href="<%= part.url %>"><%= part.name %></a>
+        <a href="<%= part.url %>" class='csv-content'><%= part.name %></a>
       </td>
       <td class="part_price">
         <div class="th-small">Price</div>
-        <span class="priceAmount">$<%= part.price %></span>
+        <span class="priceAmount csv-content">$<%= part.price %></span>
       </td>
       <td class="part_buy">
         <a href="https://www.amazon.com/s?k=<%= part.name %>" rel="noopener noreferrer" target="_blank">
@@ -46,10 +49,11 @@
   </tbody>
   <tfoot>
       <td colspan="2" id="parts_total">Total: </td>
-      <td class="accent1">$<%= totalPrice.toFixed(2) %></td>
+      <td class="accent1 totalVal">$<%= totalPrice.toFixed(2) %></td>
       <td></td>
       <td></td>
   </tfoot>
 </table>
 
 <% block('scripts', "<script type='text/javascript' src='/javascripts/removeCookie.js'></script>") -%>
+<% block('scripts', "<script type='text/javascript' src='/javascripts/listToCSV.js'></script>") -%>
