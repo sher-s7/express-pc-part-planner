@@ -458,6 +458,21 @@ td {
   align-items: center;
 }
 
+.title.home {
+  flex-direction: column;
+  padding: 0;
+  padding-top: 20px;
+}
+
+.title.home a {
+  margin-top: 20px;
+  font-size: 14px;
+  background: var(--black);
+  padding: 10px 15px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
 .title button {
   background: none;
   border: none;
