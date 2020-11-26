@@ -515,7 +515,7 @@ td {
 }
 
 .description {
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 
 .edit-links a {
