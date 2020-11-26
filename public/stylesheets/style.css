@@ -17,7 +17,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg);
+  background: linear-gradient(var(--fg) 20%,var(--bg) 60%);
   font-family: "Archivo", sans-serif;
   color: var(--font-color);
   position: relative;
@@ -439,11 +439,15 @@ td {
   padding: 10px 0;
 }
 
-.priceAmount {
+.amount {
   font-weight: lighter;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
+.inStock.amount, .totalVal.amount {
+  font-weight: normal;
+}
+
 
 /* -       -       -       -       -       -       -       -  Detail -       -       -       -       -       -       -       - */
 .title {
@@ -617,7 +621,7 @@ fieldset {
   border-radius: 2px;
   color: var(--accent1);
   background: radial-gradient(var(--input-gradient-1), var(--input-gradient-2));
-  border: 2px solid transparent;
+  border: 2px solid var(--fg);
   transition: border 0.2s;
   box-shadow: 0 0 10px #0000002e;
   margin-bottom: 30px;
@@ -658,8 +662,8 @@ textarea {
 
 fieldset:focus-within {
   transition: border 0.2s;
-  border-color: var(--accent1);
-  outline: none;
+  border: 2px solid var(--accent1);
+  /* outline: none; */
 }
 
 fieldset:focus-within legend {
@@ -761,6 +765,37 @@ footer {
 
 .symbol a {
   color: var(--font-color);
+}
+
+#githubLogo {
+  color: var(--font-color);
+  font-size: 40px;
+  display: flex;
+}
+
+#githubLogo:hover {
+  text-decoration: none;
+}
+
+.footer-body {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--bg);
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.footer-body a {
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.footer-end {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--font-color);
+  opacity: 0.3;
 }
 
 /* -       -       -       -       -       -       -       -  Error -       -       -       -       -       -       -       - */
