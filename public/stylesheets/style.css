@@ -621,7 +621,7 @@ fieldset {
   border-radius: 2px;
   color: var(--accent1);
   background: radial-gradient(var(--input-gradient-1), var(--input-gradient-2));
-  border: 2px solid var(--fg);
+  border: 2px solid var(--input-gradient-2);
   transition: border 0.2s;
   box-shadow: 0 0 10px #0000002e;
   margin-bottom: 30px;
