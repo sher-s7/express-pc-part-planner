@@ -33,7 +33,7 @@
       </td>
       <td class="part_price">
         <div class="th-small">Price</div>
-        <span class="priceAmount csv-content">$<%= part.price %></span>
+        <span class="amount csv-content">$<%= part.price %></span>
       </td>
       <td class="part_buy">
         <a href="https://www.amazon.com/s?k=<%= part.name %>" rel="noopener noreferrer" target="_blank">
@@ -49,7 +49,7 @@
   </tbody>
   <tfoot>
       <td colspan="2" id="parts_total">Total: </td>
-      <td class="accent1 totalVal">$<%= totalPrice.toFixed(2) %></td>
+      <td class="accent1 totalVal amount">$<%= totalPrice.toFixed(2) %></td>
       <td></td>
       <td></td>
   </tfoot>

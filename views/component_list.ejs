@@ -51,7 +51,7 @@
       </td>
       <td class="part-price">
         <div class="th-small">Price</div>
-        <span class="priceAmount">$<%= component.price %></span>
+        <span class="amount">$<%= component.price %></span>
       </td>
       <td class="part-add">
         <button class="yellow-btn add" data-categoryid="<%= component.category._id %> " data-partid='<%= component._id %>'>Add</button>
@@ -65,4 +65,5 @@
 </table>
 
 <% block('scripts', "<script type='text/javascript' src='/javascripts/searchFilter.js'></script>") -%>
+<% block('scripts', "<script type='text/javascript' src='/javascripts/updateCookie.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/tablesort.min.js'></script> <script type='text/javascript' src='/javascripts/tablesort.number.min.js'></script> <script>new Tablesort(document.getElementById('component-table'));</script> ") -%>

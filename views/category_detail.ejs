@@ -45,11 +45,11 @@
             </td>
             <td class="part-stock">
                 <div class="th-small">Stock</div>
-                <span><%= part.inStock %></span>
+                <span class="inStock amount"><%= part.inStock %></span>
             </td>
             <td class="part-price">
                 <div class="th-small">Price</div>
-                <span class="priceAmount">$<%= part.price %></span>
+                <span class="amount">$<%= part.price %></span>
             </td>
             <td class="part-add"><button class="yellow-btn add" data-categoryid="<%= category._id %> " data-partid='<%= part._id %>'>Add</button></td>
         </tr>
