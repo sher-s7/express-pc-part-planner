@@ -3,9 +3,9 @@ var Category = require("../models/category");
 var Manufacturer = require("../models/manufacturer");
 var async = require("async");
 var mongoose = require("mongoose");
+const fs = require('fs');
 
 const { body, validationResult } = require("express-validator/check");
-const { sanitizeBody, sanitize } = require("express-validator/filter");
 
 // Display list of all ComputerParts.
 exports.computerpart_list = function (req, res, next) {
@@ -36,7 +36,9 @@ exports.computerpart_detail = function (req, res, next) {
       if (err) next(err);
 
       if (component == null) {
-        let err = new Error("Component not found. It may have been deleted, or does not exist.");
+        let err = new Error(
+          "Component not found. It may have been deleted, or does not exist."
+        );
         err.status = 404;
         return next(err);
       }
@@ -79,7 +81,10 @@ exports.computerpart_create_post = [
     .trim()
     .isLength({ min: 3 })
     .escape(),
-  body("description", "Must add at least one feature in the description").trim().isLength({min: 1}).escape(),
+  body("description", "Must add at least one feature in the description")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
   body("inStock", "Stock cannot be lower than 0").isInt({ min: 0, max: 9999 }),
   body("price", "Price must be between $0 and $999999").isFloat({
     min: 0,
@@ -90,7 +95,6 @@ exports.computerpart_create_post = [
 
   (req, res, next) => {
     const errors = validationResult(req);
-
     var component = new ComputerPart({
       name: req.body.name,
       description: req.body.description,
@@ -98,6 +102,7 @@ exports.computerpart_create_post = [
       price: req.body.price,
       category: req.body.category,
       manufacturer: req.body.manufacturer,
+      fileName: req.file.filename,
     });
 
     if (!errors.isEmpty()) {
@@ -165,7 +170,10 @@ exports.computerpart_delete_get = function (req, res, next) {
 exports.computerpart_delete_post = function (req, res, next) {
   ComputerPart.findByIdAndRemove(req.body.id, function deleteComponent(err) {
     if (err) return next(err);
-
+    fs.unlink(`public/images/${req.body.filename}`, err => {
+      if(err) next(err);
+      console.log(req.body.filename, 'was deleted')
+    })
     res.redirect("/components");
   });
 };
@@ -228,7 +236,6 @@ exports.computerpart_update_post = [
 
   (req, res, next) => {
     const errors = validationResult(req);
-
     const component = new ComputerPart({
       name: req.body.name,
       description: req.body.description,
@@ -238,6 +245,10 @@ exports.computerpart_update_post = [
       manufacturer: req.body.manufacturer,
       _id: req.params.id,
     });
+
+    if(req.file) {
+      component.fileName = req.file.filename
+    }
 
     if (!errors.isEmpty()) {
       async.parallel(
@@ -251,7 +262,6 @@ exports.computerpart_update_post = [
         },
         function (err, results) {
           if (err) return next(err);
-
           res.render("component_form", {
             title: "Update Component",
             component: component,
@@ -263,14 +273,16 @@ exports.computerpart_update_post = [
       );
       return;
     } else {
-      ComputerPart.findByIdAndUpdate(req.params.id, component, {}, function (
-        err,
-        thecomponent
-      ) {
-        if (err) return next(err);
+      ComputerPart.findByIdAndUpdate(
+        req.params.id,
+        component,
+        {},
+        function (err, thecomponent) {
+          if (err) return next(err);
 
-        res.redirect(thecomponent.url);
-      });
+          res.redirect(thecomponent.url);
+        }
+      );
     }
   },
 ];

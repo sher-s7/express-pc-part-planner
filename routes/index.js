@@ -9,6 +9,16 @@ var Manufacturer = require("../models/manufacturer");
 
 var mongoose = require("mongoose");
 
+var multer  = require('multer')
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'public/images')
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+})
+var upload = multer({ storage: storage, limits: {fileSize: 1000000} })
 
 // Require controller modules.
 var category_controller = require("../controllers/categoryController");
@@ -96,7 +106,7 @@ router.get(
 
 // POST request for creating ComputerPart.
 router.post(
-  "/component/create",
+  "/component/create", upload.single('part_image'),
   computerpart_controller.computerpart_create_post
 );
 
@@ -120,7 +130,7 @@ router.get(
 
 // POST request to update ComputerPart.
 router.post(
-  "/component/:id/update",
+  "/component/:id/update", upload.single('part_image'),
   computerpart_controller.computerpart_update_post
 );
 

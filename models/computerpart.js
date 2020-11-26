@@ -12,6 +12,7 @@ var ComputerPartSchema = new Schema({
     ref: "Manufacturer",
     required: true,
   },
+  fileName: { type: String },
 });
 
 //Virtual for manufacturer's URL

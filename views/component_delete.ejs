@@ -16,6 +16,13 @@
       value="<%= component._id %>"
       required
     />
+    <input
+      type="hidden"
+      name="filename"
+      id="filename"
+      value="<%= component.fileName %>"
+      required
+    />
     <button type="submit" class="yellow-btn">Delete</button>
   </form>
   <a class="cancel" href="<%= component.url %>">Cancel</a>

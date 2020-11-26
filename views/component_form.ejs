@@ -9,7 +9,7 @@
       <% }) %>
     </ul>
     <% } %>
-  <form action="" method="POST">
+  <form action="" method="POST" enctype="multipart/form-data">
     <fieldset>
       <legend>NAME</legend>
       <input
@@ -80,7 +80,10 @@
           <% }) %>
       </select>
     </fieldset>
-
+    <fieldset>
+      <legend>COMPONENT IMAGE</legend>
+      <input type="file" name="part_image" id="part_image">
+    </fieldset>
     <button type="submit" class="yellow-btn">Submit</button>
   </form>
   <a class="cancel" href="<%= typeof component == 'undefined' || component.isNew ? '/components' : component.url %>">Cancel</a>
