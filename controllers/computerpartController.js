@@ -306,7 +306,7 @@ exports.computerpart_delete_image = function (req, res, next) {
           return;
         }
         console.log(req.body.removeImage, "was deleted");
-        res.redirect(part.url);
+        res.redirect(`${part.url}/update`);
       });
     }
   );
