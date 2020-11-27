@@ -9,9 +9,12 @@
     </div>
 </section>
 <section class="component-details">
-  <div class="component-details--img">
-    <img src="/images/<%= component.fileName %>" alt="<%= component.name %> image">
-  </div>
+  <% if (component.fileName) { %>
+    <div class="component-details--img">
+      <img src="/images/<%= component.fileName %>" alt="<%= component.fileName %>">
+    </div>
+  <% } %>
+ 
   <div class="component-details--details">
     <div>
       <div class="th-small">Category</div>

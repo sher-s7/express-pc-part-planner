@@ -3,7 +3,7 @@ var Category = require("../models/category");
 var Manufacturer = require("../models/manufacturer");
 var async = require("async");
 var mongoose = require("mongoose");
-const fs = require('fs');
+const fs = require("fs");
 
 const { body, validationResult } = require("express-validator/check");
 
@@ -102,8 +102,11 @@ exports.computerpart_create_post = [
       price: req.body.price,
       category: req.body.category,
       manufacturer: req.body.manufacturer,
-      fileName: req.file.filename,
     });
+
+    if (req.file) {
+      component.fileName = req.file.filename;
+    }
 
     if (!errors.isEmpty()) {
       async.parallel(
@@ -170,10 +173,10 @@ exports.computerpart_delete_get = function (req, res, next) {
 exports.computerpart_delete_post = function (req, res, next) {
   ComputerPart.findByIdAndRemove(req.body.id, function deleteComponent(err) {
     if (err) return next(err);
-    fs.unlink(`public/images/${req.body.filename}`, err => {
-      if(err) next(err);
-      console.log(req.body.filename, 'was deleted')
-    })
+    fs.unlink(`public/images/${req.body.filename}`, (err) => {
+      if (err) next(err);
+      console.log(req.body.filename, "was deleted");
+    });
     res.redirect("/components");
   });
 };
@@ -246,8 +249,8 @@ exports.computerpart_update_post = [
       _id: req.params.id,
     });
 
-    if(req.file) {
-      component.fileName = req.file.filename
+    if (req.file) {
+      component.fileName = req.file.filename;
     }
 
     if (!errors.isEmpty()) {
@@ -279,10 +282,32 @@ exports.computerpart_update_post = [
         {},
         function (err, thecomponent) {
           if (err) return next(err);
-
+          if (fs.existsSync(`public/images/${req.body.fileName}`)) {
+            fs.unlink(`public/images/${req.body.fileName}`, (err) => {
+              if (err) return console.log(err);
+            });
+          }
           res.redirect(thecomponent.url);
         }
       );
     }
   },
 ];
+
+exports.computerpart_delete_image = function (req, res, next) {
+  ComputerPart.findOneAndUpdate(
+    { _id: req.params.id },
+    { fileName: undefined },
+    (err, part) => {
+      if (err) next(err);
+      fs.unlink(`public/images/${req.body.removeImage}`, (err) => {
+        if (err) {
+          res.redirect(part.url);
+          return;
+        }
+        console.log(req.body.removeImage, "was deleted");
+        res.redirect(part.url);
+      });
+    }
+  );
+};

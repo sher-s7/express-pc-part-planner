@@ -8,17 +8,27 @@ var ComputerPart = require("../models/computerpart");
 var Manufacturer = require("../models/manufacturer");
 
 var mongoose = require("mongoose");
-
-var multer  = require('multer')
+var path = require("path");
+var multer = require("multer");
 var storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'public/images')
+  destination: function (req, file, cb) {
+    cb(null, "public/images");
   },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname)
-  }
-})
-var upload = multer({ storage: storage, limits: {fileSize: 1000000} })
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+var upload = multer({
+  storage: storage,
+  fileFilter: function (req, file, callback) {
+    var ext = path.extname(file.originalname);
+    if (ext !== ".png" && ext !== ".jpg" && ext !== ".gif" && ext !== ".jpeg") {
+      return callback(new Error("Only images are allowed"));
+    }
+    callback(null, true);
+  },
+  limits: { fileSize: 1000000 },
+});
 
 // Require controller modules.
 var category_controller = require("../controllers/categoryController");
@@ -28,12 +38,18 @@ var manufacturer_controller = require("../controllers/manufacturerController");
 function getStoredParts(req, next) {
   let promises = [];
   for (const categoryID in req.cookies) {
-    if (mongoose.Types.ObjectId.isValid(categoryID) && mongoose.Types.ObjectId.isValid(req.cookies[categoryID])) {
+    if (
+      mongoose.Types.ObjectId.isValid(categoryID) &&
+      mongoose.Types.ObjectId.isValid(req.cookies[categoryID])
+    ) {
       promises.push(
         new Promise(function (resolve, reject) {
-          ComputerPart.findById(req.cookies[categoryID]).exec(function (err,part) {
+          ComputerPart.findById(req.cookies[categoryID]).exec(function (
+            err,
+            part
+          ) {
             if (err) return next(err);
-            resolve([categoryID, part])
+            resolve([categoryID, part]);
           });
         })
       );
@@ -56,10 +72,10 @@ router.get("/list", function (req, res, next) {
     async function (err, results) {
       if (err) return next(err);
       const userList = {};
-      await Promise.all(getStoredParts(req, next)).then(function(parts) {
-        parts.forEach(part => {
-          userList[part[0]]=part[1]
-        })
+      await Promise.all(getStoredParts(req, next)).then(function (parts) {
+        parts.forEach((part) => {
+          userList[part[0]] = part[1];
+        });
       });
       res.render("list", {
         title: "My List - PC Part Planner",
@@ -106,7 +122,8 @@ router.get(
 
 // POST request for creating ComputerPart.
 router.post(
-  "/component/create", upload.single('part_image'),
+  "/component/create",
+  upload.single("part_image"),
   computerpart_controller.computerpart_create_post
 );
 
@@ -122,6 +139,12 @@ router.post(
   computerpart_controller.computerpart_delete_post
 );
 
+// POST request to delete ComputerPart image.
+router.post(
+  "/component/:id/image/delete",
+  computerpart_controller.computerpart_delete_image
+);
+
 // GET request to update ComputerPart.
 router.get(
   "/component/:id/update",
@@ -130,7 +153,8 @@ router.get(
 
 // POST request to update ComputerPart.
 router.post(
-  "/component/:id/update", upload.single('part_image'),
+  "/component/:id/update",
+  upload.single("part_image"),
   computerpart_controller.computerpart_update_post
 );
 

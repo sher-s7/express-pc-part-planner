@@ -77,11 +77,11 @@ button {
   transition: 0.2s ease-out;
   font-size: 18px;
   text-transform: uppercase;
-  box-shadow: 0 5px 10px #0009;
+  box-shadow: 0 5px 10px var(--black);
 }
 .yellow-btn:focus {
   transform: scale(1.02);
-  box-shadow: 0 3px 25px #0009;
+  box-shadow: 0 3px 25px var(--black);
 }
 .yellow-btn:active {
   transform: scale(0.98);
@@ -553,7 +553,7 @@ td {
 
 .component-details--img img {
   width: 100%;
-  filter: drop-shadow(0 0 10px black);
+  filter: drop-shadow(0 0 10px var(--black));
 }
 
 .component-details--details > div {
@@ -726,7 +726,17 @@ a.cancel {
   border-radius: 2px;
   text-decoration: none;
 }
+#deleteImageForm {
+  margin-bottom: 40px;
+}
+#deleteImageForm img {
+  width: 100%;
+}
 
+input[type="file"] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* -       -       -       -       -       -       -       -  Delete -       -       -       -       -       -       -       - */
 .delete {
   flex-direction: column;
@@ -835,6 +845,13 @@ footer {
 
 #errorDetails p {
   font-size: 16px;
+}
+
+#goBack {
+  background: none;
+  border: none;
+  color: var(--accent1);
+  padding: 0;
 }
 
 @media (max-width: 319px) {

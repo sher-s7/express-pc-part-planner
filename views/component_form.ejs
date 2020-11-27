@@ -9,6 +9,13 @@
       <% }) %>
     </ul>
     <% } %>
+    <% if (typeof component != 'undefined' && component.fileName && typeof component.fileName != 'undefined') { %>
+      <form id="deleteImageForm" action="<%= component.url %>/image/delete" method="POST">
+        <img src="/images/<%= component.fileName %>" alt="<%= component.fileName %>">
+        <input type="hidden" name='removeImage' id="removeImage" value="<%= component.fileName %>" required>
+        <input type="submit" value="Remove image">
+      </form>
+    <% } %>
   <form action="" method="POST" enctype="multipart/form-data">
     <fieldset>
       <legend>NAME</legend>
@@ -22,9 +29,7 @@
     </fieldset>
     <fieldset id="features">
       <legend>FEATURES</legend>
-      <textarea required name="description" id="description">
-  <%= typeof component == 'undefined' ? '' : component.description %></textarea
-      >
+      <textarea required name="description" id="description"><%= typeof component == 'undefined' ? '' : component.description %></textarea>
     </fieldset>
     <sub id="feature-sub">Separate features with a comma</sub>
     <div id="price-stock-container">
@@ -84,6 +89,9 @@
       <legend>COMPONENT IMAGE</legend>
       <input type="file" name="part_image" id="part_image">
     </fieldset>
+    <% if (typeof component != 'undefined') { %>
+      <input type="hidden" name="fileName" id="fileName" value="<%= component.fileName %>">
+    <% } %>
     <button type="submit" class="yellow-btn">Submit</button>
   </form>
   <a class="cancel" href="<%= typeof component == 'undefined' || component.isNew ? '/components' : component.url %>">Cancel</a>
