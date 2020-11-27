@@ -483,6 +483,7 @@ td {
   color: var(--accent1);
   padding: 0;
   font-size: 25px;
+  align-self: flex-start;
   width: 30px;
   height: 30px;
   z-index: 2;
@@ -502,6 +503,8 @@ td {
   align-items: center;
   right: 7px;
   background: linear-gradient(var(--fg) 25%, var(--black));
+  box-shadow: 0px 8px 10px var(--black);
+  border: 1px solid var(--fg);
   transition: 0.2s ease-in-out;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -553,6 +556,7 @@ td {
 
 .component-details--img img {
   width: 100%;
+  max-width: 320px;
   filter: drop-shadow(0 0 10px var(--black));
 }
 
@@ -698,7 +702,7 @@ fieldset:focus-within legend {
 
 #dollar-sign {
   position: absolute;
-  top: 2px;
+  top: 1px;
   font-size: 20px;
   left: 10px;
   color: var(--accent1);
@@ -731,6 +735,9 @@ a.cancel {
 }
 #deleteImageForm img {
   width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 input[type="file"] {
