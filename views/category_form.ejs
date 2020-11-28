@@ -22,6 +22,12 @@
 <%= typeof category == 'undefined' ? '' : category.description %></textarea
     >
   </fieldset>
+  <% if (isUpdating) { %>
+    <fieldset>
+      <legend>ADMIN PASSWORD</legend>
+      <input type="password" name="password" id="password" required>
+    </fieldset>
+  <% } %>
   <button type="submit" class="yellow-btn">Submit</button>
 </form>
 
