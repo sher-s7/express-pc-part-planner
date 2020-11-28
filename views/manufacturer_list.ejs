@@ -1,13 +1,13 @@
 <% layout('layout') -%>
-
+<div class="wide-screen-bg">
 <section class="title">
   <h1><%= title %></h1>
   <a href="/manufacturer/create" class="create-link">
     <i class="fas fa-plus"></i>
   </a>
 </section>
-
-<section class="create-section"><a href="/manufacturer/create">New Manufacturer</a></section>
+<section class="create-section"><a href="/manufacturer/create" class="create-link"><i class="las la-plus"></i> New Manufacturer</a></section>
+</div>
 
 <ul class="list">
   <% manufacturers.forEach(manufacturer => { %>
