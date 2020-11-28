@@ -72,6 +72,7 @@ exports.computerpart_create_get = function (req, res, next) {
         title: "Add a new computer part",
         categories: results.categories,
         manufacturers: results.manufacturers,
+        isUpdating: false,
       });
     }
   );
@@ -225,6 +226,7 @@ exports.computerpart_update_get = function (req, res, next) {
         component: results.component,
         categories: results.categories,
         manufacturers: results.manufacturers,
+        isUpdating: true,
       });
     }
   );

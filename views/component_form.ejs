@@ -92,10 +92,12 @@
     <% if (typeof component != 'undefined') { %>
       <input type="hidden" name="fileName" id="fileName" value="<%= component.fileName %>">
     <% } %>
-    <fieldset>
-      <legend>ADMIN PASSWORD</legend>
-      <input type="password" name="password" id="password" required>
-    </fieldset>
+    <% if (isUpdating) { %>
+      <fieldset>
+        <legend>ADMIN PASSWORD</legend>
+        <input type="password" name="password" id="password" required>
+      </fieldset>
+    <% } %>
     <button type="submit" class="yellow-btn">Submit</button>
   </form>
   <a class="cancel" href="<%= typeof component == 'undefined' || component.isNew ? '/components' : component.url %>">Cancel</a>
