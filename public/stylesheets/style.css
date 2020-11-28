@@ -885,6 +885,10 @@ footer {
 }
 
 @media (min-width: 768px) {
+  body {
+    background: linear-gradient(var(--fg), var(--bg));
+
+  }
   section {
     max-width: 960px;
     width: 100%;
@@ -895,6 +899,7 @@ footer {
   }
   .title {
     justify-content: center;
+    background-color: transparent;
   }
   .title .create-link {
     display: none;
@@ -907,7 +912,6 @@ footer {
   }
   .create-link {
     font-size: 16px;
-    margin-left: 10px;
   }
   .list {
     background-color: var(--fg);
@@ -916,6 +920,10 @@ footer {
     max-width: 640px;
     width: 100%;
     margin: 0 auto;
+  }
+
+  .list li:last-of-type {
+    margin-bottom: 20px;
   }
 
   .list li a {
