@@ -130,6 +130,7 @@ exports.computerpart_create_post = [
             manufacturers: results.manufacturers,
             component: component,
             isNew: true,
+            isUpdating: false,
             errors: errors.array(),
           });
         }
@@ -182,7 +183,7 @@ exports.computerpart_delete_post = function (req, res, next) {
     ComputerPart.findByIdAndRemove(req.body.id, function deleteComponent(err) {
       if (err) return next(err);
       fs.unlink(`public/images/${req.body.filename}`, (err) => {
-        if (err) next(err);
+        if (err) console.log(err);
         console.log(req.body.filename, "was deleted");
       });
       res.redirect("/components");
@@ -266,6 +267,10 @@ exports.computerpart_update_post = [
 
       if (req.file) {
         component.fileName = req.file.filename;
+        fs.unlink(`public/images/${req.body.fileName}`, (err) => {
+          if (err) console.log(err);
+          console.log(req.body.fileName, "was deleted");
+        });
       }
 
       if (!errors.isEmpty()) {
@@ -285,6 +290,7 @@ exports.computerpart_update_post = [
               component: component,
               categories: results.categories,
               manufacturers: results.manufacturers,
+              isUpdating: true,
               errors: errors.array(),
             });
           }
