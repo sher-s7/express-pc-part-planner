@@ -159,7 +159,9 @@ exports.computerpart_delete_get = function (req, res, next) {
       if (err) next(err);
 
       if (component == null) {
-        let err = new Error("Component not found. It may have been deleted, or does not exist.");
+        let err = new Error(
+          "Component not found. It may have been deleted, or does not exist."
+        );
         err.status = 404;
         return next(err);
       }
@@ -217,7 +219,9 @@ exports.computerpart_update_get = function (req, res, next) {
       if (err) return next(err);
 
       if (results.component == null) {
-        let err = new Error("Component not found. It may have been deleted, or does not exist.");
+        let err = new Error(
+          "Component not found. It may have been deleted, or does not exist."
+        );
         err.status = 404;
         return next(err);
       }
@@ -250,6 +254,12 @@ exports.computerpart_update_post = [
 
   (req, res, next) => {
     if (req.body.password != process.env.ADMIN_PASSWORD) {
+      if (req.file) {
+        fs.unlink(`public/images/${req.file.filename}`, (err) => {
+          if (err) console.log(err);
+          console.log(req.file.filename, "was deleted");
+        });
+      }
       let err = new Error("The password you entered is incorrect.");
       err.status = 401;
       return next(err);
@@ -306,7 +316,9 @@ exports.computerpart_update_post = [
             if (thecomponent) {
               res.redirect(thecomponent.url);
             } else {
-              let err = new Error("Component not found. It may have been deleted, or does not exist.");
+              let err = new Error(
+                "Component not found. It may have been deleted, or does not exist."
+              );
               err.status = 404;
               return next(err);
             }
