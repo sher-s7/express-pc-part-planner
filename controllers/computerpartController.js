@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 var ComputerPart = require("../models/computerpart");
 var Category = require("../models/category");
 var Manufacturer = require("../models/manufacturer");
@@ -171,14 +173,20 @@ exports.computerpart_delete_get = function (req, res, next) {
 
 // Handle ComputerPart delete on POST.
 exports.computerpart_delete_post = function (req, res, next) {
-  ComputerPart.findByIdAndRemove(req.body.id, function deleteComponent(err) {
-    if (err) return next(err);
-    fs.unlink(`public/images/${req.body.filename}`, (err) => {
-      if (err) next(err);
-      console.log(req.body.filename, "was deleted");
+  if (req.body.password != process.env.ADMIN_PASSWORD) {
+    let err = new Error("The password you entered is incorrect.");
+    err.status = 401;
+    return next(err);
+  } else {
+    ComputerPart.findByIdAndRemove(req.body.id, function deleteComponent(err) {
+      if (err) return next(err);
+      fs.unlink(`public/images/${req.body.filename}`, (err) => {
+        if (err) next(err);
+        console.log(req.body.filename, "was deleted");
+      });
+      res.redirect("/components");
     });
-    res.redirect("/components");
-  });
+  }
 };
 
 // Display ComputerPart update form on GET.
@@ -238,58 +246,64 @@ exports.computerpart_update_post = [
   body("manufacturer", "Manufacturer must not be empty").trim().escape(),
 
   (req, res, next) => {
-    const errors = validationResult(req);
-    const component = new ComputerPart({
-      name: req.body.name,
-      description: req.body.description,
-      inStock: req.body.inStock,
-      price: req.body.price,
-      category: req.body.category,
-      manufacturer: req.body.manufacturer,
-      _id: req.params.id,
-    });
-
-    if (req.file) {
-      component.fileName = req.file.filename;
-    }
-
-    if (!errors.isEmpty()) {
-      async.parallel(
-        {
-          categories: function (callback) {
-            Category.find().exec(callback);
-          },
-          manufacturers: function (callback) {
-            Manufacturer.find().exec(callback);
-          },
-        },
-        function (err, results) {
-          if (err) return next(err);
-          res.render("component_form", {
-            title: "Update Component",
-            component: component,
-            categories: results.categories,
-            manufacturers: results.manufacturers,
-            errors: errors.array(),
-          });
-        }
-      );
-      return;
+    if (req.body.password != process.env.ADMIN_PASSWORD) {
+      let err = new Error("The password you entered is incorrect.");
+      err.status = 401;
+      return next(err);
     } else {
-      ComputerPart.findByIdAndUpdate(
-        req.params.id,
-        component,
-        {},
-        function (err, thecomponent) {
-          if (err) return next(err);
-          if (fs.existsSync(`public/images/${req.body.fileName}`)) {
-            fs.unlink(`public/images/${req.body.fileName}`, (err) => {
-              if (err) return console.log(err);
+      const errors = validationResult(req);
+      const component = new ComputerPart({
+        name: req.body.name,
+        description: req.body.description,
+        inStock: req.body.inStock,
+        price: req.body.price,
+        category: req.body.category,
+        manufacturer: req.body.manufacturer,
+        _id: req.params.id,
+      });
+
+      if (req.file) {
+        component.fileName = req.file.filename;
+      }
+
+      if (!errors.isEmpty()) {
+        async.parallel(
+          {
+            categories: function (callback) {
+              Category.find().exec(callback);
+            },
+            manufacturers: function (callback) {
+              Manufacturer.find().exec(callback);
+            },
+          },
+          function (err, results) {
+            if (err) return next(err);
+            res.render("component_form", {
+              title: "Update Component",
+              component: component,
+              categories: results.categories,
+              manufacturers: results.manufacturers,
+              errors: errors.array(),
             });
           }
-          res.redirect(thecomponent.url);
-        }
-      );
+        );
+        return;
+      } else {
+        ComputerPart.findByIdAndUpdate(
+          req.params.id,
+          component,
+          {},
+          function (err, thecomponent) {
+            if (err) return next(err);
+            if (fs.existsSync(`public/images/${req.body.fileName}`)) {
+              fs.unlink(`public/images/${req.body.fileName}`, (err) => {
+                if (err) return console.log(err);
+              });
+            }
+            res.redirect(thecomponent.url);
+          }
+        );
+      }
     }
   },
 ];
