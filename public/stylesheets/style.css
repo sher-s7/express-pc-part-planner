@@ -14,6 +14,7 @@ body {
   --body-padding: 20px;
   --header-height: 70px;
   --footer-height: 200px;
+  --table-header-color: #4f4e4e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -889,6 +890,14 @@ footer {
     background: linear-gradient(var(--fg), var(--bg));
 
   }
+  .yellow-btn, .part-add button {
+    text-transform: capitalize;
+  }
+  .part-add button {
+    border: none;
+    padding: 7px 5px;
+    font-size: 16px;
+  }
   section {
     max-width: 960px;
     width: 100%;
@@ -904,7 +913,38 @@ footer {
   .title .create-link {
     display: none;
   }
+  table {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  thead {
+    display: table-header-group;
+    position: relative;
+  }
 
+  /* thead::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    border-bottom: 2px solid var(--bg);
+  } */
+  th {
+    position: relative;
+    text-align: left;
+    font-weight: normal;
+    color: var(--table-header-color);
+    border-bottom: 2px solid var(--bg);
+    padding: 5px;
+  }
+  th:hover {
+    border-color: var(--accent2);
+  }
+  th span {
+    margin-left: 10px;
+  }
+  tr {
+    display: table-row;
+  }
   .create-section {
     display: block;
     text-align: left;

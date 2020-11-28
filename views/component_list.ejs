@@ -1,5 +1,6 @@
 <% layout('layout') -%>
 
+<div class="wide-screen-bg">
 <section class="title">
   <h1><%= title %></h1>
   <a class="create-link" href="/component/create">
@@ -21,14 +22,13 @@
   </form>
 </section>
 
-<table id="component-table">
+<table cellspacing="0" id="component-table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Manufacturer</th>
-      <th>Category</th>
-      <th>Stock</th>
-      <th data-sort-method='number'>Price</th>
+      <th><span>Name</span></th>
+      <th><span>Manufacturer</span></th>
+      <th><span>Category</span></th>
+      <th data-sort-method='number' colspan="2"><span>Price</span></th>
     </tr>
   </thead>
   <tbody>
@@ -63,7 +63,7 @@
     <tr></tr>
   </tfoot>
 </table>
-
+</div>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/searchFilter.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/updateCookie.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/tablesort.min.js'></script> <script type='text/javascript' src='/javascripts/tablesort.number.min.js'></script> <script>new Tablesort(document.getElementById('component-table'));</script> ") -%>
