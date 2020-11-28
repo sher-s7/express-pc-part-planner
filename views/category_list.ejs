@@ -1,5 +1,5 @@
 <% layout('layout') -%>
-
+<div class="wide-screen-bg">
 <section class="title">
   <h1><%= title %>
   </h1>
@@ -9,7 +9,7 @@
 </section>
 
 <section class='create-section'><a href="/category/create" class="create-link"><i class="las la-plus"></i> New category</a></section>
-
+</div>
 <ul class="list">
   <% category_list.forEach(category => { %>
   <li>

@@ -1,7 +1,7 @@
 <% layout('layout') -%>
 <section class="title"><h1 class="form-header"><%= title %></h1></section>
 
-<section>
+<section id="componentFormContainer">
   <% if (typeof errors != 'undefined') { %>
     <ul id="errorMsgs">
       <% errors.forEach(err => { %>
@@ -61,32 +61,35 @@
         />
       </fieldset>
     </div>
-    <fieldset>
-      <legend>SELECT CATEGORY</legend>
-      <select name="category" id="category" required>
-          <% categories.forEach(category => { %>
-              <% if (typeof component != 'undefined') { %>
-                  <% var selected = category._id.toString() === component.category._id.toString() ? 'selected' : '' %>
-                  <option value="<%= category._id %>" <%= selected %> ><%= category.title %> </option>
-              <% } else { %>
-                  <option value="<%= category._id %> "><%= category.title %> </option>
-                  <% } %>
-          <% }) %>
-      </select>
-    </fieldset>
-    <fieldset>
-      <legend>SELECT MANUFACTURER</legend>
-      <select name="manufacturer" id="manufacturer" required>
-          <% manufacturers.forEach(manufacturer => { %>
-              <% if (typeof component != 'undefined') { %>
-                  <% var selected = manufacturer._id.toString() === component.manufacturer._id.toString() ? 'selected' : '' %> 
-                  <option value="<%= manufacturer._id %>" <%= selected %>> <%= manufacturer.name %> </option>
-              <% } else { %>
-                  <option value="<%= manufacturer._id %> "><%= manufacturer.name %> </option>
-                  <% } %>
-          <% }) %>
-      </select>
-    </fieldset>
+    <div id="category-manufacturer-container">
+      <fieldset>
+        <legend>SELECT CATEGORY</legend>
+        <select name="category" id="category" required>
+            <% categories.forEach(category => { %>
+                <% if (typeof component != 'undefined') { %>
+                    <% var selected = category._id.toString() === component.category._id.toString() ? 'selected' : '' %>
+                    <option value="<%= category._id %>" <%= selected %> ><%= category.title %> </option>
+                <% } else { %>
+                    <option value="<%= category._id %> "><%= category.title %> </option>
+                    <% } %>
+            <% }) %>
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>SELECT MANUFACTURER</legend>
+        <select name="manufacturer" id="manufacturer" required>
+            <% manufacturers.forEach(manufacturer => { %>
+                <% if (typeof component != 'undefined') { %>
+                    <% var selected = manufacturer._id.toString() === component.manufacturer._id.toString() ? 'selected' : '' %> 
+                    <option value="<%= manufacturer._id %>" <%= selected %>> <%= manufacturer.name %> </option>
+                <% } else { %>
+                    <option value="<%= manufacturer._id %> "><%= manufacturer.name %> </option>
+                    <% } %>
+            <% }) %>
+        </select>
+      </fieldset>
+    </div>
+    
     <fieldset>
       <legend>COMPONENT IMAGE</legend>
       <input type="file" name="part_image" id="part_image">
