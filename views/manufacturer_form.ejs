@@ -19,6 +19,12 @@
 <%= typeof manufacturer == 'undefined' ? '' : manufacturer.description %></textarea
     >
   </fieldset>
+  <% if (isUpdating) { %>
+    <fieldset>
+      <legend>ADMIN PASSWORD</legend>
+      <input type="password" name="password" id="password" required>
+    </fieldset>
+  <% } %>
   <button type="submit" class="yellow-btn">Submit</button>
 </form>
 <a class="cancel" href="<%= typeof manufacturer == 'undefined' ? '/manufacturers' : manufacturer.url %>">Cancel</a>

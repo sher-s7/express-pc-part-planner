@@ -32,7 +32,7 @@ exports.manufacturer_detail = function (req, res, next) {
       },
       manufacturer_parts: function (callback) {
         ComputerPart.find({ manufacturer: req.params.id })
-          .populate('manufacturer')
+          .populate("manufacturer")
           .populate("category")
           .exec(callback);
       },
@@ -56,7 +56,7 @@ exports.manufacturer_detail = function (req, res, next) {
 
 // Display Manufacturer create form on GET.
 exports.manufacturer_create_get = function (req, res) {
-  res.render("manufacturer_form", { title: "Add a manufacturer" });
+  res.render("manufacturer_form", { title: "Add a manufacturer", isUpdating: false });
 };
 
 // Handle Manufacturer create on POST.
@@ -74,6 +74,7 @@ exports.manufacturer_create_post = [
       res.render("manufacturer_form", {
         title: "Add a manufacturer",
         manufacturer: req.body,
+        isUpdating: false,
         errors: errors.array(),
       });
       return;
@@ -128,36 +129,43 @@ exports.manufacturer_delete_get = function (req, res, next) {
 
 // Handle Manufacturer delete on POST.
 exports.manufacturer_delete_post = function (req, res, next) {
-  async.parallel(
-    {
-      manufacturer: function (callback) {
-        Manufacturer.findById(req.params.id).exec(callback);
+  if (req.body.password != process.env.ADMIN_PASSWORD) {
+    let err = new Error("The password you entered is incorrect.");
+    err.status = 401;
+    return next(err);
+  } else {
+    async.parallel(
+      {
+        manufacturer: function (callback) {
+          Manufacturer.findById(req.params.id).exec(callback);
+        },
+        manufacturer_parts: function (callback) {
+          ComputerPart.find({ manufacturer: req.params.id }).exec(callback);
+        },
       },
-      manufacturer_parts: function (callback) {
-        ComputerPart.find({ manufacturer: req.params.id }).exec(callback);
-      },
-    },
-    function (err, results) {
-      if (err) return next(err);
+      function (err, results) {
+        if (err) return next(err);
 
-      if (results.manufacturer_parts.length > 0) {
-        res.render("manufacturer_delete", {
-          title: "Delete Manufacturer: " + results.manufacturer.name,
-          manufacturer: results.manufacturer,
-          manufacturer_parts: results.manufacturer_parts,
-        });
-        return;
-      } else {
-        Manufacturer.findByIdAndRemove(req.body.id, function deleteManufacturer(
-          err
-        ) {
-          if (err) return next(err);
+        if (results.manufacturer_parts.length > 0) {
+          res.render("manufacturer_delete", {
+            title: "Delete Manufacturer: " + results.manufacturer.name,
+            manufacturer: results.manufacturer,
+            manufacturer_parts: results.manufacturer_parts,
+          });
+          return;
+        } else {
+          Manufacturer.findByIdAndRemove(
+            req.body.id,
+            function deleteManufacturer(err) {
+              if (err) return next(err);
 
-          res.redirect("/manufacturers");
-        });
+              res.redirect("/manufacturers");
+            }
+          );
+        }
       }
-    }
-  );
+    );
+  }
 };
 
 // Display Manufacturer update form on GET.
@@ -178,6 +186,7 @@ exports.manufacturer_update_get = function (req, res, next) {
 
     res.render("manufacturer_form", {
       title: "Update " + manufacturer.name,
+      isUpdating: true,
       manufacturer: manufacturer,
     });
   });
@@ -192,30 +201,39 @@ exports.manufacturer_update_post = [
     .withMessage("Manufacturer name must be specified."),
   body("description").optional({ checkFalsy: true }),
   (req, res, next) => {
-    const errors = validationResult(req);
-
-    var manufacturer = new Manufacturer({
-      name: req.body.name,
-      description: req.body.description,
-      _id: req.params.id
-    });
-
-    if (!errors.isEmpty()) {
-      res.render("manufacturer_form", {
-        title: "Update Manufacturer",
-        manufacturer: manufacturer,
-        errors: errors.array(),
-      });
-      return;
+    if (req.body.password != process.env.ADMIN_PASSWORD) {
+      let err = new Error("The password you entered is incorrect.");
+      err.status = 401;
+      return next(err);
     } else {
-      Manufacturer.findByIdAndUpdate(req.params.id, manufacturer, {}, function (
-        err,
-        themanufacturer
-      ) {
-        if (err) return next(err);
+      const errors = validationResult(req);
 
-        res.redirect(themanufacturer.url);
+      var manufacturer = new Manufacturer({
+        name: req.body.name,
+        description: req.body.description,
+        _id: req.params.id,
       });
+
+      if (!errors.isEmpty()) {
+        res.render("manufacturer_form", {
+          title: "Update Manufacturer",
+          manufacturer: manufacturer,
+          isUpdating: true,
+          errors: errors.array(),
+        });
+        return;
+      } else {
+        Manufacturer.findByIdAndUpdate(
+          req.params.id,
+          manufacturer,
+          {},
+          function (err, themanufacturer) {
+            if (err) return next(err);
+
+            res.redirect(themanufacturer.url);
+          }
+        );
+      }
     }
   },
 ];

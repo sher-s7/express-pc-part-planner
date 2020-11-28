@@ -18,6 +18,10 @@
 
         <form action="" method="POST">
             <input type="hidden" name="id" id="id" value="<%= manufacturer._id %>" required>
+            <fieldset>
+                <legend>ADMIN PASSWORD</legend>
+                <input type="password" name="password" id="password" required>
+              </fieldset>
             <button type="submit" class="yellow-btn">Delete</button>
         </form>
     <% } %>
