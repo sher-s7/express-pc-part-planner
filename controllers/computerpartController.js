@@ -159,7 +159,7 @@ exports.computerpart_delete_get = function (req, res, next) {
       if (err) next(err);
 
       if (component == null) {
-        let err = new Error("Component not found");
+        let err = new Error("Component not found. It may have been deleted, or does not exist.");
         err.status = 404;
         return next(err);
       }
@@ -217,7 +217,7 @@ exports.computerpart_update_get = function (req, res, next) {
       if (err) return next(err);
 
       if (results.component == null) {
-        let err = new Error("Component not found");
+        let err = new Error("Component not found. It may have been deleted, or does not exist.");
         err.status = 404;
         return next(err);
       }
@@ -303,7 +303,13 @@ exports.computerpart_update_post = [
           {},
           function (err, thecomponent) {
             if (err) return next(err);
-            res.redirect(thecomponent.url);
+            if (thecomponent) {
+              res.redirect(thecomponent.url);
+            } else {
+              let err = new Error("Component not found. It may have been deleted, or does not exist.");
+              err.status = 404;
+              return next(err);
+            }
           }
         );
       }
@@ -311,15 +317,15 @@ exports.computerpart_update_post = [
   },
 ];
 
-exports.computerpart_delete_image_get = function(req, res, next) {
+exports.computerpart_delete_image_get = function (req, res, next) {
   ComputerPart.findById(req.params.id, (err, part) => {
-    if(err) next(err);
-    res.render('component_image_delete', {
-      title: 'Delete Image',
+    if (err) next(err);
+    res.render("component_image_delete", {
+      title: "Delete Image",
       component: part,
-    })
-  })
-}
+    });
+  });
+};
 
 exports.computerpart_delete_image_post = function (req, res, next) {
   if (req.body.password != process.env.ADMIN_PASSWORD) {
