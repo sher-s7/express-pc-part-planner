@@ -1,0 +1,30 @@
+<% layout('layout') -%>
+
+<section class="delete title">
+  <h1><%= component.name %></h1>
+</section>
+<section>
+    <div class="component-details--img">
+        <img
+        src="/images/<%= component.fileName %>"
+        alt="<%= component.fileName %>"
+      />
+    </div>
+  
+
+  <form action="" method="POST">
+    <input
+      type="hidden"
+      name="imageName"
+      id="imageName"
+      value="<%= component.fileName %>"
+      required
+    />
+    <fieldset>
+      <legend>ADMIN PASSWORD</legend>
+      <input type="password" name="password" id="password" required />
+    </fieldset>
+    <button type="submit" class="yellow-btn">Delete Image</button>
+  </form>
+  <a class="cancel" href="<%= component.url %>/update">Cancel</a>
+</section>

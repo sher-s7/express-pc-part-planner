@@ -10,11 +10,10 @@
     </ul>
     <% } %>
     <% if (typeof component != 'undefined' && component.fileName && typeof component.fileName != 'undefined') { %>
-      <form id="deleteImageForm" action="<%= component.url %>/image/delete" method="POST">
+      <div class="component-details--img">
         <img src="/images/<%= component.fileName %>" alt="<%= component.fileName %>">
-        <input type="hidden" name='removeImage' id="removeImage" value="<%= component.fileName %>" required>
-        <input type="submit" value="Remove image">
-      </form>
+        <a href="<%= component.url %>/image/delete"><i class="fas fa-times"></i></a>
+      </div>
     <% } %>
   <form action="" method="POST" enctype="multipart/form-data" id="componentForm">
     <fieldset>

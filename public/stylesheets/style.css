@@ -551,13 +551,23 @@ td {
 
 .component-details--img {
   text-align: center;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  position: relative;
   margin-bottom: 40px;
 }
 
 .component-details--img img {
   width: 100%;
-  max-width: 320px;
   filter: drop-shadow(0 0 10px var(--black));
+}
+
+.component-details--img a {
+  position: absolute;
+  font-size: 30px;
+  right: 10px;
+  text-shadow: 0 0 3px var(--bg);
 }
 
 .component-details--details > div {

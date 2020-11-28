@@ -139,10 +139,16 @@ router.post(
   computerpart_controller.computerpart_delete_post
 );
 
+// GET request to delete ComputerPart image.
+router.get(
+  "/component/:id/image/delete",
+  computerpart_controller.computerpart_delete_image_get
+);
+
 // POST request to delete ComputerPart image.
 router.post(
   "/component/:id/image/delete",
-  computerpart_controller.computerpart_delete_image
+  computerpart_controller.computerpart_delete_image_post
 );
 
 // GET request to update ComputerPart.

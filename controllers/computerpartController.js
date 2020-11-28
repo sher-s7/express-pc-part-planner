@@ -297,11 +297,6 @@ exports.computerpart_update_post = [
           {},
           function (err, thecomponent) {
             if (err) return next(err);
-            if (fs.existsSync(`public/images/${req.body.fileName}`)) {
-              fs.unlink(`public/images/${req.body.fileName}`, (err) => {
-                if (err) return console.log(err);
-              });
-            }
             res.redirect(thecomponent.url);
           }
         );
@@ -310,18 +305,33 @@ exports.computerpart_update_post = [
   },
 ];
 
-exports.computerpart_delete_image = function (req, res, next) {
+exports.computerpart_delete_image_get = function(req, res, next) {
+  ComputerPart.findById(req.params.id, (err, part) => {
+    if(err) next(err);
+    res.render('component_image_delete', {
+      title: 'Delete Image',
+      component: part,
+    })
+  })
+}
+
+exports.computerpart_delete_image_post = function (req, res, next) {
+  if (req.body.password != process.env.ADMIN_PASSWORD) {
+    let err = new Error("The password you entered is incorrect.");
+    err.status = 401;
+    return next(err);
+  }
   ComputerPart.findOneAndUpdate(
     { _id: req.params.id },
     { fileName: undefined },
     (err, part) => {
       if (err) next(err);
-      fs.unlink(`public/images/${req.body.removeImage}`, (err) => {
+      fs.unlink(`public/images/${req.body.imageName}`, (err) => {
         if (err) {
           res.redirect(part.url);
           return;
         }
-        console.log(req.body.removeImage, "was deleted");
+        console.log(req.body.imageName, "was deleted");
         res.redirect(`${part.url}/update`);
       });
     }
