@@ -927,6 +927,16 @@ footer {
   }
   #numProductsContainer {
     color: var(--font-color);
+    margin-bottom: 0;
+    opacity: 1;
+    text-shadow: 0 0 15px black;
+  }
+  .filter-section {
+    display: flex;
+    align-items: center;
+  }
+  #numProductsContainer {
+
   }
   #filterForm {
     width: 200px;
