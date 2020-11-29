@@ -69,6 +69,10 @@ button {
   cursor: pointer;
 }
 
+.widescreen {
+  display: none;
+}
+
 .yellow-btn {
   background-color: var(--accent1);
   color: var(--bg);
@@ -743,7 +747,9 @@ button[type="submit"] {
 }
 
 a.cancel {
+  max-width: 450px;
   width: 100%;
+  margin: 0 auto;
   display: block;
   text-align: center;
   background-color: var(--fg);
@@ -777,6 +783,8 @@ input[type="file"] {
   list-style: square;
 }
 #confirmationMsg {
+  max-width: 450px;
+  margin: 0 auto;
   font-size: 14px;
   margin-bottom: 30px;
 }
@@ -897,15 +905,43 @@ footer {
   body {
     background: linear-gradient(var(--fg), var(--bg));
   }
+  .widescreen {
+    display: inline-block;
+  }
+  .edit-links.collapsed {
+    visibility: visible;
+    opacity: 1;
+  }
+  .edit-links {
+    position: relative;
+    flex-direction: row;
+    right: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    top: 0;
+  }
+  .edit-links i {
+    display: none;
+  }
+  .edit-links a {
+    padding: 5px;
+    font-size: 14px;
+    color: var(--table-header-color);
+  }
+  .edit-links a:hover {
+    color: var(--accent1);
+  }
   .yellow-btn,
   .part-add button {
     text-transform: capitalize;
   }
   .part-add button {
     border: none;
-    padding: 7px 5px;
+    padding: 5px 10px;
     font-size: 16px;
-    font-weight: bold;
+    width: auto;
   }
   section {
     max-width: 960px;
@@ -935,7 +971,7 @@ footer {
     display: flex;
     align-items: center;
   }
-  
+
   #filterForm {
     width: 200px;
     margin: 0;
@@ -948,6 +984,7 @@ footer {
   .title {
     justify-content: center;
     background-color: transparent;
+    flex-direction: column;
   }
   .title .create-link {
     display: none;
@@ -956,7 +993,8 @@ footer {
     max-width: 960px;
     margin: 0 auto;
   }
-  #category-table, #manufacturer-table {
+  #category-table,
+  #manufacturer-table {
     padding-top: 30px;
   }
   thead {
@@ -1001,10 +1039,8 @@ footer {
   .part-name-container {
     display: flex;
     align-items: center;
-}
-  .part-name a {
-    
   }
+
   .list-image-container {
     width: 70px;
     height: 70px;
@@ -1067,8 +1103,28 @@ footer {
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
-  .component-details--img img {
-    margin-bottom: 10px;
+  .component-details {
+    max-width: 640px;
+  }
+  .component-details--img .add {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    font-size: 16px;
+    transition: 0.1s;
+    box-shadow: none;
+  }
+  .component-details--img .add:focus {
+    outline: 1px dotted var(--font-color);
+    transform: none;
+  }
+  .component-details--img .add:active {
+    transform: scale(0.97);
+  }
+  .component-details--img .imgNotFound {
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
   }
   .component-details--img a i {
     display: none;
@@ -1081,11 +1137,40 @@ footer {
     content: "Remove Image";
     margin-top: 10px;
   }
+  .component-details--details {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+  .component-details--details > div:not(:last-of-type) {
+    grid-column: 1;
+    border: none;
+  }
+  .component-details--details .features-list-container,
+  .component-details--details .add {
+    grid-column: 2;
+  }
+  .component-details--details .features-list-container {
+    grid-row: 1 / 5;
+  }
+  .component-details--details .add {
+    display: none;
+  }
+  
+  .component-details--details .th-small {
+    display: block;
+  }
+
+  #dropdown {
+    display: none;
+  }
 
   a.cancel {
-    max-width: 450px;
     margin: 0 auto;
     grid-column: 2;
+  }
+
+  #confirmationMsg {
+    text-align: center;
   }
 
   #footerContainer {

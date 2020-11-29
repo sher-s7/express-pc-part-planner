@@ -1,20 +1,22 @@
 <% layout('layout') -%>
-
+<div class="wide-screen-bg">
 <section class="title"> 
   <h1><%= title %></h1>
   <button id="dropdown"><i class="fas fa-caret-down"></i></button>
     <div class="edit-links collapsed">
-        <a href="<%= component.url%>/update"><i class="fas fa-wrench"></i></a>
-        <a href="<%= component.url%>/delete"><i class="fas fa-trash"></i></a>
+        <a href="<%= component.url%>/update"><i class="fas fa-wrench"></i><span class="widescreen">Update</span></a>
+        <a href="<%= component.url%>/delete"><i class="fas fa-trash"></i><span class="widescreen">Delete</span></a>
     </div>
 </section>
 <section class="component-details">
+  <div class="component-details--img">
   <% if (component.fileName) { %>
-    <div class="component-details--img">
       <img src="/images/<%= component.fileName %>" alt="<%= component.fileName %>">
-    </div>
+  <% } else { %>
+      <div class="imgNotFound"><i class="fas fa-question"></i></div>
   <% } %>
- 
+  <button class="yellow-btn add widescreen" data-categoryid="<%= category._id %> " data-partid='<%= component._id %>'>Add</button>
+</div>
   <div class="component-details--details">
     <div>
       <div class="th-small">Category</div>
@@ -45,6 +47,6 @@
     <button class="yellow-btn add" data-categoryid="<%= category._id %> " data-partid='<%= component._id %>'>Add</button>
   </div>
 </section>
-
+</div>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/updateCookie.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/dropdown.js'></script>") -%>
