@@ -632,6 +632,7 @@ form {
   flex-direction: column;
   max-width: 450px;
   margin: 0 auto;
+  width: 100%;
 }
 legend {
   padding: 0 2px;
@@ -775,12 +776,19 @@ input[type="file"] {
 .delete {
   flex-direction: column;
 }
+.deleteSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 #deleteMsg {
   font-size: 14px;
   margin-top: 0;
 }
 #deleteList {
   list-style: square;
+  margin-bottom: 40px;
 }
 #confirmationMsg {
   max-width: 450px;
@@ -907,6 +915,10 @@ footer {
   }
   .widescreen {
     display: inline-block;
+  }
+  .description {
+    max-width: 640px;
+    margin: 0 auto;
   }
   .edit-links.collapsed {
     visibility: visible;
@@ -1102,6 +1114,16 @@ footer {
   #componentFormContainer {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto auto;
+  }
+  #errorMsgs {
+    grid-row: 2;
+  }
+  .component-details--img {
+    grid-row: 1;
+  }
+  #componentForm {
+    grid-row: 1/3;
   }
   .component-details {
     max-width: 640px;
@@ -1155,7 +1177,7 @@ footer {
   .component-details--details .add {
     display: none;
   }
-  
+
   .component-details--details .th-small {
     display: block;
   }

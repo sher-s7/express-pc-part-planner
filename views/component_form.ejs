@@ -5,16 +5,19 @@
   <% if (typeof errors != 'undefined') { %>
     <ul id="errorMsgs">
       <% errors.forEach(err => { %>
-      <li><i class="fas fa-exclamation-triangle"></i><%= err.msg %></li>
+        <li><i class="fas fa-exclamation-triangle"></i><%= err.msg %></li>
       <% }) %>
     </ul>
-    <% } %>
+  <% } %>
+  <div class="component-details--img">
     <% if (typeof component != 'undefined' && component.fileName && typeof component.fileName != 'undefined') { %>
-      <div class="component-details--img">
         <img src="/images/<%= component.fileName %>" alt="<%= component.fileName %>">
         <a href="<%= component.url %>/image/delete"><i class="fas fa-times"></i></a>
-      </div>
+      
+      <% } else { %>
+        <div class="imgNotFound"><i class="fas fa-question"></i></div>
     <% } %>
+  </div>
   <form action="" method="POST" enctype="multipart/form-data" id="componentForm">
     <fieldset>
       <legend>NAME</legend>
