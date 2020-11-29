@@ -1,10 +1,11 @@
 <% layout('layout') -%>
 <% var totalPrice = 0 %> 
+<div class="wide-screen-bg">
 <section class="title home">
   <h1>My List</h1>
   <a id="downloadCSV">Export to CSV <i class="fas fa-download"></i></a>
 </section>
-<table id="pc-planner-list">
+<table cellspacing="0" id="pc-planner-list">
   <thead>
     <tr>
       <th id="thComponent">Component</th>
@@ -28,8 +29,19 @@
       <% if (part) { %>
         <% totalPrice += part.price %> 
       <td class="part_selected">
+        <div class="part-name-container">
+        <div class="list-image-container">
+          <% if (part.fileName) { %>
+            <a href="<%= part.url %>">
+              <img src="/images/<%= part.fileName %>" alt="">
+            </a>
+          <% } else { %>
+            <div class="imgNotFound"><i class="fas fa-question"></i></div>
+          <% } %>
+        </div>
         <div class="th-small">Selection</div>
         <a href="<%= part.url %>" class='csv-content'><%= part.name %></a>
+      </div>
       </td>
       <td class="part_price">
         <div class="th-small">Price</div>
@@ -54,6 +66,6 @@
       <td></td>
   </tfoot>
 </table>
-
+</div>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/removeCookie.js'></script>") -%>
 <% block('scripts', "<script type='text/javascript' src='/javascripts/listToCSV.js'></script>") -%>

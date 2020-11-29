@@ -107,11 +107,24 @@ exports.computerpart_create_post = [
       manufacturer: req.body.manufacturer,
     });
 
-    if (req.file) {
+    if (req.file && errors.isEmpty()) {
+      console.log('FILE', req.file)
       component.fileName = req.file.filename;
+      fs.unlink(`public/images/${req.body.fileName}`, (err) => {
+        if (err) console.log(err);
+        console.log(req.body.fileName, "was deleted");
+      });
+    } else if(req.body.fileName && req.body.fileName !='null' && req.body.fileName !='undefined'){
+      component.fileName = req.body.fileName;
     }
 
     if (!errors.isEmpty()) {
+      if(req.file){
+        fs.unlink(`public/images/${req.file.filename}`, (err) => {
+          if (err) console.log(err);
+          console.log(req.file.filename, "was deleted");
+        });
+      }
       async.parallel(
         {
           categories: function (callback) {

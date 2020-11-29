@@ -973,6 +973,20 @@ footer {
   .create-section.component-list {
     max-width: 960px;
   }
+  #pc-planner-list .part_category::after {
+    content: none;
+  }
+  #pc-planner-list .part_buy, #pc-planner-list .part_remove {
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--bg);
+    width: auto;
+  }
+  #pc-planner-list .part_buy a {
+    background-color: var(--accent1);
+    border-radius: 2px;
+  }
   #numProductsContainer {
     color: var(--font-color);
     margin-bottom: 0;
@@ -1027,6 +1041,9 @@ footer {
   th:hover {
     border-color: var(--accent2);
   }
+  #pc-planner-list th:hover {
+    border-color: var(--bg);
+  }
   th span {
     margin-left: 10px;
   }
@@ -1045,8 +1062,9 @@ footer {
     text-align: center;
     padding-top: 50px;
   }
-  .part-name {
+  .part-name, #pc-planner-list .part_selected {
     max-width: 300px;
+    padding-right: 10px;
   }
   .part-name-container {
     display: flex;
@@ -1054,7 +1072,8 @@ footer {
   }
 
   .list-image-container {
-    width: 70px;
+    max-width: 70px;
+    width: 100%;
     height: 70px;
     float: left;
     margin-right: 20px;
@@ -1062,7 +1081,7 @@ footer {
     justify-content: center;
     align-items: center;
   }
-  .part-name img {
+  .part-name img, .part_selected img {
     width: 100%;
   }
   .imgNotFound {
