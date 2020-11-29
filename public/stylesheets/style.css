@@ -343,6 +343,9 @@ tfoot tr {
 .list li {
   background-color: var(--fg);
 }
+.list-image-container {
+  display: none;
+}
 
 .list li:hover,
 .list li:active {
@@ -374,6 +377,11 @@ tfoot tr {
   padding: 0 var(--body-padding);
   position: relative;
   top: 22px;
+}
+
+#filterForm {
+  width: 100%;
+  max-width: 100%;
 }
 
 .component-list {
@@ -888,15 +896,16 @@ footer {
 @media (min-width: 768px) {
   body {
     background: linear-gradient(var(--fg), var(--bg));
-
   }
-  .yellow-btn, .part-add button {
+  .yellow-btn,
+  .part-add button {
     text-transform: capitalize;
   }
   .part-add button {
     border: none;
     padding: 7px 5px;
     font-size: 16px;
+    font-weight: bold;
   }
   section {
     max-width: 960px;
@@ -905,6 +914,28 @@ footer {
   }
   .wide-screen-bg {
     background-color: var(--fg);
+  }
+  .widescreen-numprod-filter {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .create-section.component-list {
+    max-width: 960px;
+  }
+  #numProductsContainer {
+    color: var(--font-color);
+  }
+  #filterForm {
+    width: 200px;
+    margin: 0;
+    margin-left: auto;
+  }
+  #filter {
+    font-size: 14px;
+    padding: 0px 0px 7px 15px;
   }
   .title {
     justify-content: center;
@@ -921,13 +952,9 @@ footer {
     display: table-header-group;
     position: relative;
   }
-
-  /* thead::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    border-bottom: 2px solid var(--bg);
-  } */
+  .th-small {
+    display: none;
+  }
   th {
     position: relative;
     text-align: left;
@@ -945,6 +972,50 @@ footer {
   tr {
     display: table-row;
   }
+  tbody td {
+    border-bottom: 1px solid var(--bg);
+  }
+  #notFound {
+    display: table-row;
+  }
+
+  #notFound td {
+    border: none;
+    text-align: center;
+    padding-top: 50px;
+  }
+  .part-name {
+    max-width: 300px;
+  }
+  .part-name-container {
+    display: flex;
+    align-items: center;
+}
+  .part-name a {
+    
+  }
+  .list-image-container {
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .part-name img {
+    width: 100%;
+  }
+  .imgNotFound {
+    width: 100%;
+    height: 100%;
+    background: var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: var(--accent1);
+  }
   .create-section {
     display: block;
     text-align: left;
@@ -953,10 +1024,13 @@ footer {
   .create-link {
     font-size: 16px;
   }
+  .create-link:hover {
+    text-decoration: underline;
+  }
   .list {
     background-color: var(--fg);
   }
-  .list li{
+  .list li {
     max-width: 640px;
     width: 100%;
     margin: 0 auto;
@@ -980,7 +1054,7 @@ footer {
 
   #componentFormContainer {
     display: grid;
-  grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 2fr;
   }
   .component-details--img img {
     margin-bottom: 10px;
@@ -993,7 +1067,7 @@ footer {
     font-size: 16px;
   }
   .component-details--img a::after {
-    content: 'Remove Image';
+    content: "Remove Image";
     margin-top: 10px;
   }
 

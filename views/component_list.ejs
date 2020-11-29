@@ -8,19 +8,22 @@
   </a>
 </section>
 
-<section class="create-section component-list"><a href="/component/create">Add a new part</a></section>
+<section class="create-section component-list"><a href="/component/create"><i class="las la-plus"></i> Add a new part</a></section>
 
-<section class="component-list numProductsSection">
-  <p id="numProductsContainer"><span id="numProducts"><%= component_list.length %></span> product(s)</p>
-</section>
-<section class="filter-section component-list">
-  <form id="filterForm">
-      <fieldset>
-          <legend>SEARCH</legend>
-          <input type="text" name="filter" id="filter" placeholder="Components">
-      </fieldset>
-  </form>
-</section>
+<div class="widescreen-numprod-filter">
+  <section class="component-list numProductsSection">
+    <p id="numProductsContainer"><span id="numProducts"><%= component_list.length %></span> product(s)</p>
+  </section>
+  <section class="filter-section component-list">
+    <form id="filterForm">
+        <fieldset>
+            <legend>SEARCH</legend>
+            <input type="text" name="filter" id="filter" placeholder="Components">
+        </fieldset>
+    </form>
+  </section>
+</div>
+
 
 <table cellspacing="0" id="component-table">
   <thead>
@@ -33,13 +36,25 @@
   </thead>
   <tbody>
     <tr id="notFound" class="<%= component_list.length == 0 ? '' : 'hidden' %>">
-      <td><i class="fas fa-sad-tear"></i></td>
+      <td colspan="5"><i class="fas fa-sad-tear"></i></td>
     </tr>
     <% component_list.forEach(component => { %>
     <tr class="part-row" data-part="<%= component.name %>">
       <td class="part-name">
+        <div class="part-name-container">
+        <div class="list-image-container">
+          <% if (component.fileName) { %>
+            <a href="<%= component.url %>">
+              <img src="/images/<%= component.fileName %>" alt="">
+            </a>
+          <% } else { %>
+            <div class="imgNotFound"><i class="fas fa-question"></i></div>
+          <% } %>
+          
+        </div>
         <div class="th-small">Name</div>
         <a href="<%= component.url %>"><%= component.name %></a>
+      </div>
       </td>
       <td class="part-manufacturer">
         <div class="th-small">Manufacturer</div>
