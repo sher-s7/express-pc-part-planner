@@ -935,9 +935,7 @@ footer {
     display: flex;
     align-items: center;
   }
-  #numProductsContainer {
-
-  }
+  
   #filterForm {
     width: 200px;
     margin: 0;
@@ -957,6 +955,9 @@ footer {
   table {
     max-width: 960px;
     margin: 0 auto;
+  }
+  #category-table, #manufacturer-table {
+    padding-top: 30px;
   }
   thead {
     display: table-header-group;
