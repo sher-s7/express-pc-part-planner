@@ -68,6 +68,9 @@ a:hover {
 button {
   cursor: pointer;
 }
+i, i::before, i::after {
+  text-rendering: optimizeLegibility;
+}
 
 .widescreen {
   display: none;
