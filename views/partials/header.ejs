@@ -1,19 +1,21 @@
 <header>
-    <section>
-        <h1 class="logo symbol header-small"><a href="/list"><span class="accent1">3</span><span>P</span></a></h1>
-        <h1 class="logo header-large"><a href="/list"><span class="accent1">P</span>C<span class="accent1">P</span>ART<span class="accent1">P</span>LANNER</a></h1>
-        <button id="burger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </button>
-    </section>
-    <ul id="nav-bar">
-        <li><a href="/list"><i class="las la-th-list"></i> my list</a></li>
-        <li><a href="/categories">categories</a></li>
-        <li><a href="/manufacturers">manufacturers</a></li>
-        <li><a href="/components">all parts</a></li>
-    </ul>
+    <div class="headerContentContainer">
+        <section>
+            <h1 class="logo symbol header-small"><a href="/list"><span class="accent1">3</span><span>P</span></a></h1>
+            <h1 class="logo header-large"><a href="/list"><span class="accent1">P</span>C<span class="accent1">P</span>ART<span class="accent1">P</span>LANNER</a></h1>
+            <button id="burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+        </section>
+        <ul id="nav-bar">
+            <li><a href="/list"><i class="las la-th-list"></i> my list</a></li>
+            <li><a href="/categories">categories</a></li>
+            <li><a href="/manufacturers">manufacturers</a></li>
+            <li><a href="/components">all parts</a></li>
+        </ul>
+</div>
 </header>
 
 <% block('scripts', "<script type='text/javascript' src='/javascripts/burgerMenu.js'></script>") -%>

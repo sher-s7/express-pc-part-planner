@@ -96,7 +96,17 @@ section,
 table {
   padding: var(--body-padding);
 }
-
+.component-details--img .imgNotFound {
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+  background: var(--black);
+  color: var(--accent1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
 /* -       -       -       -       -       -       -       -  Header -       -       -       -       -       -       -       - */
 
 header {
@@ -111,7 +121,7 @@ header section:first-of-type {
   position: relative;
   z-index: 10;
   height: 100%;
-  background-color: var(--black);
+  background-color: transparent;
 }
 
 h1.header-small {
@@ -175,7 +185,10 @@ body.expand #burger div:nth-child(2) {
 .logo a:hover {
   text-decoration: none;
 }
-
+.headerContentContainer {
+  background-color: var(--black);
+  height: 100%;
+}
 #nav-bar {
   margin: 0;
   list-style: none;
@@ -190,8 +203,9 @@ body.expand #burger div:nth-child(2) {
   justify-content: start;
   align-items: start;
   padding: var(--body-padding);
-  padding-top: 5px;
-  overflow-y: scroll;
+  padding-top: 0;
+  overflow-y: auto;
+  top: var(--header-height);
 }
 
 #nav-bar li {
@@ -913,6 +927,29 @@ footer {
   body {
     background: linear-gradient(var(--fg), var(--bg));
   }
+  body.expand {
+    overflow: auto;
+  }
+  .headerContentContainer {
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+  }
+  #nav-bar {
+    position: absolute;
+    background: linear-gradient(45deg, var(--fg),var(--black));
+    width: 200px;
+    height: 260px;
+    right: 0;
+    left: auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom: 5px solid var(--black);
+
+  }
+  #nav-bar li {
+    font-size: 16px;
+  }
   .widescreen {
     display: inline-block;
   }
@@ -973,20 +1010,56 @@ footer {
   .create-section.component-list {
     max-width: 960px;
   }
+  #thComponent {
+    width: 150px;
+  }
+  #thBuy {
+    width: 90px;
+  }
+  #pc-planner-list {
+    margin-bottom: 40px;
+  }
+  #pc-planner-list .part_category {
+    white-space: normal;
+  }
   #pc-planner-list .part_category::after {
     content: none;
   }
-  #pc-planner-list .part_buy, #pc-planner-list .part_remove {
+  #pc-planner-list .part_buy,
+  #pc-planner-list .part_remove {
     background-color: transparent;
     border-radius: 0;
     border: none;
     border-bottom: 1px solid var(--bg);
-    width: auto;
   }
   #pc-planner-list .part_buy a {
     background-color: var(--accent1);
     border-radius: 2px;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
   }
+  #pc-planner-list .part_remove .remove {
+    width: auto;
+  }
+  #text-remove {
+    display: none;
+  }
+  .chooseCategory a {
+    display: inline-block;
+    margin: 15px 0;
+  }
+  tfoot tr {
+    display: table-row;
+  }
+  tr #parts_total {
+    text-align: right;
+    padding-right: 10px;
+  }
+  #pc-planner-list tfoot tr td {
+    padding-top: 30px;
+  }
+
   #numProductsContainer {
     color: var(--font-color);
     margin-bottom: 0;
@@ -1062,9 +1135,10 @@ footer {
     text-align: center;
     padding-top: 50px;
   }
-  .part-name, #pc-planner-list .part_selected {
+  .part-name,
+  #pc-planner-list .part_selected {
     max-width: 300px;
-    padding-right: 10px;
+    padding-right: 15px;
   }
   .part-name-container {
     display: flex;
@@ -1081,8 +1155,24 @@ footer {
     justify-content: center;
     align-items: center;
   }
-  .part-name img, .part_selected img {
-    width: 100%;
+  .list-image-container .imgNotFound {
+    width: 75%;
+    height: 75%;
+    font-size: 18px;
+  }
+  .part-name a,
+  .part_selected a {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .part-name img,
+  .part_selected img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
   }
   .imgNotFound {
     width: 100%;
