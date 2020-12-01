@@ -25,5 +25,5 @@ Created using Express.js and MongoDB
 <p align="center">Mobile-First Responsive Design</p>
 
 <p align="center">
-  <img src="readme-assets/3P_NewPart.png">
+  <img width="350px" src="readme-assets/3P_NewPart.png">
 </p>
