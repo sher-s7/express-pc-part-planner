@@ -1,4 +1,4 @@
-<a href="https://pcpartplanner.herokuapp.com/list">
+<a href="https://pc-part-planner.onrender.com/list">
     <img src="readme-assets/3P.jpg" alt="3P logo" title="3P" align="right" height="120" />
 </a>
 
@@ -6,7 +6,7 @@ PC Part Planner
 ====================== 
 Created using Express.js and MongoDB
 
-[PC Part Planner](https://pcpartplanner.herokuapp.com/list) allows users to add PC parts, manufacturers, and categories, and allows them to add these parts to their list to plan out a potential build. The total dollar amount is displayed, links are provided to purchase these parts, and a download link to export the list to CSV is provided.
+[PC Part Planner](https://pc-part-planner.onrender.com/list) allows users to add PC parts, manufacturers, and categories, and allows them to add these parts to their list to plan out a potential build. The total dollar amount is displayed, links are provided to purchase these parts, and a download link to export the list to CSV is provided.
 
 <p align="center">
   <img src="readme-assets/3P_Main.png">
